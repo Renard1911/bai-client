@@ -43,9 +43,9 @@ class Board extends Component {
 
         if (!isLoaded) {
             return (
-                <Loader active centered >
+                <Loader active centered="true" >
                     Cargando ...
-                </Loader>
+                </Loader >
             )
         }
 

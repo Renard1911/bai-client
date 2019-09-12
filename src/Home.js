@@ -46,7 +46,7 @@ class Home extends Component {
     render() {
         if (!this.state.isLoaded) {
             return (
-                <Loader active centered >
+                <Loader active centered="true" >
                     Cargando ...
                 </Loader>
             )

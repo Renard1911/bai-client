@@ -38,9 +38,9 @@ class BBSThread extends Component {
 
         if (isLoading) {
             return (
-                <Loader active centered >
+                <Loader active centered="true">
                     Cargando ...
-                </Loader>
+                </Loader >
             )
         }
 

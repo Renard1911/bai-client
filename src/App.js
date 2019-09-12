@@ -35,9 +35,9 @@ class App extends Component {
     if (!this.state.isLoaded) {
       if (!this.state.isLoaded) {
         return (
-          <Loader active centered >
+          <Loader active centered="true">
             Cargando ...
-            </Loader>
+            </Loader >
         )
       }
     }
@@ -51,12 +51,12 @@ class App extends Component {
           <Menu.Item as={Link} to="/"><Icon name='home' /> Home</Menu.Item>
           <Dropdown text='BBS' className='link item'>
             <Dropdown.Menu>
-              {boardList.map(board => board.board_type === 1 ? <Dropdown.Item as={Link} to={`/board/${board.dir}`}>/{board.dir}/ - {board.name}</Dropdown.Item> : null)}
+              {boardList.map(board => board.board_type === 1 ? <Dropdown.Item key={board.dir} as={Link} to={`/board/${board.dir}`}>/{board.dir}/ - {board.name}</Dropdown.Item> : null)}
             </Dropdown.Menu>
           </Dropdown>
           <Dropdown text='Imageboard' className='link item'>
             <Dropdown.Menu>
-              {boardList.map(board => board.board_type === 0 ? <Dropdown.Item as={Link} to={`/board/${board.dir}`}>/{board.dir}/ - {board.name}</Dropdown.Item> : null)}
+              {boardList.map(board => board.board_type === 0 ? <Dropdown.Item key={board.dir} as={Link} to={`/board/${board.dir}`}>/{board.dir}/ - {board.name}</Dropdown.Item> : null)}
             </Dropdown.Menu>
           </Dropdown>
         </Menu>
