@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Loader, Message, Segment, Header, Icon, Image } from "semantic-ui-react";
+import { Loader, Message, Segment, Header } from "semantic-ui-react";
 import { Link } from "@reach/router";
 import Moment from "react-moment";
 import "moment/locale/es";
-import Post from "./Post";
 class Board extends Component {
     constructor() {
         super();
@@ -20,7 +19,7 @@ class Board extends Component {
                 return response.json();
             })
             .then((resource) => {
-                if (resource["state"] == "error") {
+                if (resource["state"] === "error") {
                     this.setState({ error: resource });
                 }
                 this.setState({ isLoaded: true, threadList: resource["threads"] })

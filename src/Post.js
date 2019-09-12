@@ -15,7 +15,7 @@ const Post = ({ index, post, locked, dir }) => {
             </Header>
 
             <Segment.Group horizontal>
-                {post.file != "" ?
+                {post.file !== "" ?
                     <Segment compact className="imageSegment">
                         <Label attached='bottom'>{post.file} {post.image_width}x{post.image_height} {filesize(post.file_size, { bits: true })}</Label>
                         <Image fluid src={`https://bienvenidoainternet.org/${dir}/thumb/${post.thumb}`} />

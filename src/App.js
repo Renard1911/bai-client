@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { render } from "react-dom";
-import { Router, Link, Match } from "@reach/router";
+import { Router, Link } from "@reach/router";
 import 'fomantic-ui-css/semantic.css';
 import "./App.css";
 
-import { Dropdown, Menu, Icon, Loader, Container, Grid } from "semantic-ui-react";
+import { Dropdown, Menu, Icon, Loader, Container } from "semantic-ui-react";
 import Home from "./Home";
 import BBSThread from "./BBSThread";
 import Board from "./Board";
@@ -43,7 +43,7 @@ class App extends Component {
     }
 
     const { boardList } = this.state;
-    const pathList = boardList.map(board => "/" + board.dir)
+    //const pathList = boardList.map(board => "/" + board.dir)
     return (
       <Container>
         <Menu inverted>

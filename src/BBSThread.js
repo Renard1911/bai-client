@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Header, Icon, Loader, Message, Segment, Image, Label } from "semantic-ui-react";
+import { Header, Icon, Loader, Message } from "semantic-ui-react";
 import Moment from "react-moment";
 import "moment/locale/es";
 import Post from "./Post";
@@ -27,7 +27,7 @@ class BBSThread extends Component {
         fetch(apiURl)
             .then((response) => { return response.json() })
             .then((resource => {
-                if (resource["state"] == "error") {
+                if (resource["state"] === "error") {
                     console.log("API Error:" + resource["message"]);
                     this.setState({ error: resource });
                 }
@@ -37,7 +37,6 @@ class BBSThread extends Component {
     }
     render() {
         const { isLoading, error } = this.state;
-        const filesize = require('filesize');
 
         if (isLoading) {
             return (
