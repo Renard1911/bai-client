@@ -63,8 +63,8 @@ class BBSThread extends Component {
             <div>
                 <Header as="h2">{subject}
                     <Header.Subheader>
-                        <Icon name="clock" /> <Moment fromNow unix locale="es" date={timestamp} />
-                        &nbsp;<Icon name="reply" /> {total_replies}
+                        Creado <Moment fromNow unix locale="es" date={timestamp} /><br />
+                        {total_replies} respuestas
                     </Header.Subheader>
                 </Header>
 
@@ -73,7 +73,7 @@ class BBSThread extends Component {
                         (<Segment.Group>
                             <Header as="h5" attached>
                                 {post.name}
-                                <Header.Subheader>
+                                <Header.Subheader className="inlineSubHeader">
                                     <Moment fromNow unix locale="es" date={post.timestamp} />
                                 </Header.Subheader>
                             </Header>

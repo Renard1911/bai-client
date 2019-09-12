@@ -3,3 +3,8 @@
   overflow-wrap: anywhere;
   text-overflow: ellipsis;
 }
+
+.inlineSubHeader {
+  display: inline !important;
+  margin-left: 0.25em !important;
+}
