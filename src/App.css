@@ -8,3 +8,7 @@
   display: inline !important;
   margin-left: 0.25em !important;
 }
+
+.imageSegment {
+  padding: 0 !important;
+}

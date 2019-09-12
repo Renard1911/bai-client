@@ -57,14 +57,20 @@ class BBSThread extends Component {
             );
         }
 
-        const { posts, subject, timestamp, total_replies } = this.state.thread;
+        const { posts, subject, timestamp, total_replies, locked } = this.state.thread;
 
         return (
             <div>
-                <Header as="h2">{subject}
+                <Header as="h2">
+                    <Header.Content className="postMessage">
+                        {subject}{locked ? <Icon name='lock' /> : null}
+                    </Header.Content>
+
                     <Header.Subheader>
+
                         Creado <Moment fromNow unix locale="es" date={timestamp} /><br />
-                        {total_replies} respuestas
+                        {total_replies} respuestas<br />
+
                     </Header.Subheader>
                 </Header>
 
@@ -80,17 +86,17 @@ class BBSThread extends Component {
 
                             <Segment.Group horizontal>
                                 {post.file != "" ?
-                                    <Segment padded compact>
+                                    <Segment padded compact className="imageSegment">
                                         <Label attached='bottom'>{post.file} {post.image_width}x{post.image_height} {filesize(post.file_size, { bits: true })}</Label>
                                         <Image src={`https://bienvenidoainternet.org/${this.props.dir}/thumb/${post.thumb}`} />
 
                                     </Segment> : null}
                                 <Segment padded>
                                     <div className="postMessage" dangerouslySetInnerHTML={{ __html: post.message }} />
-                                    <Label attached='bottom right'>
-                                        <Icon name="reply" />Responder
-                                        <Icon name="exclamation circle" />Reportar
-                                    </Label>
+                                    {locked ? null :
+                                        (<Label attached='bottom right'>
+                                            <Icon name="reply" />Responder
+                                    </Label>)}
 
                                 </Segment>
                             </Segment.Group>
