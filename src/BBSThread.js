@@ -88,7 +88,7 @@ class BBSThread extends Component {
                                 {post.file != "" ?
                                     <Segment padded compact className="imageSegment">
                                         <Label attached='bottom'>{post.file} {post.image_width}x{post.image_height} {filesize(post.file_size, { bits: true })}</Label>
-                                        <Image src={`https://bienvenidoainternet.org/${this.props.dir}/thumb/${post.thumb}`} />
+                                        <Image fluid src={`https://bienvenidoainternet.org/${this.props.dir}/thumb/${post.thumb}`} />
 
                                     </Segment> : null}
                                 <Segment padded>
