@@ -1,0 +1,5 @@
+.postMessage {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  text-overflow: ellipsis;
+}

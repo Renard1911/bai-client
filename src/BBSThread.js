@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Header, Icon, Loader, Message, Segment } from "semantic-ui-react";
+import { Header, Icon, Loader, Message, Segment, Image, Button } from "semantic-ui-react";
 import Moment from "react-moment";
 import "moment/locale/es";
 
@@ -75,13 +75,16 @@ class BBSThread extends Component {
                                     <Moment fromNow unix locale="es" date={post.timestamp} />
                                 </Header.Subheader>
                             </Header>
-                            <Segment attached>
-                                <div dangerouslySetInnerHTML={{ __html: post.message }} />
-                            </Segment>
-                            <Segment attached='bottom' textAlign='right' tertiary style={{ "padding": "0.5em", "font-size": "0.75em" }}>
-                                <Icon name="reply" /> Responder ― &nbsp;
-                                <Icon name="exclamation circle" /> Reportar
-                            </Segment>
+
+                            <Segment.Group horizontal>
+                                {post.file != "" ? <Segment compact> <Image src={`https://bienvenidoainternet.org/${this.props.dir}/thumb/${post.thumb}`} /></Segment> : null}
+                                <Segment>
+                                    <div className="postMessage" dangerouslySetInnerHTML={{ __html: post.message }} />
+                                    <Icon name="reply" />Responder
+
+                                    <Icon name="exclamation circle" />Reportar
+                                </Segment>
+                            </Segment.Group>
                         </Segment.Group>
                         ) : null)
                 }

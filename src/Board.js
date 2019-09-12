@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Loader, Message, Segment, Header } from "semantic-ui-react";
+import { Loader, Message, Segment, Header, Icon, Image } from "semantic-ui-react";
 import { Link } from "@reach/router";
 import Moment from "react-moment";
 import "moment/locale/es";
@@ -25,6 +25,22 @@ class Board extends Component {
                 this.setState({ isLoaded: true, threadList: resource["threads"] })
             })
             .catch(console.error)
+    }
+
+    componentWillUnmount() {
+        console.log("will unmount")
+    }
+
+    componentDidUpdate(prevProps) {
+        // Uso tipico (no olvides de comparar los props):
+        if (this.props.dir !== prevProps.dir) {
+            this.setState({
+                isLoaded: false,
+                threadList: [],
+                error: null
+            })
+            this.componentDidMount();
+        }
     }
 
     render() {
@@ -63,9 +79,14 @@ class Board extends Component {
                             <div dangerouslySetInnerHTML={{ __html: thread.message }} />
                         </Segment>
                         {thread.replies.map(reply =>
-                            <Segment attached>
-                                <div dangerouslySetInnerHTML={{ __html: reply.message }} />
-                            </Segment>
+                            <Segment.Group horizontal key={reply.id}>
+                                {reply.file != "" ? <Segment compact> <Image src={`https://bienvenidoainternet.org/${this.props.dir}/thumb/${reply.thumb}`} /></Segment> : null}
+                                <Segment>
+                                    <div className="postMessage" dangerouslySetInnerHTML={{ __html: reply.message }} />
+                                    <Icon name="reply" />Responder
+                                   <Icon name="exclamation circle" />Reportar
+                               </Segment>
+                            </Segment.Group>
                         )}
 
                     </Segment.Group>
