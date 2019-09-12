@@ -74,11 +74,11 @@ class BBSThread extends Component {
                     </Header.Subheader>
                 </Header>
 
-                {posts.map(post =>
+                {posts.map((post, index) =>
                     post.IS_DELETED === 0 ?
                         (<Segment.Group>
                             <Header as="h5" attached>
-                                {post.name}
+                                #{index + 1} {post.name}
                                 <Header.Subheader className="inlineSubHeader">
                                     <Moment fromNow unix locale="es" date={post.timestamp} />
                                 </Header.Subheader>
