@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Header, Icon, Loader, Message, Segment, Image, Button } from "semantic-ui-react";
+import { Header, Icon, Loader, Message, Segment, Image, Label } from "semantic-ui-react";
 import Moment from "react-moment";
 import "moment/locale/es";
+
 
 class BBSThread extends Component {
     constructor(props) {
@@ -35,6 +36,7 @@ class BBSThread extends Component {
     }
     render() {
         const { isLoading, error } = this.state;
+        const filesize = require('filesize');
 
         if (isLoading) {
             return (
@@ -77,12 +79,19 @@ class BBSThread extends Component {
                             </Header>
 
                             <Segment.Group horizontal>
-                                {post.file != "" ? <Segment compact> <Image src={`https://bienvenidoainternet.org/${this.props.dir}/thumb/${post.thumb}`} /></Segment> : null}
-                                <Segment>
-                                    <div className="postMessage" dangerouslySetInnerHTML={{ __html: post.message }} />
-                                    <Icon name="reply" />Responder
+                                {post.file != "" ?
+                                    <Segment padded compact>
+                                        <Label attached='bottom'>{post.file} {post.image_width}x{post.image_height} {filesize(post.file_size, { bits: true })}</Label>
+                                        <Image src={`https://bienvenidoainternet.org/${this.props.dir}/thumb/${post.thumb}`} />
 
-                                    <Icon name="exclamation circle" />Reportar
+                                    </Segment> : null}
+                                <Segment padded>
+                                    <div className="postMessage" dangerouslySetInnerHTML={{ __html: post.message }} />
+                                    <Label attached='bottom right'>
+                                        <Icon name="reply" />Responder
+                                        <Icon name="exclamation circle" />Reportar
+                                    </Label>
+
                                 </Segment>
                             </Segment.Group>
                         </Segment.Group>

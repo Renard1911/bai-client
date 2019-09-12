@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@reach/router": "^1.2.1",
+    "filesize": "^4.2.0",
     "fomantic-ui": "^2.7.8",
     "fomantic-ui-css": "^2.7.8",
     "moment": "^2.24.0",
