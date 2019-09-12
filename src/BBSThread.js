@@ -92,7 +92,8 @@ class BBSThread extends Component {
 
                                     </Segment> : null}
                                 <Segment padded>
-                                    <div className="postMessage" dangerouslySetInnerHTML={{ __html: post.message }} />
+
+                                    <div className={`postMessage ${this.props.dir === "zonavip" ? "vipFont" : null}`} dangerouslySetInnerHTML={{ __html: post.message }} />
                                     {locked ? null :
                                         (<Label attached='bottom right'>
                                             <Icon name="reply" />Responder

@@ -12,3 +12,7 @@
 .imageSegment {
   padding: 0 !important;
 }
+
+.vipFont {
+  font-family: Mona, Monapo, IPAMonaPGothic, 'MS PGothic', YOzFontAA97;
+}
