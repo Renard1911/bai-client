@@ -62,7 +62,7 @@ class Home extends Component {
                         <Header as="h4">Hilos activos</Header>
                         <List divided>
                             {lastAgeThreads.map(thread =>
-                                <List.Item>
+                                <List.Item key={thread.id}>
                                     <List.Icon name='comment alternate outline' size='large' verticalAlign='middle' />
                                     <List.Content>
                                         <List.Header as={Link} to={`${thread.dir}/read/${thread.id}`}>{thread.content}</List.Header>
@@ -77,7 +77,7 @@ class Home extends Component {
                         <Header as="h4">Nuevos hilos</Header>
                         <List divided>
                             {newThreadsList.map(thread =>
-                                <List.Item>
+                                <List.Item key={thread.id}>
                                     <List.Icon name='comment alternate outline' size='large' verticalAlign='middle' />
                                     <List.Content>
                                         <List.Header as={Link} to={`${thread.dir}/read/${thread.id}`}>{thread.content}</List.Header>
@@ -93,7 +93,7 @@ class Home extends Component {
                     <Header as="h4">Blotter</Header>
                     <List divided>
                         {latestNews.map(n =>
-                            <List.Item>
+                            <List.Item key={n.timestamp}>
                                 <List.Content>
                                     <div dangerouslySetInnerHTML={{ __html: n.message }} />
                                     <span className="ui tiny"><Icon name="clock" /><Moment fromNow unix locale="es" date={n.timestamp} /></span>
