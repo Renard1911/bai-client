@@ -3,6 +3,7 @@ import { Loader, Message, Segment, Header, Icon, Image } from "semantic-ui-react
 import { Link } from "@reach/router";
 import Moment from "react-moment";
 import "moment/locale/es";
+import Post from "./Post";
 class Board extends Component {
     constructor() {
         super();
@@ -78,15 +79,13 @@ class Board extends Component {
                         <Segment attached>
                             <div dangerouslySetInnerHTML={{ __html: thread.message }} />
                         </Segment>
-                        {thread.replies.map(reply =>
-                            <Segment.Group horizontal key={reply.id}>
-                                {reply.file != "" ? <Segment compact> <Image src={`https://bienvenidoainternet.org/${this.props.dir}/thumb/${reply.thumb}`} /></Segment> : null}
-                                <Segment>
-                                    <div className="postMessage" dangerouslySetInnerHTML={{ __html: reply.message }} />
-                                    <Icon name="reply" />Responder
-                                   <Icon name="exclamation circle" />Reportar
-                               </Segment>
-                            </Segment.Group>
+                        {thread.replies.map((reply, index, replies) =>
+                            <Header attached key={index} as="h5">
+                                #{thread.total_replies - replies.length + index + 1} {reply.name}
+                                <Header.Subheader>
+                                    <div className={`postMessage ${this.props.dir === "zonavip" ? "vipFont" : null}`} dangerouslySetInnerHTML={{ __html: reply.message }} />
+                                </Header.Subheader>
+                            </Header>
                         )}
 
                     </Segment.Group>
