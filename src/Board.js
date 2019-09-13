@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Loader, Message, Segment, Header } from "semantic-ui-react";
+import { Loader, Message, Segment, Header, Image, SegmentGroup } from "semantic-ui-react";
 import { Link } from "@reach/router";
 import Moment from "react-moment";
 import "moment/locale/es";
@@ -75,16 +75,36 @@ class Board extends Component {
                                 {thread.name} ― <Moment fromNow unix locale="es" date={thread.timestamp} />
                             </Header.Subheader>
                         </Header>
-                        <Segment attached>
-                            <div dangerouslySetInnerHTML={{ __html: thread.message }} />
-                        </Segment>
+                        <Segment.Group horizontal attached>
+                            {thread.file !== "" ?
+                                <Segment compact className="imageSegment">
+                                    <Image size="small" fluid src={`https://bienvenidoainternet.org/${this.props.dir}/thumb/${thread.thumb}`} />
+                                </Segment>
+
+                                : null}
+                            <Segment attached>
+                                <div dangerouslySetInnerHTML={{ __html: thread.message }} />
+                            </Segment>
+                        </Segment.Group>
+
                         {thread.replies.map((reply, index, replies) =>
-                            <Header attached key={index} as="h5">
-                                #{thread.total_replies - replies.length + index + 1} {reply.name}
-                                <Header.Subheader>
-                                    <div className={`postMessage ${this.props.dir === "zonavip" ? "vipFont" : null}`} dangerouslySetInnerHTML={{ __html: reply.message }} />
-                                </Header.Subheader>
-                            </Header>
+                            <Segment.Group horizontal attached>
+                                {reply.file !== "" ?
+                                    <Segment compact className="imageSegment">
+                                        <Image size="small" fluid src={`https://bienvenidoainternet.org/${this.props.dir}/thumb/${reply.thumb}`} />
+                                    </Segment>
+                                    : null}
+                                <Segment attached>
+
+                                    <Header key={index} as="h5">
+                                        #{thread.total_replies - replies.length + index + 1} {reply.name}
+                                        <Header.Subheader>
+                                            <div className={`postMessage ${this.props.dir === "zonavip" ? "vipFont" : null}`} dangerouslySetInnerHTML={{ __html: reply.message }} />
+                                        </Header.Subheader>
+                                    </Header>
+                                </Segment>
+                            </Segment.Group>
+
                         )}
 
                     </Segment.Group>
