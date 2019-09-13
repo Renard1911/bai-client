@@ -5,13 +5,18 @@ import "moment/locale/es";
 
 const Post = ({ index, post, locked, dir }) => {
     const filesize = require('filesize');
+
+    let user_id = post.timestamp_formatted.split(" ID:")[1];
+
     return (
         <Segment.Group>
             <Header as="h5" attached>
-                #{index + 1} {post.name}
+                #{index + 1} <span className={post.email === "sage" ? "username sage" : "username"}>{post.name}</span><span className="tripcode">{post.tripcode}</span>
+
                 <Header.Subheader className="inlineSubHeader">
                     <Moment fromNow unix locale="es" date={post.timestamp} />
                 </Header.Subheader>
+                <Label size="mini">{user_id}</Label>
             </Header>
 
             <Segment.Group horizontal>
@@ -22,7 +27,6 @@ const Post = ({ index, post, locked, dir }) => {
 
                     </Segment> : null}
                 <Segment>
-
                     <div className={`postMessage ${dir === "zonavip" ? "vipFont" : null}`} dangerouslySetInnerHTML={{ __html: post.message }} />
                     {locked ? null :
                         (<Label attached='bottom right'>

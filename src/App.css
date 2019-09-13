@@ -17,3 +17,21 @@
 .vipFont {
   font-family: Mona, Monapo, IPAMonaPGothic, 'MS PGothic', YOzFontAA97;
 }
+
+.tripcode {
+  font-weight: normal !important;
+  font-style: italic !important;
+}
+
+.username {
+  color: #B5BD68;
+}
+
+.username.sage {
+  color: #81A2BE;
+}
+
+/* a quien estás citando? */
+.q {
+  color: #080;
+}
