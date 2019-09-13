@@ -78,7 +78,7 @@ class Board extends Component {
                         <Segment.Group horizontal attached>
                             {thread.file !== "" ?
                                 <Segment compact className="imageSegment">
-                                    <Image size="small" fluid src={`https://bienvenidoainternet.org/${this.props.dir}/thumb/${thread.thumb}`} />
+                                    <Image size="small" src={`https://bienvenidoainternet.org/${this.props.dir}/thumb/${thread.thumb}`} />
                                 </Segment>
 
                                 : null}
