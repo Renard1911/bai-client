@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Header, Icon, Loader, Message } from "semantic-ui-react";
+import { Header, Icon, Loader, Message, Segment } from "semantic-ui-react";
 import Moment from "react-moment";
 import "moment/locale/es";
 import Post from "./Post";
@@ -76,7 +76,11 @@ class BBSThread extends Component {
 
                 {posts.map((post, index) =>
                     post.IS_DELETED === 0 ?
-                        (<Post key={index} index={index} post={post} locked={locked} dir={this.props.dir} />) : null)
+                        (<Post key={index} index={index} post={post} locked={locked} dir={this.props.dir} />) :
+                        (<Segment secondary>
+                            #{index} Eliminado <Moment fromNow unix locale="es" date={post.timestamp} />
+                        </Segment>)
+                )
                 }
 
                 <a href={`https://bienvenidoainternet.org/cgi/api/thread?dir=${this.props.dir}&id=${this.props.id}`}>API Link</a>
