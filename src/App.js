@@ -45,30 +45,34 @@ class App extends Component {
     const { boardList } = this.state;
     //const pathList = boardList.map(board => "/" + board.dir)
     return (
-      <Container>
-        <Menu inverted>
-          <Menu.Item header>B.a.I</Menu.Item>
-          <Menu.Item as={Link} to="/"><Icon name='home' /> Home</Menu.Item>
-          <Dropdown text='BBS' className='link item'>
-            <Dropdown.Menu>
-              {boardList.map(board => board.board_type === 1 ? <Dropdown.Item key={board.dir} as={Link} to={`/board/${board.dir}`}>/{board.dir}/ - {board.name}</Dropdown.Item> : null)}
-            </Dropdown.Menu>
-          </Dropdown>
-          <Dropdown text='Imageboard' className='link item'>
-            <Dropdown.Menu>
-              {boardList.map(board => board.board_type === 0 ? <Dropdown.Item key={board.dir} as={Link} to={`/board/${board.dir}`}>/{board.dir}/ - {board.name}</Dropdown.Item> : null)}
-            </Dropdown.Menu>
-          </Dropdown>
+      <React.Fragment>
+        <Menu inverted fixed="top">
+          <Container>
+            <Menu.Item header>B.a.I</Menu.Item>
+            <Menu.Item as={Link} to="/"><Icon name='home' /> Home</Menu.Item>
+            <Dropdown text='BBS' className='link item'>
+              <Dropdown.Menu>
+                {boardList.map(board => board.board_type === 1 ? <Dropdown.Item key={board.dir} as={Link} to={`/board/${board.dir}`}>/{board.dir}/ - {board.name}</Dropdown.Item> : null)}
+              </Dropdown.Menu>
+            </Dropdown>
+            <Dropdown text='Imageboard' className='link item'>
+              <Dropdown.Menu>
+                {boardList.map(board => board.board_type === 0 ? <Dropdown.Item key={board.dir} as={Link} to={`/board/${board.dir}`}>/{board.dir}/ - {board.name}</Dropdown.Item> : null)}
+              </Dropdown.Menu>
+            </Dropdown>
+          </Container>
         </Menu>
-        <Router>
-          <Home boardList={this.state.boardList} path="/" />
-          <BBSThread path="/:dir/read/:id">
-            <BBSThread path=":active" />
-          </BBSThread>
-          <Board path="/board/:dir" />
-          <NotFound default />
-        </Router>
-      </Container >
+        <Container className="main">
+          <Router>
+            <Home boardList={this.state.boardList} path="/" />
+            <BBSThread path="/:dir/read/:id">
+              <BBSThread path=":active" />
+            </BBSThread>
+            <Board path="/board/:dir" />
+            <NotFound default />
+          </Router>
+        </Container >
+      </React.Fragment>
     );
   }
 }

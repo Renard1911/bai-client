@@ -1,3 +1,7 @@
+.main.container {
+  margin-top: 4em;
+}
+
 .postMessage {
   word-break: break-word;
   overflow-wrap: anywhere;
