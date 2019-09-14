@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { List, Header, Segment, Icon, Loader } from "semantic-ui-react";
+import { List, Header, Segment, Icon, Loader, Grid } from "semantic-ui-react";
 import Moment from "react-moment";
 import "moment/locale/es";
 
@@ -55,10 +55,9 @@ class Home extends Component {
         const { newThreadsList, lastAgeThreads, latestNews } = this.state;
 
         return (
-            <Segment.Group>
-                <Segment.Group horizontal>
-
-                    <Segment>
+            <Grid columns={2} divided container doubling>
+                <Grid.Row>
+                    <Grid.Column>
                         <Header as="h4">Hilos activos</Header>
                         <List divided>
                             {lastAgeThreads.map(thread =>
@@ -71,9 +70,8 @@ class Home extends Component {
                                 </List.Item>
                             )}
                         </List>
-                    </Segment>
-
-                    <Segment>
+                    </Grid.Column>
+                    <Grid.Column>
                         <Header as="h4">Nuevos hilos</Header>
                         <List divided>
                             {newThreadsList.map(thread =>
@@ -86,25 +84,25 @@ class Home extends Component {
                                 </List.Item>
                             )}
                         </List>
-                    </Segment>
+                    </Grid.Column>
+                </Grid.Row>
+                <Grid.Row columns={1}>
+                    <Grid.Column>
+                        <Header as="h4">Blotter</Header>
+                        <List divided>
+                            {latestNews.map(n =>
+                                <List.Item key={n.timestamp}>
+                                    <List.Content>
+                                        <div dangerouslySetInnerHTML={{ __html: n.message }} />
+                                        <span className="ui tiny"><Icon name="clock" /><Moment fromNow unix locale="es" date={n.timestamp} /></span>
 
-                </Segment.Group>
-                <Segment>
-                    <Header as="h4">Blotter</Header>
-                    <List divided>
-                        {latestNews.map(n =>
-                            <List.Item key={n.timestamp}>
-                                <List.Content>
-                                    <div dangerouslySetInnerHTML={{ __html: n.message }} />
-                                    <span className="ui tiny"><Icon name="clock" /><Moment fromNow unix locale="es" date={n.timestamp} /></span>
-
-                                </List.Content>
-                            </List.Item>
-                        )}
-                    </List>
-                </Segment>
-
-            </Segment.Group>
+                                    </List.Content>
+                                </List.Item>
+                            )}
+                        </List>
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
         );
     }
 }
