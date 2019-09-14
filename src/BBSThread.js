@@ -3,7 +3,7 @@ import { Header, Icon, Loader, Message, Segment } from "semantic-ui-react";
 import Moment from "react-moment";
 import "moment/locale/es";
 import Post from "./Post";
-
+import ReplyForm from "./ReplyForm";
 
 class BBSThread extends Component {
     constructor(props) {
@@ -57,7 +57,7 @@ class BBSThread extends Component {
             );
         }
 
-        const { posts, subject, timestamp, total_replies, locked } = this.state.thread;
+        const { posts, subject, timestamp, total_replies, locked, id } = this.state.thread;
 
         return (
             <div>
@@ -82,6 +82,8 @@ class BBSThread extends Component {
                         </Segment>)
                 )
                 }
+
+                <ReplyForm dir={this.props.dir} parent={id} />
 
                 <a href={`https://bienvenidoainternet.org/cgi/api/thread?dir=${this.props.dir}&id=${this.props.id}`}>API Link</a>
             </div>);
