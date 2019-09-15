@@ -5,7 +5,7 @@ import "moment/locale/es";
 import Post from "./Post";
 import ReplyForm from "./ReplyForm";
 
-class BBSThread extends Component {
+class Thread extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -92,4 +92,4 @@ class BBSThread extends Component {
     }
 }
 
-export default BBSThread;
+export default Thread;

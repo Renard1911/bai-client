@@ -6,7 +6,7 @@ import "./App.css";
 
 import { Dropdown, Menu, Icon, Loader, Container } from "semantic-ui-react";
 import Home from "./Home";
-import BBSThread from "./BBSThread";
+import Thread from "./Thread";
 import Board from "./Board";
 import NotFound from "./NotFound"
 
@@ -65,9 +65,9 @@ class App extends Component {
         <Container className="main">
           <Router>
             <Home boardList={this.state.boardList} path="/" />
-            <BBSThread path="/:dir/read/:id">
-              <BBSThread path=":active" />
-            </BBSThread>
+            <Thread path="/:dir/read/:id">
+              <Thread path=":active" />
+            </Thread>
             <Board path="/board/:dir" />
             <NotFound default />
           </Router>
