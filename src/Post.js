@@ -26,7 +26,7 @@ const Post = ({ index, post, locked, dir, threadId }) => {
         <Comment>
             <Comment.Avatar src={`https://bienvenidoainternet.org/static/ico/${rndAvatar}.gif`} />
             <Comment.Content>
-                <Comment.Author>#{index + 1} <span className={post.email === "sage" ? "username sage" : "username"}>{post.name}</span><span className="tripcode">{post.tripcode}</span></Comment.Author>
+                <Comment.Author as='a'>#{index + 1} <span className={post.email === "sage" ? "username sage" : "username"}>{post.name}</span><span className="tripcode">{post.tripcode}</span></Comment.Author>
                 <Comment.Metadata>
                     <Moment fromNow unix locale="es" date={post.timestamp} />
                 </Comment.Metadata>
