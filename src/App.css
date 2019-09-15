@@ -39,3 +39,8 @@
 .q {
   color: #080;
 }
+
+.postImage {
+  padding-top: 0.5em;
+  padding-bottom: 1em;
+}

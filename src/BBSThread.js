@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Header, Icon, Loader, Message, Segment } from "semantic-ui-react";
+import { Header, Icon, Loader, Message, Segment, Comment } from "semantic-ui-react";
 import Moment from "react-moment";
 import "moment/locale/es";
 import Post from "./Post";
@@ -74,14 +74,16 @@ class BBSThread extends Component {
                     </Header.Subheader>
                 </Header>
 
-                {posts.map((post, index) =>
-                    post.IS_DELETED === 0 ?
-                        (<Post key={index} index={index} post={post} locked={locked} dir={this.props.dir} />) :
-                        (<Segment secondary>
-                            #{index} Eliminado <Moment fromNow unix locale="es" date={post.timestamp} />
-                        </Segment>)
-                )
-                }
+                <Comment.Group>
+                    {posts.map((post, index) =>
+                        post.IS_DELETED === 0 ?
+                            (<Post key={index} index={index} post={post} locked={locked} dir={this.props.dir} threadId={id} />) :
+                            (<Segment secondary>
+                                #{index} Eliminado <Moment fromNow unix locale="es" date={post.timestamp} />
+                            </Segment>)
+                    )
+                    }
+                </Comment.Group>
 
                 <ReplyForm dir={this.props.dir} parent={id} />
 

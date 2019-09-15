@@ -14,6 +14,7 @@
     "react-scripts": "3.1.1",
     "react-time-ago": "^5.0.4",
     "react-timestamp": "^5.1.0",
+    "seedrandom": "^3.0.3",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.1"
   },
