@@ -51,7 +51,7 @@ const Post = ({ index, post, locked, dir, threadId }) => {
                 <Comment.Text>
                     {post.file !== "" ?
                         <div className="imageContainer">
-                            <ImageModal href={`https://bienvenidoainternet.org/${dir}/src/${post.file}`} trigger={<Image className="postImage" src={`https://bienvenidoainternet.org/${dir}/thumb/${post.thumb}`} />} />
+                            <ImageModal href={`https://bienvenidoainternet.org/${dir}/src/${post.file}`} trigger={<Image centered className="postImage" src={`https://bienvenidoainternet.org/${dir}/thumb/${post.thumb}`} />} />
                             {post.file} {post.image_width}x{post.image_height} {filesize(post.file_size, { bits: true })}
                         </div>
                         : null}
