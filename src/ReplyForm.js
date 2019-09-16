@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Segment, Button, Message } from "semantic-ui-react";
+import { Form, Segment, Button, Message, Icon } from "semantic-ui-react";
 import { quotes } from "./Quotes";
 
 class ReplyForm extends Component {
@@ -9,6 +9,7 @@ class ReplyForm extends Component {
       name: "",
       email: "",
       message: "",
+      attachment: "",
       submittedName: "",
       submittedEmail: "",
       submittedMessage: "",
@@ -65,8 +66,14 @@ class ReplyForm extends Component {
     );
   }
 
+  handleClick(e) {
+    e.preventDefault();
+    document.getElementById("hiddenInput").click();
+  }
+
   render() {
-    const { name, email, message, replyRes } = this.state;
+    const { name, email, message, replyRes, attachment } = this.state;
+    const { currentBoard } = this.props;
     if (this.props.locked === 1) {
       return (
         <Message negative>
@@ -112,6 +119,22 @@ class ReplyForm extends Component {
               value={email}
               onChange={this.handleChange}
             />
+            {/* TODO: Archivos adjuntos */}
+            {currentBoard.board_type === 0 &&
+            currentBoard.allow_image_replies === 1 ? (
+              <React.Fragment>
+                <input id="hiddenInput" type="file" hidden />
+                <Form.Button
+                  label="Adjunto"
+                  fluid
+                  value={attachment}
+                  onClick={this.handleClick}
+                >
+                  <Icon name="attach" />
+                  Adjuntar archivo
+                </Form.Button>
+              </React.Fragment>
+            ) : null}
           </Form.Group>
           <Form.TextArea
             name="message"
