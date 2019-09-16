@@ -24,41 +24,52 @@ class ReplyForm extends Component {
   }
 
   handleSubmit() {
-    const { submittedName, submittedEmail, name, email, message } = this.state;
-    this.setState({
-      submittedName: name,
-      submittedEmail: email,
-      submittedMessage: message
-    });
-    const data = {
-      board: this.props.dir,
-      parent: this.props.parent,
-      name: "",
-      email: "",
-      fielda: submittedName,
-      fieldb: submittedEmail,
-      message: message,
-      password: "bai-client"
-    };
+    const {
+      submittedName,
+      submittedEmail,
+      submittedMessage,
+      name,
+      email,
+      message
+    } = this.state;
+    this.setState(
+      {
+        submittedName: name,
+        submittedEmail: email,
+        submittedMessage: message
+      },
+      () => {
+        const data = {
+          board: this.props.dir,
+          parent: this.props.parent,
+          name: "",
+          email: "",
+          fielda: submittedName,
+          fieldb: submittedEmail,
+          message: submittedMessage,
+          password: "bai-client"
+        };
 
-    const formData = new FormData();
-    for (var key in data) {
-      formData.append(key, data[key]);
-    }
+        const formData = new FormData();
+        for (var key in data) {
+          formData.append(key, data[key]);
+        }
 
-    fetch("https://bienvenidoainternet.org/cgi/api/post", {
-      method: "POST",
-      mode: "cors",
-      redirect: "follow",
-      body: formData
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(resource => {
-        console.log(resource);
-        this.setState({ replyRes: resource });
-      });
+        fetch("https://bienvenidoainternet.org/cgi/api/post", {
+          method: "POST",
+          mode: "cors",
+          redirect: "follow",
+          body: formData
+        })
+          .then(response => {
+            return response.json();
+          })
+          .then(resource => {
+            console.log(resource);
+            this.setState({ replyRes: resource });
+          });
+      }
+    );
   }
 
   render() {
