@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Loader, Message, Segment, Header, Image, Comment } from "semantic-ui-react";
+import { Loader, Message, Segment, Header, Image, Comment, Divider } from "semantic-ui-react";
 import { Link } from "@reach/router";
 import Moment from "react-moment";
 import "moment/locale/es";
@@ -76,6 +76,7 @@ class Board extends Component {
                         <Segment>
                             <Comment.Group>
                                 <Post index={0} post={thread} locked={thread.locked} threadId={thread.id} dir={this.props.dir} />
+                                <Divider />
                                 {thread.replies.map((reply, index, replies) =>
                                     <Post index={thread.total_replies - replies.length + index + 1} post={reply} locked={thread.locked} threadId={thread.id} dir={this.props.dir} />
                                 )}
