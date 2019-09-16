@@ -58,6 +58,7 @@ class Thread extends Component {
         }
 
         const { posts, subject, timestamp, total_replies, locked, id } = this.state.thread;
+        document.title = subject;
 
         return (
             <div>
