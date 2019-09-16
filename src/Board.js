@@ -79,7 +79,7 @@ class Board extends Component {
     return (
       <div>
         {threadList.map(thread => (
-          <Segment.Group>
+          <Segment.Group key={thread.id}>
             <Header as="h4" attached>
               <Link to={`/${this.props.dir}/read/${thread.id}`}>
                 {thread.subject}
@@ -102,6 +102,7 @@ class Board extends Component {
                     locked={thread.locked}
                     threadId={thread.id}
                     dir={this.props.dir}
+                    key={index}
                   />
                 ))}
               </Comment.Group>
