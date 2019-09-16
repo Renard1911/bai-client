@@ -42,5 +42,30 @@
 
 .postImage {
   padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.imageContainer {
+  display: inline-block;
+  text-align: center;
+  font-size: 0.75em;
   padding-bottom: 1em;
+}
+
+.yt {
+  border: 1px solid #ccc;
+  font-size: 12px;
+  display: inline-block;
+  line-height: 13px;
+  margin: 2px 0;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.yt .pvw {
+  width: 100px;
+  height: 60px;
+  overflow: hidden;
+  float: left;
+  margin-right: 5px;
 }

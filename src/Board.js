@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Loader, Message, Segment, Header, Image, SegmentGroup } from "semantic-ui-react";
+import { Loader, Message, Segment, Header, Image, Comment } from "semantic-ui-react";
 import { Link } from "@reach/router";
 import Moment from "react-moment";
 import "moment/locale/es";
+import Post from "./Post";
 class Board extends Component {
     constructor() {
         super();
@@ -71,42 +72,15 @@ class Board extends Component {
                     <Segment.Group>
                         <Header as="h4" attached>
                             <Link to={`/${this.props.dir}/read/${thread.id}`}>{thread.subject}</Link>
-                            <Header.Subheader>
-                                {thread.name} ― <Moment fromNow unix locale="es" date={thread.timestamp} />
-                            </Header.Subheader>
                         </Header>
-                        <Segment.Group horizontal attached>
-                            {thread.file !== "" ?
-                                <Segment compact className="imageSegment">
-                                    <Image size="small" src={`https://bienvenidoainternet.org/${this.props.dir}/thumb/${thread.thumb}`} />
-                                </Segment>
-
-                                : null}
-                            <Segment attached>
-                                <div dangerouslySetInnerHTML={{ __html: thread.message }} />
-                            </Segment>
-                        </Segment.Group>
-
-                        {thread.replies.map((reply, index, replies) =>
-                            <Segment.Group horizontal attached>
-                                {reply.file !== "" ?
-                                    <Segment compact className="imageSegment">
-                                        <Image size="small" fluid src={`https://bienvenidoainternet.org/${this.props.dir}/thumb/${reply.thumb}`} />
-                                    </Segment>
-                                    : null}
-                                <Segment attached>
-
-                                    <Header key={index} as="h5">
-                                        #{thread.total_replies - replies.length + index + 1} {reply.name}
-                                        <Header.Subheader>
-                                            <div className={`postMessage ${this.props.dir === "zonavip" ? "vipFont" : null}`} dangerouslySetInnerHTML={{ __html: reply.message }} />
-                                        </Header.Subheader>
-                                    </Header>
-                                </Segment>
-                            </Segment.Group>
-
-                        )}
-
+                        <Segment>
+                            <Comment.Group>
+                                <Post index={0} post={thread} locked={thread.locked} threadId={thread.id} dir={this.props.dir} />
+                                {thread.replies.map((reply, index, replies) =>
+                                    <Post index={thread.total_replies - replies.length + index + 1} post={reply} locked={thread.locked} threadId={thread.id} dir={this.props.dir} />
+                                )}
+                            </Comment.Group>
+                        </Segment>
                     </Segment.Group>
                 )}
             </div>

@@ -14,6 +14,10 @@ const ImageModal = ({ href, trigger }) => (
 );
 
 const Post = ({ index, post, locked, dir, threadId }) => {
+    if (post.IS_DELETED > 0) {
+        return null;
+    }
+    console.log(post);
     const filesize = require('filesize');
     const seedrandom = require("seedrandom");
     const rng = seedrandom(threadId + index);
@@ -28,11 +32,15 @@ const Post = ({ index, post, locked, dir, threadId }) => {
             <Comment.Content>
                 <Comment.Author as='a'>#{index + 1} <span className={post.email === "sage" ? "username sage" : "username"}>{post.name}</span><span className="tripcode">{post.tripcode}</span></Comment.Author>
                 <Comment.Metadata>
-                    <Moment fromNow unix locale="es" date={post.timestamp} />
+                    <div><Moment fromNow unix locale="es" date={post.timestamp} /></div>
+                    <div><Icon name="star" />{user_id}</div>
                 </Comment.Metadata>
                 <Comment.Text>
                     {post.file !== "" ?
-                        <ImageModal href={`https://bienvenidoainternet.org/${dir}/src/${post.file}`} trigger={<Image className="postImage" src={`https://bienvenidoainternet.org/${dir}/thumb/${post.thumb}`} />} />
+                        <div className="imageContainer">
+                            <ImageModal href={`https://bienvenidoainternet.org/${dir}/src/${post.file}`} trigger={<Image className="postImage" src={`https://bienvenidoainternet.org/${dir}/thumb/${post.thumb}`} />} />
+                            {post.file} {post.image_width}x{post.image_height} {filesize(post.file_size, { bits: true })}
+                        </div>
                         : null}
                     <div className={`postMessage ${dir === "zonavip" ? "vipFont" : null}`} dangerouslySetInnerHTML={{ __html: post.message }} />
                 </Comment.Text>
@@ -42,35 +50,6 @@ const Post = ({ index, post, locked, dir, threadId }) => {
             </Comment.Content>
         </Comment>
     );
-
-    return (
-        <Segment.Group>
-            <Header as="h5" attached>
-                #{index + 1} <span className={post.email === "sage" ? "username sage" : "username"}>{post.name}</span><span className="tripcode">{post.tripcode}</span>
-
-                <Header.Subheader className="inlineSubHeader">
-                    <Moment fromNow unix locale="es" date={post.timestamp} />
-                </Header.Subheader>
-                {user_id ? <Label size="mini">{user_id}</Label> : null}
-            </Header>
-
-            <Segment.Group horizontal>
-                {post.file !== "" ?
-                    <Segment compact className="imageSegment">
-                        <Label size="tiny" attached='bottom'>{post.file} {post.image_width}x{post.image_height}
-                            <Label.Detail>{filesize(post.file_size, { bits: true })}</Label.Detail>
-                        </Label>
-                        <ImageModal href={`https://bienvenidoainternet.org/${dir}/src/${post.file}`} trigger={<Image fluid src={`https://bienvenidoainternet.org/${dir}/thumb/${post.thumb}`} />} />
-                    </Segment> : null}
-                <Segment>
-                    <div className={`postMessage ${dir === "zonavip" ? "vipFont" : null}`} dangerouslySetInnerHTML={{ __html: post.message }} />
-                    {locked ? null :
-                        (<Label attached='bottom right'>
-                            <Icon name="reply" />Responder
-                                    </Label>)}
-                </Segment>
-            </Segment.Group>
-        </Segment.Group>);
 }
 
 export default Post;
