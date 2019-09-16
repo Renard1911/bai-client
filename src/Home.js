@@ -47,6 +47,7 @@ class Home extends Component {
           isLoaded: true
         });
       });
+    window.scrollTo(0, 0);
   }
 
   render() {

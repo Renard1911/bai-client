@@ -50,6 +50,7 @@ class Thread extends Component {
         });
         this.lastTime = resource.time;
       });
+    window.scrollTo(0, 0);
   }
 
   componentWillUnmount() {

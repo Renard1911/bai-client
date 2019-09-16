@@ -35,12 +35,8 @@ class Board extends Component {
           this.setState({ error: resource });
         }
         this.setState({ isLoaded: true, threadList: resource["threads"] });
-      })
-      .catch(console.error);
-  }
-
-  componentWillUnmount() {
-    console.log("will unmount");
+      });
+    window.scrollTo(0, 0);
   }
 
   componentDidUpdate(prevProps) {
