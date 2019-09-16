@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Icon, Modal, Comment } from "semantic-ui-react";
+import { Image, Icon, Modal, Comment, Flag } from "semantic-ui-react";
 import Moment from "react-moment";
 import "moment/locale/es";
 import { avatars } from "./Quotes";
@@ -47,6 +47,16 @@ const Post = ({ index, post, locked, threadId, currentBoard }) => {
   let user_id = post.timestamp_formatted.split(" ID:")[1];
   const i = Math.round(rng() * avatars.length);
   const rndAvatar = avatars[i];
+  let flag;
+
+  if (currentBoard.dir === "world") {
+    flag = post.name.match("[A-Z][A-Z]");
+    if (flag !== null) {
+      flag = flag[0].toLowerCase();
+    } else {
+      flag = "kp"; // heh
+    }
+  }
 
   return (
     <Comment>
@@ -59,7 +69,10 @@ const Post = ({ index, post, locked, threadId, currentBoard }) => {
           <span
             className={post.email === "sage" ? "username sage" : "username"}
           >
-            {post.name}
+            {currentBoard.dir === "world"
+              ? post.name.split("<em>")[0]
+              : post.name}{" "}
+            {currentBoard.dir === "world" ? <Flag name={flag} /> : null}
           </span>
           <span className="tripcode">{post.tripcode}</span>
         </Comment.Author>
