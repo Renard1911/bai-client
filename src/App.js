@@ -102,7 +102,10 @@ class App extends Component {
         <Segment vertical textAlign="center" className="footer">
           Bievenido a Internet 2010-2019
           <br />
-          bai-client + weabot
+          <Icon name="github" />
+          <a href="https://github.com/Renard1911/bai-client">bai-client</a>
+          {" + "}
+          <a href="https://git.bienvenidoainternet.org/bai/weabot/">weabot</a>
         </Segment>
       </React.Fragment>
     );
