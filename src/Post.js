@@ -109,7 +109,7 @@ const Post = ({ index, post, locked, threadId, currentBoard }) => {
           />
         </Comment.Text>
         <Comment.Actions>
-          <Comment.Action>Responder</Comment.Action>
+          {locked ? null : <Comment.Action>Responder</Comment.Action>}
           <Comment.Action>Reportar</Comment.Action>
         </Comment.Actions>
       </Comment.Content>
