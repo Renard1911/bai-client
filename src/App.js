@@ -86,7 +86,7 @@ class App extends Component {
         <Container className="main">
           <Router>
             <Home boardList={this.state.boardList} path="/" />
-            <Thread path="/:dir/read/:id">
+            <Thread boardList={this.state.boardList} path="/:dir/read/:id">
               <Thread path=":active" />
             </Thread>
             <Board path="/board/:dir" />
