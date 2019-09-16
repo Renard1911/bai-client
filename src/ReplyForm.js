@@ -24,14 +24,7 @@ class ReplyForm extends Component {
   }
 
   handleSubmit() {
-    const {
-      submittedName,
-      submittedEmail,
-      submittedMessage,
-      name,
-      email,
-      message
-    } = this.state;
+    const { name, email, message } = this.state;
     this.setState(
       {
         submittedName: name,
@@ -39,6 +32,7 @@ class ReplyForm extends Component {
         submittedMessage: message
       },
       () => {
+        const { submittedName, submittedEmail, submittedMessage } = this.state;
         const data = {
           board: this.props.dir,
           parent: this.props.parent,
@@ -65,7 +59,6 @@ class ReplyForm extends Component {
             return response.json();
           })
           .then(resource => {
-            console.log(resource);
             this.setState({ replyRes: resource });
           });
       }
