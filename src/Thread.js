@@ -76,11 +76,7 @@ class Thread extends Component {
 
                 <Comment.Group>
                     {posts.map((post, index) =>
-                        post.IS_DELETED === 0 ?
-                            (<Post key={index} index={index} post={post} locked={locked} dir={this.props.dir} threadId={id} />) :
-                            (<Segment secondary>
-                                #{index} Eliminado <Moment fromNow unix locale="es" date={post.timestamp} />
-                            </Segment>)
+                        <Post key={index} index={index} post={post} locked={locked} dir={this.props.dir} threadId={id} />
                     )
                     }
                 </Comment.Group>

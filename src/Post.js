@@ -15,7 +15,20 @@ const ImageModal = ({ href, trigger }) => (
 
 const Post = ({ index, post, locked, dir, threadId }) => {
     if (post.IS_DELETED > 0) {
-        return null;
+        return (
+            <Comment>
+                <Comment.Avatar src={`https://bienvenidoainternet.org/static/css/img/picnicbdy.gif`} />
+                <Comment.Content>
+                    <Comment.Author as='a'>#{index + 1}</Comment.Author>
+                    <Comment.Metadata>
+                        <div><Moment fromNow unix locale="es" date={post.timestamp} /></div>
+                    </Comment.Metadata>
+                    <Comment.Text>
+                        <span className="deleted">Eliminado por el {post.IS_DELETED === 1 ? "usuario." : "Staff."}</span>
+                    </Comment.Text>
+                </Comment.Content>
+            </Comment>
+        );
     }
     console.log(post);
     const filesize = require('filesize');
@@ -33,7 +46,7 @@ const Post = ({ index, post, locked, dir, threadId }) => {
                 <Comment.Author as='a'>#{index + 1} <span className={post.email === "sage" ? "username sage" : "username"}>{post.name}</span><span className="tripcode">{post.tripcode}</span></Comment.Author>
                 <Comment.Metadata>
                     <div><Moment fromNow unix locale="es" date={post.timestamp} /></div>
-                    <div><Icon name="star" />{user_id}</div>
+                    <div><Icon name="star" color={user_id === "CAP_USER*" ? "yellow" : "grey"} />{user_id}</div>
                 </Comment.Metadata>
                 <Comment.Text>
                     {post.file !== "" ?
