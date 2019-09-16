@@ -34,7 +34,7 @@ class ReplyForm extends Component {
       () => {
         const { submittedName, submittedEmail, submittedMessage } = this.state;
         const data = {
-          board: this.props.dir,
+          board: this.props.currentBoard.dir,
           parent: this.props.parent,
           name: "",
           email: "",
@@ -67,6 +67,14 @@ class ReplyForm extends Component {
 
   render() {
     const { name, email, message, replyRes } = this.state;
+    if (this.props.locked === 1) {
+      return (
+        <Message negative>
+          <Message.Header>Hilo cerrado</Message.Header>
+          Este hilo ha sido cerrado y no admite nuevas respuestas.
+        </Message>
+      );
+    }
     return (
       <Segment>
         {replyRes !== null ? (

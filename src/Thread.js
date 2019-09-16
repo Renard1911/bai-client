@@ -173,7 +173,7 @@ class Thread extends Component {
           ))}
         </Comment.Group>
 
-        <ReplyForm dir={this.props.dir} parent={id} />
+        <ReplyForm currentBoard={currentBoard} parent={id} locked={locked} />
 
         <a
           href={`https://bienvenidoainternet.org/cgi/api/thread?dir=${this.props.dir}&id=${this.props.id}`}
