@@ -6,7 +6,8 @@ import {
   Header,
   Image,
   Comment,
-  Divider
+  Divider,
+  Breadcrumb
 } from "semantic-ui-react";
 import { Link } from "@reach/router";
 import Moment from "react-moment";
@@ -76,8 +77,19 @@ class Board extends Component {
       );
     }
 
+    const currentBoard = this.props.boardList.find(board => {
+      return board.dir === this.props.dir;
+    });
+
     return (
-      <div>
+      <React.Fragment>
+        <Breadcrumb>
+          <Breadcrumb.Section link as={Link} to="/">
+            Home
+          </Breadcrumb.Section>
+          <Breadcrumb.Divider icon="right chevron" />
+          <Breadcrumb.Section link>{currentBoard.name}</Breadcrumb.Section>
+        </Breadcrumb>
         {threadList.map(thread => (
           <Segment.Group key={thread.id}>
             <Header as="h4" attached>
@@ -109,7 +121,7 @@ class Board extends Component {
             </Segment>
           </Segment.Group>
         ))}
-      </div>
+      </React.Fragment>
     );
   }
 }

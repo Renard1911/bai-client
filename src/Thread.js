@@ -5,12 +5,14 @@ import {
   Loader,
   Message,
   Segment,
-  Comment
+  Comment,
+  Breadcrumb
 } from "semantic-ui-react";
 import Moment from "react-moment";
 import "moment/locale/es";
 import Post from "./Post";
 import ReplyForm from "./ReplyForm";
+import { Link } from "@reach/router";
 
 class Thread extends Component {
   constructor(props) {
@@ -75,8 +77,23 @@ class Thread extends Component {
     } = this.state.thread;
     document.title = subject;
 
+    const currentBoard = this.props.boardList.find(board => {
+      return board.dir === this.props.dir;
+    });
+
     return (
       <React.Fragment>
+        <Breadcrumb>
+          <Breadcrumb.Section link as={Link} to="/">
+            Home
+          </Breadcrumb.Section>
+          <Breadcrumb.Divider icon="right chevron" />
+          <Breadcrumb.Section link as={Link} to={`/board/${currentBoard.dir}`}>
+            {currentBoard.name}
+          </Breadcrumb.Section>
+          <Breadcrumb.Divider icon="right arrow" />
+          <Breadcrumb.Section active>{subject}</Breadcrumb.Section>
+        </Breadcrumb>
         <Header as="h2">
           <Header.Content className="postMessage">
             {subject}

@@ -89,7 +89,7 @@ class App extends Component {
             <Thread boardList={this.state.boardList} path="/:dir/read/:id">
               <Thread path=":active" />
             </Thread>
-            <Board path="/board/:dir" />
+            <Board boardList={this.state.boardList} path="/board/:dir" />
             <NotFound default />
           </Router>
         </Container>
