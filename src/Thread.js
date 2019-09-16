@@ -76,7 +76,7 @@ class Thread extends Component {
     document.title = subject;
 
     return (
-      <div>
+      <React.Fragment>
         <Header as="h2">
           <Header.Content className="postMessage">
             {subject}
@@ -111,7 +111,7 @@ class Thread extends Component {
         >
           API Link
         </a>
-      </div>
+      </React.Fragment>
     );
   }
 }
