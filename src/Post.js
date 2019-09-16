@@ -30,7 +30,7 @@ const Post = ({ index, post, locked, dir, threadId }) => {
             </Comment>
         );
     }
-    console.log(post);
+
     const filesize = require('filesize');
     const seedrandom = require("seedrandom");
     const rng = seedrandom(threadId + index);
