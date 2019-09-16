@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { render } from "react-dom";
 import { Router, Link } from "@reach/router";
-import 'fomantic-ui-css/semantic.css';
+import "fomantic-ui-css/semantic.css";
 import "./App.css";
 
 import { Dropdown, Menu, Icon, Loader, Container } from "semantic-ui-react";
 import Home from "./Home";
 import Thread from "./Thread";
 import Board from "./Board";
-import NotFound from "./NotFound"
+import NotFound from "./NotFound";
 
 class App extends Component {
   constructor() {
@@ -16,16 +16,15 @@ class App extends Component {
     this.state = {
       boardList: [],
       isLoaded: false
-    }
-
+    };
   }
 
   componentDidMount() {
     fetch("https://bienvenidoainternet.org/cgi/api/boards")
-      .then((response) => {
+      .then(response => {
         return response.json();
       })
-      .then((resource) => {
+      .then(resource => {
         this.setState({ boardList: resource["boards"], isLoaded: true });
       })
       .catch(console.error);
@@ -37,8 +36,8 @@ class App extends Component {
         return (
           <Loader active centered="true">
             Cargando ...
-            </Loader >
-        )
+          </Loader>
+        );
       }
     }
 
@@ -49,15 +48,37 @@ class App extends Component {
         <Menu inverted fixed="top">
           <Container>
             <Menu.Item header>B.a.I</Menu.Item>
-            <Menu.Item as={Link} to="/"><Icon name='home' /> Home</Menu.Item>
-            <Dropdown text='BBS' className='link item'>
+            <Menu.Item as={Link} to="/">
+              <Icon name="home" /> Home
+            </Menu.Item>
+            <Dropdown text="BBS" className="link item">
               <Dropdown.Menu>
-                {boardList.map(board => board.board_type === 1 ? <Dropdown.Item key={board.dir} as={Link} to={`/board/${board.dir}`}>/{board.dir}/ - {board.name}</Dropdown.Item> : null)}
+                {boardList.map(board =>
+                  board.board_type === 1 ? (
+                    <Dropdown.Item
+                      key={board.dir}
+                      as={Link}
+                      to={`/board/${board.dir}`}
+                    >
+                      /{board.dir}/ - {board.name}
+                    </Dropdown.Item>
+                  ) : null
+                )}
               </Dropdown.Menu>
             </Dropdown>
-            <Dropdown text='Imageboard' className='link item'>
+            <Dropdown text="Imageboard" className="link item">
               <Dropdown.Menu>
-                {boardList.map(board => board.board_type === 0 ? <Dropdown.Item key={board.dir} as={Link} to={`/board/${board.dir}`}>/{board.dir}/ - {board.name}</Dropdown.Item> : null)}
+                {boardList.map(board =>
+                  board.board_type === 0 ? (
+                    <Dropdown.Item
+                      key={board.dir}
+                      as={Link}
+                      to={`/board/${board.dir}`}
+                    >
+                      /{board.dir}/ - {board.name}
+                    </Dropdown.Item>
+                  ) : null
+                )}
               </Dropdown.Menu>
             </Dropdown>
           </Container>
@@ -71,11 +92,10 @@ class App extends Component {
             <Board path="/board/:dir" />
             <NotFound default />
           </Router>
-        </Container >
+        </Container>
       </React.Fragment>
     );
   }
 }
-
 
 render(<App />, document.getElementById("root"));

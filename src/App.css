@@ -19,7 +19,7 @@
 }
 
 .vipFont {
-  font-family: Mona, Monapo, IPAMonaPGothic, 'MS PGothic', YOzFontAA97;
+  font-family: Mona, Monapo, IPAMonaPGothic, "MS PGothic", YOzFontAA97;
 }
 
 .tripcode {
@@ -28,11 +28,11 @@
 }
 
 .username {
-  color: #B5BD68;
+  color: #b5bd68;
 }
 
 .username.sage {
-  color: #81A2BE;
+  color: #81a2be;
 }
 
 /* a quien estás citando? */
