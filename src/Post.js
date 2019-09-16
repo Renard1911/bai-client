@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Segment,
-  Header,
-  Image,
-  Label,
-  Icon,
-  Modal,
-  Comment,
-  Divider
-} from "semantic-ui-react";
+import { Image, Icon, Modal, Comment } from "semantic-ui-react";
 import Moment from "react-moment";
 import "moment/locale/es";
 import { avatars } from "./Quotes";

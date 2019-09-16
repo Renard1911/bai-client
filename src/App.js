@@ -33,8 +33,7 @@ class App extends Component {
       })
       .then(resource => {
         this.setState({ boardList: resource["boards"], isLoaded: true });
-      })
-      .catch(console.error);
+      });
   }
 
   render() {
