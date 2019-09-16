@@ -4,7 +4,6 @@ import {
   Icon,
   Loader,
   Message,
-  Segment,
   Comment,
   Breadcrumb
 } from "semantic-ui-react";
@@ -31,19 +30,18 @@ class Thread extends Component {
     } else {
       apiURl = `https://bienvenidoainternet.org/cgi/api/thread?dir=${this.props.dir}&id=${this.props.id}`;
     }
-    console.log(apiURl);
+
     fetch(apiURl)
       .then(response => {
         return response.json();
       })
       .then(resource => {
         if (resource["state"] === "error") {
-          console.log("API Error:" + resource["message"]);
           this.setState({ error: resource });
         }
         this.setState({ isLoading: false, thread: resource });
-      })
-      .catch(console.error);
+      });
+    /* .catch(console.error); */
   }
   render() {
     const { isLoading, error } = this.state;
