@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, Segment, Button, Message } from "semantic-ui-react";
+import { quotes } from "./Quotes";
 
 class ReplyForm extends Component {
     constructor(props) {
@@ -58,7 +59,6 @@ class ReplyForm extends Component {
 
     render() {
         const { name, email, message, replyRes } = this.state;
-        const quotes = ["Eres una buena persona.", "Y por invertir en felaciones.", "Fue un mensaje cachilupi.", "holiwi :3", "Hemos enviado a tu casa un ejército de prostitutas.", "Fue un mensaje de PURA CALIDAD.", "Ganaste frot gratis por una semana.", "Te besaría en la boca.", "Te invitaría a un café.", "ミト━━━━━━⊂( ﾟ ヮﾟ)⊃━━━━━━ン!!!!!", "Suenas como un bot muy desarrollado.", "¿Usaste TheSaurus para escribir tu post?", "(´･ω･`)", "Plataformas del futuro para la web 1.0.", "Gracias por utilizar Internet.", "Plataformas del pasado para la web 2.0.", "Elegiste bien. Elegiste calidad.", "Espero que no hayas abusado del sage.", "gRAciAs pOR Tu PAgA ;)", "Gracias por tu papiro."]
         return (
             <Segment>
                 {
