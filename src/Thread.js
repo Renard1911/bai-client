@@ -167,7 +167,7 @@ class Thread extends Component {
               index={index}
               post={post}
               locked={locked}
-              dir={this.props.dir}
+              currentBoard={currentBoard}
               threadId={id}
             />
           ))}

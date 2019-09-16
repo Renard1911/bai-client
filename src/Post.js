@@ -23,7 +23,7 @@ const ImageModal = ({ href, trigger }) => (
   </Modal>
 );
 
-const Post = ({ index, post, locked, dir, threadId }) => {
+const Post = ({ index, post, locked, threadId, currentBoard }) => {
   if (post.IS_DELETED > 0) {
     return (
       <Comment>
@@ -31,7 +31,9 @@ const Post = ({ index, post, locked, dir, threadId }) => {
           src={`https://bienvenidoainternet.org/static/css/img/picnicbdy.gif`}
         />
         <Comment.Content>
-          <Comment.Author as="a">#{index + 1}</Comment.Author>
+          <Comment.Author as="a">
+            #{currentBoard.board_type === 0 ? post.id : index + 1}
+          </Comment.Author>
           <Comment.Metadata>
             <div>
               <Moment fromNow unix locale="es" date={post.timestamp} />
@@ -62,7 +64,7 @@ const Post = ({ index, post, locked, dir, threadId }) => {
       />
       <Comment.Content>
         <Comment.Author as="a">
-          #{index + 1}{" "}
+          #{currentBoard.board_type === 0 ? post.id : index + 1}{" "}
           <span
             className={post.email === "sage" ? "username sage" : "username"}
           >
@@ -86,12 +88,12 @@ const Post = ({ index, post, locked, dir, threadId }) => {
           {post.file !== "" ? (
             <div className="imageContainer">
               <ImageModal
-                href={`https://bienvenidoainternet.org/${dir}/src/${post.file}`}
+                href={`https://bienvenidoainternet.org/${currentBoard.dir}/src/${post.file}`}
                 trigger={
                   <Image
                     centered
                     className="postImage"
-                    src={`https://bienvenidoainternet.org/${dir}/thumb/${post.thumb}`}
+                    src={`https://bienvenidoainternet.org/${currentBoard.dir}/thumb/${post.thumb}`}
                   />
                 }
               />
@@ -100,7 +102,9 @@ const Post = ({ index, post, locked, dir, threadId }) => {
             </div>
           ) : null}
           <div
-            className={`postMessage ${dir === "zonavip" ? "vipFont" : null}`}
+            className={`postMessage ${
+              currentBoard.dir === "zonavip" ? "vipFont" : null
+            }`}
             dangerouslySetInnerHTML={{ __html: post.message }}
           />
         </Comment.Text>

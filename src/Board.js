@@ -101,7 +101,7 @@ class Board extends Component {
                   post={thread}
                   locked={thread.locked}
                   threadId={thread.id}
-                  dir={this.props.dir}
+                  currentBoard={currentBoard}
                 />
                 <Divider />
                 {thread.replies.map((reply, index, replies) => (
@@ -110,8 +110,8 @@ class Board extends Component {
                     post={reply}
                     locked={thread.locked}
                     threadId={thread.id}
-                    dir={this.props.dir}
                     key={index}
+                    currentBoard={currentBoard}
                   />
                 ))}
               </Comment.Group>
