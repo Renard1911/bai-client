@@ -69,3 +69,7 @@
   float: left;
   margin-right: 5px;
 }
+
+.ui.comments {
+  max-width: none !important;
+}
