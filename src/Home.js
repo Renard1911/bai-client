@@ -60,6 +60,7 @@ class Home extends Component {
     }
 
     const { newThreadsList, lastAgeThreads, latestNews } = this.state;
+    document.title = "B.a.I Home";
 
     return (
       <Grid columns={2} divided container doubling>

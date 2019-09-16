@@ -127,11 +127,11 @@ class Thread extends Component {
       locked,
       id
     } = this.state.thread;
-    document.title = subject;
 
     const currentBoard = this.props.boardList.find(board => {
       return board.dir === this.props.dir;
     });
+    document.title = subject + " - " + currentBoard.name + "@B.a.I";
 
     return (
       <React.Fragment>

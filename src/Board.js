@@ -76,6 +76,7 @@ class Board extends Component {
     const currentBoard = this.props.boardList.find(board => {
       return board.dir === this.props.dir;
     });
+    document.title = currentBoard.name + " - B.a.I";
 
     return (
       <React.Fragment>
