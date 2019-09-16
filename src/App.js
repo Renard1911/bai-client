@@ -4,7 +4,14 @@ import { Router, Link } from "@reach/router";
 import "fomantic-ui-css/semantic.css";
 import "./App.css";
 
-import { Dropdown, Menu, Icon, Loader, Container } from "semantic-ui-react";
+import {
+  Dropdown,
+  Menu,
+  Icon,
+  Loader,
+  Container,
+  Segment
+} from "semantic-ui-react";
 import Home from "./Home";
 import Thread from "./Thread";
 import Board from "./Board";
@@ -93,6 +100,11 @@ class App extends Component {
             <NotFound default />
           </Router>
         </Container>
+        <Segment vertical textAlign="center" className="footer">
+          Bievenido a Internet 2010-2019
+          <br />
+          bai-client + weabot
+        </Segment>
       </React.Fragment>
     );
   }
