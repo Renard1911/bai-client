@@ -93,6 +93,9 @@ class Board extends Component {
               <Link to={`/${this.props.dir}/read/${thread.id}`}>
                 {thread.subject}
               </Link>
+              <Header.Subheader>
+                {thread.total_replies} respuestas
+              </Header.Subheader>
             </Header>
             <Segment attached>
               <Comment.Group>
