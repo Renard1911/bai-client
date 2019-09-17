@@ -5,7 +5,8 @@ import {
   Loader,
   Message,
   Comment,
-  Breadcrumb
+  Breadcrumb,
+  Divider
 } from "semantic-ui-react";
 import Moment from "react-moment";
 import "moment/locale/es";
@@ -146,7 +147,7 @@ class Thread extends Component {
           <Breadcrumb.Divider icon="right arrow" />
           <Breadcrumb.Section active>{subject}</Breadcrumb.Section>
         </Breadcrumb>
-        <Header as="h2">
+        <Header as="h1">
           <Header.Content className="postMessage">
             {subject}
             {locked ? <Icon name="lock" /> : null}
@@ -159,6 +160,7 @@ class Thread extends Component {
             <br />
           </Header.Subheader>
         </Header>
+        <Divider />
 
         <Comment.Group>
           {posts.map((post, index) => (
