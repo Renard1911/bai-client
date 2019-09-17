@@ -52,22 +52,10 @@
   padding-bottom: 1em;
 }
 
-.yt {
-  border: 1px solid #ccc;
-  font-size: 12px;
-  display: inline-block;
-  line-height: 13px;
-  margin: 2px 0;
-  padding: 5px;
-  text-decoration: none;
-}
+.yt {}
 
 .yt .pvw {
-  width: 100px;
-  height: 60px;
-  overflow: hidden;
-  float: left;
-  margin-right: 5px;
+  display: none;
 }
 
 .ui.comments {
@@ -82,4 +70,9 @@
 .footer {
   margin-top: 3em !important;
   padding: 1em 0 !important;
+}
+
+.playerContainer {
+  max-width: 400px;
+  padding-bottom: 0.75em;
 }

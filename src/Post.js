@@ -1,5 +1,13 @@
 import React from "react";
-import { Image, Icon, Modal, Comment, Flag } from "semantic-ui-react";
+import {
+  Image,
+  Icon,
+  Modal,
+  Comment,
+  Flag,
+  Embed,
+  Label
+} from "semantic-ui-react";
 import Moment from "react-moment";
 import "moment/locale/es";
 import { avatars } from "./Quotes";
@@ -71,6 +79,11 @@ const Post = ({ index, post, locked, threadId, currentBoard }) => {
   if (post.tripcode === " (★ ****-****)") {
     post.tripcode = "";
   }
+  //(?:https?:\/\/)?(?:www\.)?youtu(.be\/|be\.com\/watch\?v=)(\w{11})
+  const youtubeRe = RegExp(
+    /(?:https?:\/\/)?(?:www\.)?youtu(.be\/|be\.com\/watch\?v=)(\w{11})/g
+  );
+  const youtubeVideos = post.message.match(youtubeRe);
 
   return (
     <Comment>
@@ -122,6 +135,23 @@ const Post = ({ index, post, locked, threadId, currentBoard }) => {
               {filesize(post.file_size, { bits: true })}
             </div>
           ) : null}
+
+          {youtubeVideos !== null
+            ? youtubeVideos.map((url, i) => {
+                let id = url.split("?v=")[1];
+                return (
+                  <div className="playerContainer" key={i}>
+                    <Embed
+                      id={id}
+                      source="youtube"
+                      key={i}
+                      placeholder={`https://img.youtube.com/vi/${id}/hqdefault.jpg`}
+                    />
+                  </div>
+                );
+              })
+            : null}
+
           <div
             className={`postMessage ${
               currentBoard.dir === "zonavip" ? "vipFont" : null
