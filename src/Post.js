@@ -78,7 +78,10 @@ const Post = ({ index, post, locked, threadId, currentBoard }) => {
         src={`https://bienvenidoainternet.org/static/ico/${rndAvatar}.gif`}
       />
       <Comment.Content>
-        <Comment.Author as="a">
+        <Comment.Author
+          as="a"
+          href={post.mail !== "" ? `mailto:${post.email}` : null}
+        >
           #{currentBoard.board_type === 0 ? post.id : index + 1}{" "}
           <span
             className={post.email === "sage" ? "username sage" : "username"}
