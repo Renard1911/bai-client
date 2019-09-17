@@ -94,7 +94,7 @@ class Board extends Component {
                 {thread.subject}
               </Link>
             </Header>
-            <Segment>
+            <Segment attached>
               <Comment.Group>
                 <Post
                   index={0}
