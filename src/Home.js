@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { List, Header, Segment, Icon, Loader, Grid } from "semantic-ui-react";
+import { List, Header, Label, Icon, Loader, Grid } from "semantic-ui-react";
 import Moment from "react-moment";
 import "moment/locale/es";
 
@@ -12,8 +12,13 @@ class Home extends Component {
       lastAgeThreads: [],
       newThreadsList: [],
       latestNews: [],
-      isLoaded: false
+      isLoaded: false,
+      autoRefresh: null
     };
+    this.lastTime = 0;
+    this.refreshCooldown = 15;
+    this.cooldownCounter = 0;
+    this.lastTimeNoAge = 0;
   }
 
   componentDidMount() {
@@ -23,8 +28,11 @@ class Home extends Component {
       })
       .then(resource => {
         this.setState({
-          lastAgeThreads: resource["threads"]
+          lastAgeThreads: resource["threads"],
+          autoRefresh: setInterval(() => this.updateAges(), 1000)
         });
+        this.lastTime = resource.time;
+        this.lastTimeNoAge = resource.time;
       });
 
     fetch("https://bienvenidoainternet.org/cgi/api/newThreads?limit=10")
@@ -48,6 +56,42 @@ class Home extends Component {
         });
       });
     window.scrollTo(0, 0);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.autoRefresh);
+  }
+
+  async updateAges() {
+    this.cooldownCounter++;
+    if (this.cooldownCounter < this.refreshCooldown) {
+      return;
+    } else {
+      this.cooldownCounter = 0;
+    }
+
+    let apiURl = `https://bienvenidoainternet.org/cgi/api/lastage?time=${this.lastTime}&limit=10`;
+    fetch(apiURl)
+      .then(response => {
+        return response.json();
+      })
+      .then(resource => {
+        if (resource.state === "success") {
+          if (resource.threads.length > 0) {
+            this.setState({
+              lastAgeThreads: resource.threads
+            });
+            this.refreshCooldown = 30;
+          } else {
+            this.refreshCooldown += 15;
+            this.lastTimeNoAge = resource.time;
+            if (this.refreshCooldown > 60) {
+              this.refreshCooldown = 60;
+            }
+          }
+        }
+        this.lastTime = resource.time;
+      });
   }
 
   render() {
@@ -81,6 +125,9 @@ class Home extends Component {
                       to={`${thread.dir}/read/${thread.id}`}
                     >
                       {thread.content}
+                      {thread.bumped > this.lastTimeNoAge ? (
+                        <Icon name="star" color="red" size="small" />
+                      ) : null}
                     </List.Header>
                     <List.Description as="a">
                       <Icon name="folder open outline" /> {thread.board_fulln} ―{" "}
