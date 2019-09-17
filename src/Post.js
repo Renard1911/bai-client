@@ -58,6 +58,16 @@ const Post = ({ index, post, locked, threadId, currentBoard }) => {
     }
   }
 
+  post.message = post.message.replace(
+    '<img src="/',
+    '<img src="https://bienvenidoainternet.org/'
+  );
+
+  if (currentBoard.board_type === 0) {
+    post.message = post.message.replace("/res/", "/read/");
+    post.message = post.message.replace(".html#", "/");
+  }
+
   return (
     <Comment>
       <Comment.Avatar
