@@ -48,13 +48,29 @@ const Post = ({ index, post, locked, threadId, currentBoard }) => {
     );
   }
 
+  let user_id = post.timestamp_formatted.split(" ID:")[1];
   const filesize = require("filesize");
   const seedrandom = require("seedrandom");
   const rng = seedrandom(threadId + index);
+  const idRng = seedrandom(user_id);
+  const idColor =
+    "rgb(" +
+    Math.round(idRng() * 255) +
+    ", " +
+    Math.round(idRng() * 200) +
+    ", " +
+    Math.round(idRng() * 200) +
+    ")";
 
-  let user_id = post.timestamp_formatted.split(" ID:")[1];
-  const i = Math.round(rng() * avatars.length);
-  const rndAvatar = avatars[i];
+  let rndAvatar;
+  if (user_id !== "") {
+    let i = Math.round(idRng() * avatars.length);
+    rndAvatar = avatars[i];
+  } else {
+    let i = Math.round(rng() * avatars.length);
+    rndAvatar = avatars[i];
+  }
+
   let flag;
 
   if (currentBoard.dir === "world") {
@@ -115,7 +131,11 @@ const Post = ({ index, post, locked, threadId, currentBoard }) => {
               name="star"
               color={user_id === "CAP_USER*" ? "yellow" : "grey"}
             />
-            {user_id === "CAP_USER*" ? "Usuario verificado" : user_id}
+            {user_id === "CAP_USER*" ? (
+              "Usuario verificado"
+            ) : (
+              <span style={{ color: idColor }}>{user_id}</span>
+            )}
           </div>
         </Comment.Metadata>
         <Comment.Text>
