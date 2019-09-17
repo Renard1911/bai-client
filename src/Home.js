@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { List, Header, Label, Icon, Loader, Grid } from "semantic-ui-react";
+import { List, Header, Icon, Loader, Grid } from "semantic-ui-react";
 import Moment from "react-moment";
 import "moment/locale/es";
 
@@ -27,12 +27,12 @@ class Home extends Component {
         return response.json();
       })
       .then(resource => {
+        this.lastTime = resource.time;
+        this.lastTimeNoAge = resource.time;
         this.setState({
           lastAgeThreads: resource["threads"],
           autoRefresh: setInterval(() => this.updateAges(), 1000)
         });
-        this.lastTime = resource.time;
-        this.lastTimeNoAge = resource.time;
       });
 
     fetch("https://bienvenidoainternet.org/cgi/api/newThreads?limit=10")
@@ -105,7 +105,6 @@ class Home extends Component {
 
     const { newThreadsList, lastAgeThreads, latestNews } = this.state;
     document.title = "B.a.I Home";
-
     return (
       <Grid columns={2} divided container doubling>
         <Grid.Row>
@@ -115,7 +114,11 @@ class Home extends Component {
               {lastAgeThreads.map(thread => (
                 <List.Item key={thread.id}>
                   <List.Icon
-                    name="comment alternate outline"
+                    name={
+                      thread.bumped > this.lastTimeNoAge
+                        ? "bullhorn"
+                        : "comment alternate outline"
+                    }
                     size="large"
                     verticalAlign="middle"
                   />
@@ -125,9 +128,6 @@ class Home extends Component {
                       to={`${thread.dir}/read/${thread.id}`}
                     >
                       {thread.content}
-                      {thread.bumped > this.lastTimeNoAge ? (
-                        <Icon name="star" color="red" size="small" />
-                      ) : null}
                     </List.Header>
                     <List.Description as="a">
                       <Icon name="folder open outline" /> {thread.board_fulln} ―{" "}
