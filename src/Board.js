@@ -4,14 +4,11 @@ import {
   Message,
   Segment,
   Header,
-  Image,
   Comment,
   Divider,
   Breadcrumb
 } from "semantic-ui-react";
 import { Link } from "@reach/router";
-import Moment from "react-moment";
-import "moment/locale/es";
 import Post from "./Post";
 class Board extends Component {
   constructor() {
@@ -56,7 +53,6 @@ class Board extends Component {
   }
 
   fetchMoreThreads() {
-    console.log("fetching more");
     fetch(
       `https://bienvenidoainternet.org/cgi/api/list?dir=${this.props.dir}&replies=5&limit=10&offset=${this.threadOffset}`
     )
