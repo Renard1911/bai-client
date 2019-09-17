@@ -56,8 +56,9 @@ class Board extends Component {
   }
 
   fetchMoreThreads() {
+    console.log("fetching more");
     fetch(
-      `https://bienvenidoainternet.org/cgi/api/list?dir=${this.props.dir}&replies=5&limit=10&offset${this.threadOffset}`
+      `https://bienvenidoainternet.org/cgi/api/list?dir=${this.props.dir}&replies=5&limit=10&offset=${this.threadOffset}`
     )
       .then(response => {
         return response.json();
@@ -66,6 +67,7 @@ class Board extends Component {
         if (resource.state === "success") {
           if (resource.threads.length > 0) {
             const moreThreads = this.state.threadList.concat(resource.threads);
+            this.threadOffset += 10;
             this.setState({ threadList: moreThreads, loadingMore: false });
           }
         }
@@ -122,7 +124,7 @@ class Board extends Component {
           <Breadcrumb.Section link>{currentBoard.name}</Breadcrumb.Section>
         </Breadcrumb>
         {threadList.map(thread => (
-          <Segment.Group key={thread.id}>
+          <Segment.Group key={"seg_" + thread.timestamp + thread.id}>
             <Header as="h3" attached>
               <Link to={`/${this.props.dir}/read/${thread.id}`}>
                 {thread.subject}
@@ -147,7 +149,7 @@ class Board extends Component {
                     post={reply}
                     locked={thread.locked}
                     threadId={thread.id}
-                    key={index}
+                    key={"reply_" + reply.id}
                     currentBoard={currentBoard}
                   />
                 ))}
