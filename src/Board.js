@@ -19,8 +19,11 @@ class Board extends Component {
     this.state = {
       isLoaded: false,
       threadList: [],
-      error: null
+      error: null,
+      loadingMore: false
     };
+    this.handleScroll = this.handleScroll.bind(this);
+    this.threadOffset = 10;
   }
 
   componentDidMount() {
@@ -37,6 +40,37 @@ class Board extends Component {
         this.setState({ isLoaded: true, threadList: resource["threads"] });
       });
     window.scrollTo(0, 0);
+    window.addEventListener("scroll", this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+
+  handleScroll() {
+    const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
+    if (scrollHeight - scrollTop === clientHeight && !this.state.loadingMore) {
+      this.setState({ loadingMore: true });
+      this.fetchMoreThreads();
+    }
+  }
+
+  fetchMoreThreads() {
+    fetch(
+      `https://bienvenidoainternet.org/cgi/api/list?dir=${this.props.dir}&replies=5&limit=10&offset${this.threadOffset}`
+    )
+      .then(response => {
+        return response.json();
+      })
+      .then(resource => {
+        if (resource.state === "success") {
+          if (resource.threads.length > 0) {
+            const moreThreads = this.state.threadList.concat(resource.threads);
+            this.setState({ threadList: moreThreads, loadingMore: false });
+          }
+        }
+        return;
+      });
   }
 
   componentDidUpdate(prevProps) {
@@ -52,7 +86,7 @@ class Board extends Component {
   }
 
   render() {
-    const { isLoaded, error, threadList } = this.state;
+    const { isLoaded, error, threadList, loadingMore } = this.state;
 
     if (error != null) {
       return (
@@ -121,6 +155,12 @@ class Board extends Component {
             </Segment>
           </Segment.Group>
         ))}
+
+        {loadingMore ? (
+          <Loader active inline="centered" style={{ marginTop: "3em" }}>
+            Cargando más hilos ...
+          </Loader>
+        ) : null}
       </React.Fragment>
     );
   }
