@@ -68,6 +68,10 @@ const Post = ({ index, post, locked, threadId, currentBoard }) => {
     post.message = post.message.replace(".html#", "/");
   }
 
+  if (post.tripcode === " (★ ****-****)") {
+    post.tripcode = "";
+  }
+
   return (
     <Comment>
       <Comment.Avatar
@@ -95,7 +99,7 @@ const Post = ({ index, post, locked, threadId, currentBoard }) => {
               name="star"
               color={user_id === "CAP_USER*" ? "yellow" : "grey"}
             />
-            {user_id}
+            {user_id === "CAP_USER*" ? "Usuario verificado" : user_id}
           </div>
         </Comment.Metadata>
         <Comment.Text>
