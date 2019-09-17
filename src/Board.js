@@ -89,7 +89,7 @@ class Board extends Component {
         </Breadcrumb>
         {threadList.map(thread => (
           <Segment.Group key={thread.id}>
-            <Header as="h4" attached>
+            <Header as="h3" attached>
               <Link to={`/${this.props.dir}/read/${thread.id}`}>
                 {thread.subject}
               </Link>
