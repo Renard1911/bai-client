@@ -126,6 +126,7 @@ class Home extends Component {
                     <List.Header
                       as={Link}
                       to={`${thread.dir}/read/${thread.id}`}
+                      className="postMessage"
                     >
                       {thread.content}
                     </List.Header>
