@@ -20,7 +20,7 @@
   },
   "scripts": {
     "dev": "parcel src/index.html",
-    "build": "parcel build src/index.html --no-source-maps",
+    "build": "parcel build src/index.html --no-source-maps --out-dir public",
     "format": "prettier \"src/**/*.{js,css,html}\" --write",
     "lint": "eslint \"src/**/*.{js,jsx} --quiet"
   },
