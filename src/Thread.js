@@ -6,7 +6,8 @@ import {
   Message,
   Comment,
   Breadcrumb,
-  Divider
+  Divider,
+  Container
 } from "semantic-ui-react";
 import Moment from "react-moment";
 import "moment/locale/es";
@@ -100,6 +101,7 @@ class Thread extends Component {
 
   render() {
     const { isLoading, error } = this.state;
+    const { nightMode } = this.props;
 
     if (isLoading) {
       return (
@@ -135,8 +137,8 @@ class Thread extends Component {
     document.title = subject + " - " + currentBoard.name + "@B.a.I";
 
     return (
-      <React.Fragment>
-        <Breadcrumb>
+      <Container className={nightMode ? "inverted" : ""}>
+        <Breadcrumb className={nightMode ? "inverted" : ""}>
           <Breadcrumb.Section link as={Link} to="/">
             Home
           </Breadcrumb.Section>
@@ -147,7 +149,7 @@ class Thread extends Component {
           <Breadcrumb.Divider icon="right arrow" />
           <Breadcrumb.Section active>{subject}</Breadcrumb.Section>
         </Breadcrumb>
-        <Header as="h1">
+        <Header as="h1" inverted={nightMode}>
           <Header.Content className="postMessage">
             {subject}
             {locked ? <Icon name="lock" /> : null}
@@ -162,7 +164,7 @@ class Thread extends Component {
         </Header>
         <Divider />
 
-        <Comment.Group>
+        <Comment.Group className={nightMode ? "inverted" : ""}>
           {posts.map((post, index) => (
             <Post
               key={index}
@@ -175,14 +177,19 @@ class Thread extends Component {
           ))}
         </Comment.Group>
 
-        <ReplyForm currentBoard={currentBoard} parent={id} locked={locked} />
+        <ReplyForm
+          currentBoard={currentBoard}
+          parent={id}
+          locked={locked}
+          nightMode={nightMode}
+        />
 
         <a
           href={`https://bienvenidoainternet.org/cgi/api/thread?dir=${this.props.dir}&id=${this.props.id}`}
         >
           API Link
         </a>
-      </React.Fragment>
+      </Container>
     );
   }
 }

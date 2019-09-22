@@ -73,7 +73,7 @@ class ReplyForm extends Component {
 
   render() {
     const { name, email, message, replyRes, attachment } = this.state;
-    const { currentBoard } = this.props;
+    const { currentBoard, nightMode } = this.props;
     if (this.props.locked === 1) {
       return (
         <Message negative>
@@ -83,7 +83,7 @@ class ReplyForm extends Component {
       );
     }
     return (
-      <Segment>
+      <Segment inverted={nightMode}>
         {replyRes !== null ? (
           replyRes.state === "success" ? (
             <Message positive>
@@ -101,7 +101,7 @@ class ReplyForm extends Component {
             </Message>
           )
         ) : null}
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit} inverted={nightMode}>
           <Form.Group widths="equal">
             <Form.Input
               label="Nombre"
@@ -143,9 +143,7 @@ class ReplyForm extends Component {
             placeholder="(　･ω･) Cuentáme algo interesante ..."
             onChange={this.handleChange}
           />
-          <Button type="submit" secondary>
-            Enviar
-          </Button>
+          <Button type="submit">Enviar</Button>
         </Form>
       </Segment>
     );

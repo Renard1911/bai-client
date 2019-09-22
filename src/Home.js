@@ -106,7 +106,15 @@ class Home extends Component {
     const { newThreadsList, lastAgeThreads, latestNews } = this.state;
     document.title = "B.a.I Home";
     return (
-      <Grid columns={2} divided container doubling>
+      <Grid
+        columns={2}
+        divided
+        container
+        doubling
+        className={
+          this.props.nightMode ? "homeContainer inverted" : "homeContainer"
+        }
+      >
         <Grid.Row>
           <Grid.Column>
             <Header as="h4">Hilos activos</Header>

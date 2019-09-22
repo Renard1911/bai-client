@@ -109,10 +109,11 @@ class Board extends Component {
       return board.dir === this.props.dir;
     });
     document.title = currentBoard.name + " - B.a.I";
+    const nightMode = this.props.nightMode;
 
     return (
       <React.Fragment>
-        <Breadcrumb>
+        <Breadcrumb className={nightMode ? "inverted" : ""}>
           <Breadcrumb.Section link as={Link} to="/">
             Home
           </Breadcrumb.Section>
@@ -121,7 +122,7 @@ class Board extends Component {
         </Breadcrumb>
         {threadList.map(thread => (
           <Segment.Group key={"seg_" + thread.timestamp + thread.id}>
-            <Header as="h3" attached>
+            <Header as="h3" attached inverted={nightMode}>
               <Link to={`/${this.props.dir}/read/${thread.id}`}>
                 {thread.subject}
               </Link>
@@ -129,14 +130,15 @@ class Board extends Component {
                 {thread.total_replies} respuestas
               </Header.Subheader>
             </Header>
-            <Segment attached>
-              <Comment.Group>
+            <Segment attached inverted={nightMode}>
+              <Comment.Group className={nightMode ? "inverted" : ""}>
                 <Post
                   index={0}
                   post={thread}
                   locked={thread.locked}
                   threadId={thread.id}
                   currentBoard={currentBoard}
+                  nightMode={nightMode}
                 />
                 <Divider />
                 {thread.replies.map((reply, index, replies) => (
@@ -147,6 +149,7 @@ class Board extends Component {
                     threadId={thread.id}
                     key={"reply_" + reply.id}
                     currentBoard={currentBoard}
+                    nightMode={nightMode}
                   />
                 ))}
               </Comment.Group>

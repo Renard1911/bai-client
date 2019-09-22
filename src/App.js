@@ -22,8 +22,10 @@ class App extends Component {
     super();
     this.state = {
       boardList: [],
-      isLoaded: false
+      isLoaded: false,
+      nightMode: true
     };
+    this.toggleTheme = this.toggleTheme.bind(this);
   }
 
   componentDidMount() {
@@ -34,6 +36,18 @@ class App extends Component {
       .then(resource => {
         this.setState({ boardList: resource["boards"], isLoaded: true });
       });
+  }
+
+  componentDidUpdate() {
+    if (this.state.nightMode) {
+      document.body.style.backgroundColor = "#313233";
+    } else {
+      document.body.style.backgroundColor = "#FFFFFF";
+    }
+  }
+
+  toggleTheme() {
+    this.setState({ nightMode: !this.state.nightMode });
   }
 
   render() {
@@ -87,15 +101,36 @@ class App extends Component {
                 )}
               </Dropdown.Menu>
             </Dropdown>
+            <Menu.Menu position="right">
+              <Menu.Item as="a" onClick={this.toggleTheme}>
+                {this.state.nightMode ? (
+                  <Icon name="sun" />
+                ) : (
+                  <Icon name="moon" />
+                )}
+              </Menu.Item>
+            </Menu.Menu>
           </Container>
         </Menu>
         <Container className="main">
           <Router>
-            <Home boardList={this.state.boardList} path="/" />
-            <Thread boardList={this.state.boardList} path="/:dir/read/:id">
+            <Home
+              boardList={this.state.boardList}
+              path="/"
+              nightMode={this.state.nightMode}
+            />
+            <Thread
+              boardList={this.state.boardList}
+              path="/:dir/read/:id"
+              nightMode={this.state.nightMode}
+            >
               <Thread path=":active" />
             </Thread>
-            <Board boardList={this.state.boardList} path="/board/:dir" />
+            <Board
+              boardList={this.state.boardList}
+              path="/board/:dir"
+              nightMode={this.state.nightMode}
+            />
             <NotFound default />
           </Router>
         </Container>

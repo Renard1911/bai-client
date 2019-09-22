@@ -22,7 +22,7 @@ const ImageModal = ({ href, trigger }) => (
   </Modal>
 );
 
-const Post = ({ index, post, locked, threadId, currentBoard }) => {
+const Post = ({ index, post, locked, threadId, currentBoard, nightMode }) => {
   if (post.IS_DELETED > 0) {
     return (
       <Comment>
@@ -102,7 +102,7 @@ const Post = ({ index, post, locked, threadId, currentBoard }) => {
   const youtubeVideos = post.message.match(youtubeRe);
 
   return (
-    <Comment>
+    <Comment inverted={nightMode}>
       <Comment.Avatar
         src={`https://bienvenidoainternet.org/static/ico/${rndAvatar}.gif`}
       />

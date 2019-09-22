@@ -77,3 +77,22 @@
   max-width: 400px;
   padding-bottom: 0.75em;
 }
+
+.ui.attached:not(.top).header {
+  border-top: 1px solid !important;
+  border-radius: 0.28571429rem 0.28571429rem 0 0;
+}
+
+.ui.inverted.attached.header {
+  border-color: #555555 !important;
+}
+
+.ui.container.inverted {
+  background-color: #1c1c1c;
+  padding: 1em 2em;
+}
+
+.homeContainer.inverted {
+  color: #eaeaea !important;
+  background-color: #454647 !important;
+}
