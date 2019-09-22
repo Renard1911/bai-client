@@ -104,6 +104,7 @@ class Home extends Component {
     }
 
     const { newThreadsList, lastAgeThreads, latestNews } = this.state;
+    const { nightMode } = this.props;
     document.title = "B.a.I Home";
     return (
       <Grid
@@ -111,14 +112,14 @@ class Home extends Component {
         divided
         container
         doubling
-        className={
-          this.props.nightMode ? "homeContainer inverted" : "homeContainer"
-        }
+        className={nightMode ? "homeContainer inverted" : "homeContainer"}
       >
         <Grid.Row>
           <Grid.Column>
-            <Header as="h4">Hilos activos</Header>
-            <List divided>
+            <Header as="h4" inverted={nightMode}>
+              Hilos activos
+            </Header>
+            <List divided inverted={nightMode}>
               {lastAgeThreads.map(thread => (
                 <List.Item key={thread.id}>
                   <List.Icon
@@ -149,8 +150,10 @@ class Home extends Component {
             </List>
           </Grid.Column>
           <Grid.Column>
-            <Header as="h4">Nuevos hilos</Header>
-            <List divided>
+            <Header as="h4" inverted={nightMode}>
+              Nuevos hilos
+            </Header>
+            <List divided inverted={nightMode}>
               {newThreadsList.map(thread => (
                 <List.Item key={thread.id}>
                   <List.Icon
@@ -183,8 +186,10 @@ class Home extends Component {
         </Grid.Row>
         <Grid.Row columns={1}>
           <Grid.Column>
-            <Header as="h4">Blotter</Header>
-            <List divided>
+            <Header as="h4" inverted={nightMode}>
+              Blotter
+            </Header>
+            <List divided inverted={nightMode}>
               {latestNews.map(n => (
                 <List.Item key={n.timestamp}>
                   <List.Content>
