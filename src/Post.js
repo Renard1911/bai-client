@@ -62,13 +62,15 @@ const Post = ({ index, post, locked, threadId, currentBoard, nightMode }) => {
     Math.round(idRng() * 200) +
     ")";
 
-  let rndAvatar;
+  let rndAvatar, hue;
   if (user_id !== "") {
-    let i = Math.round(idRng() * avatars.length);
+    let i = Math.round(idRng() * avatars.length - 1);
     rndAvatar = avatars[i];
+    hue = Math.round(idRng() * 360);
   } else {
-    let i = Math.round(rng() * avatars.length);
+    let i = Math.round(rng() * avatars.length - 1);
     rndAvatar = avatars[i];
+    hue = Math.round(rng() * 360);
   }
 
   let flag;
@@ -105,6 +107,7 @@ const Post = ({ index, post, locked, threadId, currentBoard, nightMode }) => {
     <Comment inverted={nightMode}>
       <Comment.Avatar
         src={`https://bienvenidoainternet.org/static/ico/${rndAvatar}.gif`}
+        style={{ filter: `hue-rotate(${hue}deg)` }}
       />
       <Comment.Content>
         <Comment.Author
