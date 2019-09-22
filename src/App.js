@@ -23,7 +23,7 @@ class App extends Component {
     this.state = {
       boardList: [],
       isLoaded: false,
-      nightMode: true
+      nightMode: false
     };
     this.toggleTheme = this.toggleTheme.bind(this);
   }
@@ -36,6 +36,13 @@ class App extends Component {
       .then(resource => {
         this.setState({ boardList: resource["boards"], isLoaded: true });
       });
+
+    let _nightMode = localStorage.getItem("nightMode");
+    if (_nightMode === null) {
+      localStorage.setItem("nightMode", false);
+    } else {
+      this.setState({ nightMode: JSON.parse(_nightMode) });
+    }
   }
 
   componentDidUpdate() {
@@ -47,7 +54,9 @@ class App extends Component {
   }
 
   toggleTheme() {
-    this.setState({ nightMode: !this.state.nightMode });
+    this.setState({ nightMode: !this.state.nightMode }, () => {
+      localStorage.setItem("nightMode", this.state.nightMode);
+    });
   }
 
   render() {
