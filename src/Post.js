@@ -6,11 +6,13 @@ import {
   Comment,
   Flag,
   Embed,
-  Label
+  Form,
+  Button
 } from "semantic-ui-react";
 import Moment from "react-moment";
 import "moment/locale/es";
 import { avatars } from "./Quotes";
+import ReplyForm from "./ReplyForm";
 
 const ImageModal = ({ href, trigger }) => (
   <Modal trigger={trigger} basic size="fullscreen">
@@ -19,6 +21,53 @@ const ImageModal = ({ href, trigger }) => (
         <Image as="a" src={href} />
       </Modal.Description>
     </Modal.Content>
+  </Modal>
+);
+
+const ReportModal = ({ trigger, threadId, postId, dir }) => (
+  <Modal trigger={trigger} size="tiny">
+    <Modal.Header>Reportar</Modal.Header>
+    <Modal.Content>
+      <Modal.Description>
+        <p>
+          Para pedir que el post <b>#{postId}</b> sea eliminado, indica una
+          razón y presiona el botón Reportar.
+        </p>
+        <p>
+          Normalmente eliminamos los mensajes que son considerados spam o flood.
+          <br />
+          Si deseas pedir la prohibición de acceso a algún usuario persistente,
+          te recomendamos hacerlo en la sección /bai/.
+        </p>
+        <Form>
+          <Form.Field>
+            <Form.Input label="Razón" />
+          </Form.Field>
+        </Form>
+      </Modal.Description>
+    </Modal.Content>
+    <Modal.Actions>
+      <Button color="red">Reportar</Button>
+    </Modal.Actions>
+  </Modal>
+);
+
+const QuickReplyModal = ({ trigger, currentBoard, id, locked }) => (
+  <Modal trigger={trigger} size="tiny">
+    <Modal.Header>Respuesta rápida</Modal.Header>.
+    <Modal.Content>
+      <Modal.Description>
+        <ReplyForm
+          currentBoard={currentBoard}
+          parent={id}
+          locked={locked}
+          nightMode={false}
+        />
+      </Modal.Description>
+    </Modal.Content>
+    <Modal.Actions>
+      <Button secondary>Responder</Button>
+    </Modal.Actions>
   </Modal>
 );
 
@@ -183,8 +232,18 @@ const Post = ({ index, post, locked, threadId, currentBoard, nightMode }) => {
           />
         </Comment.Text>
         <Comment.Actions>
-          {locked ? null : <Comment.Action>Responder</Comment.Action>}
-          <Comment.Action>Reportar</Comment.Action>
+          {locked ? null : (
+            <QuickReplyModal
+              trigger={<Comment.Action>Responder</Comment.Action>}
+              currentBoard={currentBoard}
+              id={post.parentid}
+              locked={locked}
+            />
+          )}
+          <ReportModal
+            trigger={<Comment.Action>Reportar</Comment.Action>}
+            postId={post.id}
+          />
         </Comment.Actions>
       </Comment.Content>
     </Comment>
