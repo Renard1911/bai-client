@@ -9,7 +9,7 @@ class ReplyForm extends Component {
       name: "",
       email: "",
       message:
-        this.props.replyIndex !== null
+        this.props.replyIndex !== undefined
           ? ">>" + this.props.replyIndex + "\n"
           : "",
       attachment: "",
