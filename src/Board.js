@@ -17,7 +17,8 @@ class Board extends Component {
       isLoaded: false,
       threadList: [],
       error: null,
-      loadingMore: false
+      loadingMore: false,
+      endReached: false
     };
     this.handleScroll = this.handleScroll.bind(this);
     this.threadOffset = 10;
@@ -46,7 +47,11 @@ class Board extends Component {
 
   handleScroll() {
     const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
-    if (scrollHeight - scrollTop === clientHeight && !this.state.loadingMore) {
+    if (
+      scrollHeight - scrollTop === clientHeight &&
+      !this.state.loadingMore &&
+      !this.state.endReached
+    ) {
       this.setState({ loadingMore: true });
       this.fetchMoreThreads();
     }
@@ -65,6 +70,8 @@ class Board extends Component {
             const moreThreads = this.state.threadList.concat(resource.threads);
             this.threadOffset += 10;
             this.setState({ threadList: moreThreads, loadingMore: false });
+          } else {
+            this.setState({ endReached: true, loadingMore: false });
           }
         }
         return;
@@ -84,7 +91,7 @@ class Board extends Component {
   }
 
   render() {
-    const { isLoaded, error, threadList, loadingMore } = this.state;
+    const { isLoaded, error, threadList, loadingMore, endReached } = this.state;
 
     if (error != null) {
       return (
@@ -161,6 +168,14 @@ class Board extends Component {
           <Loader active inline="centered" style={{ marginTop: "3em" }}>
             Cargando más hilos ...
           </Loader>
+        ) : null}
+
+        {endReached ? (
+          <Message
+            warning
+            header="ｷﾀ━━━(ﾟ∀ﾟ)━━━!!"
+            content="No hay más hilos para mostrar."
+          />
         ) : null}
       </React.Fragment>
     );
