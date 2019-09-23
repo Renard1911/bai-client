@@ -109,3 +109,7 @@
   color: #eaeaea !important;
   background-color: #454647 !important;
 }
+
+.ui.modal>.content.replyModal {
+  padding: 0 !important;
+}

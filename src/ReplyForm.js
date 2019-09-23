@@ -8,7 +8,10 @@ class ReplyForm extends Component {
     this.state = {
       name: "",
       email: "",
-      message: "",
+      message:
+        this.props.replyIndex !== null
+          ? ">>" + this.props.replyIndex + "\n"
+          : "",
       attachment: "",
       submittedName: "",
       submittedEmail: "",
@@ -73,7 +76,7 @@ class ReplyForm extends Component {
 
   render() {
     const { name, email, message, replyRes, attachment } = this.state;
-    const { currentBoard, nightMode } = this.props;
+    const { currentBoard, nightMode, quickReply } = this.props;
     if (this.props.locked === 1) {
       return (
         <Message negative>
@@ -83,7 +86,7 @@ class ReplyForm extends Component {
       );
     }
     return (
-      <Segment inverted={nightMode}>
+      <Segment inverted={nightMode} basic={quickReply}>
         {replyRes !== null ? (
           replyRes.state === "success" ? (
             <Message positive>

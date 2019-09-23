@@ -52,22 +52,19 @@ const ReportModal = ({ trigger, threadId, postId, dir }) => (
   </Modal>
 );
 
-const QuickReplyModal = ({ trigger, currentBoard, id, locked }) => (
+const QuickReplyModal = ({ trigger, currentBoard, id, locked, replyIndex }) => (
   <Modal trigger={trigger} size="tiny">
     <Modal.Header>Respuesta rápida</Modal.Header>.
-    <Modal.Content>
-      <Modal.Description>
-        <ReplyForm
-          currentBoard={currentBoard}
-          parent={id}
-          locked={locked}
-          nightMode={false}
-        />
-      </Modal.Description>
+    <Modal.Content className="replyModal">
+      <ReplyForm
+        currentBoard={currentBoard}
+        parent={id}
+        locked={locked}
+        nightMode={false}
+        quickReply
+        replyIndex={replyIndex}
+      />
     </Modal.Content>
-    <Modal.Actions>
-      <Button secondary>Responder</Button>
-    </Modal.Actions>
   </Modal>
 );
 
@@ -238,6 +235,7 @@ const Post = ({ index, post, locked, threadId, currentBoard, nightMode }) => {
               currentBoard={currentBoard}
               id={post.parentid}
               locked={locked}
+              replyIndex={currentBoard.board_type === 0 ? post.id : index + 1}
             />
           )}
           <ReportModal
