@@ -53,8 +53,6 @@
   padding-bottom: 1em;
 }
 
-.yt {}
-
 .yt .pvw {
   display: none;
 }
@@ -89,7 +87,22 @@
 
 .ui.container.inverted {
   background-color: #1c1c1c;
-  padding: 1em 2em;
+  padding: 0.5em 1em;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .ui.container.inverted {
+    padding: 0;
+  }
+
+  .ui.ui.ui.container.main:not(.fluid) {
+    margin-left: 0.5em !important;
+    margin-right: 0.5em !important;
+  }
+
+  .iu.container.main {
+    margin: 0px !important;
+  }
 }
 
 .homeContainer.inverted {
