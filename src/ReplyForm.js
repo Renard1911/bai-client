@@ -22,6 +22,13 @@ class ReplyForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentWillMount() {
+    let userData = JSON.parse(localStorage.getItem("userData"));
+    if (userData != null) {
+      this.setState({ name: userData.name, email: userData.email });
+    }
+  }
+
   handleChange(e) {
     const { name, value } = e.target;
     this.setState({ [name]: value });
@@ -48,6 +55,9 @@ class ReplyForm extends Component {
           password: "bai-client"
         };
 
+        let userData = { name: name, email: email };
+        localStorage.setItem("userData", JSON.stringify(userData));
+
         const formData = new FormData();
         for (var key in data) {
           formData.append(key, data[key]);
@@ -63,7 +73,7 @@ class ReplyForm extends Component {
             return response.json();
           })
           .then(resource => {
-            this.setState({ replyRes: resource });
+            this.setState({ replyRes: resource, message: "" });
           });
       }
     );
