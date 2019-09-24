@@ -100,14 +100,24 @@
     margin-right: 0.5em !important;
   }
 
+  .ui.ui.ui.container.thread:not(.fluid) {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    padding: 0.5em;
+  }
+
   .iu.container.main {
+    margin: 0px !important;
+  }
+
+  .homeContainer {
     margin: 0px !important;
   }
 }
 
 .homeContainer.inverted {
   color: #eaeaea !important;
-  background-color: #454647 !important;
+  background-color: #1c1c1c !important;
 }
 
 .ui.modal>.content.replyModal {

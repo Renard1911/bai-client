@@ -137,7 +137,7 @@ class Thread extends Component {
     document.title = subject + " - " + currentBoard.name + "@B.a.I";
 
     return (
-      <Container className={nightMode ? "inverted" : ""}>
+      <Container className={nightMode ? "thread inverted" : "thread"}>
         <Breadcrumb className={nightMode ? "inverted" : ""}>
           <Breadcrumb.Section link as={Link} to="/">
             Home
