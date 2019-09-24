@@ -200,7 +200,14 @@ const Post = ({ index, post, locked, threadId, currentBoard, nightMode }) => {
                   />
                 }
               />
-              {post.file} {post.image_width}x{post.image_height}{" "}
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={`https://bienvenidoainternet.org/${currentBoard.dir}/src/${post.file}`}
+              >
+                {post.file}
+              </a>{" "}
+              {post.image_width}x{post.image_height}{" "}
               {filesize(post.file_size, { bits: true })}
             </div>
           ) : null}
