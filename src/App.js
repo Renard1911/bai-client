@@ -16,6 +16,7 @@ import Home from "./Home";
 import Thread from "./Thread";
 import Board from "./Board";
 import NotFound from "./NotFound";
+import ThreadList from "./ThreadList";
 
 class App extends Component {
   constructor() {
@@ -138,6 +139,11 @@ class App extends Component {
             <Board
               boardList={this.state.boardList}
               path="/board/:dir"
+              nightMode={this.state.nightMode}
+            />
+            <ThreadList
+              boardList={this.state.boardList}
+              path="/list/:dir"
               nightMode={this.state.nightMode}
             />
             <NotFound default />

@@ -35,7 +35,12 @@ class Board extends Component {
         if (resource["state"] === "error") {
           this.setState({ error: resource });
         }
-        this.setState({ isLoaded: true, threadList: resource["threads"] });
+        this.setState(
+          { isLoaded: true, threadList: resource["threads"] },
+          () => {
+            window.scrollTo(0, 0);
+          }
+        );
       });
     window.scrollTo(0, 0);
     window.addEventListener("scroll", this.handleScroll);
@@ -127,6 +132,14 @@ class Board extends Component {
           <Breadcrumb.Divider icon="right chevron" />
           <Breadcrumb.Section link>{currentBoard.name}</Breadcrumb.Section>
         </Breadcrumb>
+        <Segment basic>
+          <Header as="h1">
+            {currentBoard.name}
+            <Header.Subheader>/{currentBoard.dir}/</Header.Subheader>
+          </Header>
+          <Link to={`/list/${currentBoard.dir}`}>Lista de hilos</Link>
+        </Segment>
+
         {threadList.map(thread => (
           <Segment.Group key={"seg_" + thread.timestamp + thread.id}>
             <Header as="h3" attached inverted={nightMode}>
