@@ -132,8 +132,8 @@ class Board extends Component {
           <Breadcrumb.Divider icon="right chevron" />
           <Breadcrumb.Section link>{currentBoard.name}</Breadcrumb.Section>
         </Breadcrumb>
-        <Segment basic>
-          <Header as="h1">
+        <Segment basic inverted={nightMode}>
+          <Header as="h1" inverted={nightMode}>
             {currentBoard.name}
             <Header.Subheader>/{currentBoard.dir}/</Header.Subheader>
           </Header>
