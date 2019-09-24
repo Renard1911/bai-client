@@ -240,7 +240,7 @@ const Post = ({ index, post, locked, threadId, currentBoard, nightMode }) => {
             <QuickReplyModal
               trigger={<Comment.Action>Responder</Comment.Action>}
               currentBoard={currentBoard}
-              id={post.parentid}
+              id={threadId}
               locked={locked}
               replyIndex={currentBoard.board_type === 0 ? post.id : index + 1}
             />
