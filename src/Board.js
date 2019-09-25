@@ -97,6 +97,7 @@ class Board extends Component {
 
   render() {
     const { isLoaded, error, threadList, loadingMore, endReached } = this.state;
+    const { boardList, dir, nightMode } = this.props;
 
     if (error != null) {
       return (
@@ -117,11 +118,10 @@ class Board extends Component {
       );
     }
 
-    const currentBoard = this.props.boardList.find(board => {
-      return board.dir === this.props.dir;
+    const currentBoard = boardList.find(board => {
+      return board.dir === dir;
     });
     document.title = currentBoard.name + " - B.a.I";
-    const nightMode = this.props.nightMode;
 
     return (
       <React.Fragment>
@@ -143,9 +143,7 @@ class Board extends Component {
         {threadList.map(thread => (
           <Segment.Group key={"seg_" + thread.timestamp + thread.id}>
             <Header as="h3" attached inverted={nightMode}>
-              <Link to={`/${this.props.dir}/read/${thread.id}`}>
-                {thread.subject}
-              </Link>
+              <Link to={`/${dir}/read/${thread.id}`}>{thread.subject}</Link>
               <Header.Subheader>
                 {thread.total_replies} respuestas
               </Header.Subheader>

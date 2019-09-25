@@ -86,8 +86,8 @@ class ReplyForm extends Component {
 
   render() {
     const { name, email, message, replyRes, attachment } = this.state;
-    const { currentBoard, nightMode, quickReply } = this.props;
-    if (this.props.locked === 1) {
+    const { currentBoard, nightMode, quickReply, locked } = this.props;
+    if (locked === 1) {
       return (
         <Message negative>
           <Message.Header>Hilo cerrado</Message.Header>

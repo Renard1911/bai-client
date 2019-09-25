@@ -69,6 +69,9 @@ const QuickReplyModal = ({ trigger, currentBoard, id, locked, replyIndex }) => (
 );
 
 const Post = ({ index, post, locked, threadId, currentBoard, nightMode }) => {
+  const filesize = require("filesize");
+
+  // Manejo de posts eliminados
   if (post.IS_DELETED > 0) {
     return (
       <Comment>
@@ -94,8 +97,8 @@ const Post = ({ index, post, locked, threadId, currentBoard, nightMode }) => {
     );
   }
 
+  // Obtener un avatar aleatorio basado en ID
   let user_id = post.timestamp_formatted.split(" ID:")[1];
-  const filesize = require("filesize");
   const seedrandom = require("seedrandom");
   const rng = seedrandom(threadId + index);
   const idRng = seedrandom(user_id);
@@ -119,8 +122,8 @@ const Post = ({ index, post, locked, threadId, currentBoard, nightMode }) => {
     hue = Math.round(rng() * 360);
   }
 
+  // Obetener bandera del pais (para /world)
   let flag;
-
   if (currentBoard.dir === "world") {
     flag = post.name.match("[A-Z][A-Z]");
     if (flag !== null) {
@@ -130,11 +133,13 @@ const Post = ({ index, post, locked, threadId, currentBoard, nightMode }) => {
     }
   }
 
+  // Fix: imagenes en dominio incorrecto
   post.message = post.message.replace(
     '<img src="/',
     '<img src="https://bienvenidoainternet.org/'
   );
 
+  // Fix para reach-router
   if (currentBoard.board_type === 0) {
     post.message = post.message.replace("/res/", "/read/");
     post.message = post.message.replace(".html#", "/");
@@ -143,7 +148,8 @@ const Post = ({ index, post, locked, threadId, currentBoard, nightMode }) => {
   if (post.tripcode === " (★ ****-****)") {
     post.tripcode = "";
   }
-  //(?:https?:\/\/)?(?:www\.)?youtu(.be\/|be\.com\/watch\?v=)(\w{11})
+
+  // Obtener lista de videos de youtube incrustados
   const youtubeRe = RegExp(
     /(?:https?:\/\/)?(?:www\.)?youtu(.be\/|be\.com\/watch\?v=)(\w{11})/g
   );

@@ -101,7 +101,7 @@ class Thread extends Component {
 
   render() {
     const { isLoading, error } = this.state;
-    const { nightMode } = this.props;
+    const { boardList, dir, nightMode } = this.props;
 
     if (isLoading) {
       return (
@@ -131,8 +131,8 @@ class Thread extends Component {
       id
     } = this.state.thread;
 
-    const currentBoard = this.props.boardList.find(board => {
-      return board.dir === this.props.dir;
+    const currentBoard = boardList.find(board => {
+      return board.dir === dir;
     });
     document.title = subject + " - " + currentBoard.name + "@B.a.I";
 
@@ -185,7 +185,7 @@ class Thread extends Component {
         />
 
         <a
-          href={`https://bienvenidoainternet.org/cgi/api/thread?dir=${this.props.dir}&id=${this.props.id}`}
+          href={`https://bienvenidoainternet.org/cgi/api/thread?dir=${dir}&id=${this.props.id}`}
         >
           API Link
         </a>

@@ -61,18 +61,16 @@ class App extends Component {
   }
 
   render() {
-    if (!this.state.isLoaded) {
-      if (!this.state.isLoaded) {
-        return (
-          <Loader active centered="true">
-            Cargando ...
-          </Loader>
-        );
-      }
+    const { boardList, nightMode, isLoaded } = this.state;
+
+    if (!isLoaded) {
+      return (
+        <Loader active centered="true">
+          Cargando ...
+        </Loader>
+      );
     }
 
-    const { boardList } = this.state;
-    //const pathList = boardList.map(board => "/" + board.dir)
     return (
       <React.Fragment>
         <Menu inverted fixed="top">
@@ -113,38 +111,30 @@ class App extends Component {
             </Dropdown>
             <Menu.Menu position="right">
               <Menu.Item as="a" onClick={this.toggleTheme}>
-                {this.state.nightMode ? (
-                  <Icon name="sun" />
-                ) : (
-                  <Icon name="moon" />
-                )}
+                {nightMode ? <Icon name="sun" /> : <Icon name="moon" />}
               </Menu.Item>
             </Menu.Menu>
           </Container>
         </Menu>
         <Container className="main">
           <Router>
-            <Home
-              boardList={this.state.boardList}
-              path="/"
-              nightMode={this.state.nightMode}
-            />
+            <Home boardList={boardList} path="/" nightMode={nightMode} />
             <Thread
-              boardList={this.state.boardList}
+              boardList={boardList}
               path="/:dir/read/:id"
-              nightMode={this.state.nightMode}
+              nightMode={nightMode}
             >
               <Thread path=":active" />
             </Thread>
             <Board
-              boardList={this.state.boardList}
+              boardList={boardList}
               path="/board/:dir"
-              nightMode={this.state.nightMode}
+              nightMode={nightMode}
             />
             <ThreadList
-              boardList={this.state.boardList}
+              boardList={boardList}
               path="/list/:dir"
-              nightMode={this.state.nightMode}
+              nightMode={nightMode}
             />
             <NotFound default />
           </Router>
