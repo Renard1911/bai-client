@@ -155,6 +155,30 @@ const Post = ({ index, post, locked, threadId, currentBoard, nightMode }) => {
   );
   const youtubeVideos = post.message.match(youtubeRe);
 
+  // El post es nuestro?
+  const ownPosts = JSON.parse(localStorage.getItem("ownPosts"));
+  let isMine = false;
+  if (ownPosts !== null) {
+    if (Object.prototype.hasOwnProperty.call(ownPosts, currentBoard.dir)) {
+      ownPosts[currentBoard.dir].forEach(reply => {
+        if (reply.thread_id === post.parentid) {
+          if (reply.reply_id === post.id) {
+            isMine = true;
+          }
+        }
+      });
+    }
+  }
+
+  let starColor;
+  if (user_id === "CAP_USER*") {
+    starColor = "yellow";
+  } else if (isMine) {
+    starColor = "blue";
+  } else {
+    starColor = "gray";
+  }
+
   return (
     <Comment inverted={nightMode}>
       <Comment.Avatar
@@ -182,15 +206,13 @@ const Post = ({ index, post, locked, threadId, currentBoard, nightMode }) => {
             <Moment fromNow unix locale="es" date={post.timestamp} />
           </div>
           <div>
-            <Icon
-              name="star"
-              color={user_id === "CAP_USER*" ? "yellow" : "grey"}
-            />
+            <Icon name="star" color={starColor} />
             {user_id === "CAP_USER*" ? (
               "Usuario verificado"
             ) : (
               <span style={{ color: idColor }}>{user_id}</span>
             )}
+            {isMine ? " (Tú)" : null}
           </div>
         </Comment.Metadata>
         <Comment.Text>

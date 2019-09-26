@@ -40,13 +40,15 @@ class ReplyForm extends Component {
       {
         submittedName: name,
         submittedEmail: email,
-        submittedMessage: message
+        submittedMessage: message,
+        replyRes: null
       },
       () => {
         const { submittedName, submittedEmail, submittedMessage } = this.state;
+        const { currentBoard, parent } = this.props;
         const data = {
-          board: this.props.currentBoard.dir,
-          parent: this.props.parent,
+          board: currentBoard.dir,
+          parent: parent,
           name: "",
           email: "",
           fielda: submittedName,
@@ -75,6 +77,19 @@ class ReplyForm extends Component {
           .then(resource => {
             if (resource.state === "success") {
               this.setState({ replyRes: resource, message: "" });
+              let ownPosts = JSON.parse(localStorage.getItem("ownPosts"));
+              if (ownPosts === null) {
+                ownPosts = {};
+              }
+              // eslint-disable-next-line no-prototype-builtins
+              if (!ownPosts.hasOwnProperty(currentBoard.dir)) {
+                ownPosts[currentBoard.dir] = [];
+              }
+              ownPosts[currentBoard.dir] = ownPosts[currentBoard.dir].concat({
+                thread_id: parent,
+                reply_id: resource.post_id
+              });
+              localStorage.setItem("ownPosts", JSON.stringify(ownPosts));
             }
           });
       }
