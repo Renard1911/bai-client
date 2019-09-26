@@ -73,7 +73,9 @@ class ReplyForm extends Component {
             return response.json();
           })
           .then(resource => {
-            this.setState({ replyRes: resource, message: "" });
+            if (resource.state === "success") {
+              this.setState({ replyRes: resource, message: "" });
+            }
           });
       }
     );
