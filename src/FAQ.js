@@ -1,12 +1,74 @@
 import React from "react";
-import { Header, Table, Segment } from "semantic-ui-react";
+import { Header, Table, Segment, List, Divider } from "semantic-ui-react";
 import { Link } from "@reach/router";
 
 const FAQ = ({ nightMode }) => {
   return (
     <Segment inverted={nightMode}>
-      <Header as="h1">Acerca de BaI</Header>
-      <Header as="h3">¿Qué es BaI?</Header>
+      <Header as="h2">Índice</Header>
+      <List ordered inverted={nightMode}>
+        <List.Item>
+          Acerca de BaI
+          <List.List>
+            <List.Item as="a" href="#queEsBai">
+              ¿Qué es BaI?
+            </List.Item>
+            <List.Item as="a" href="#esAnonimo">
+              ¿Realmente es anónimo? ¿Es BaI seguro?
+            </List.Item>
+            <List.Item as="a" href="#quienACargo">
+              ¿Quién está a cargo de BaI?
+            </List.Item>
+            <List.Item as="a" href="#nacionalidad">
+              ¿Cuál es la nacionalidad de BaI?
+            </List.Item>
+            <List.Item as="a" href="#reglas">
+              ¿Hay reglas que debo seguir?
+            </List.Item>
+          </List.List>
+        </List.Item>
+
+        <List.Item>
+          Funcionamiento y Terminología
+          <List.List>
+            <List.Item as="a" href="#trip">
+              ¿Cómo me identifico y qué es un trip?
+            </List.Item>
+            <List.Item as="a" href="#denuncia">
+              ¿Cómo denuncio a alguien?
+            </List.Item>
+            <List.Item as="a" href="#sage">
+              ¿Qué es "sage"?
+            </List.Item>
+            <List.Item as="a" href="#ids">
+              ¿Qué son los IDs y cómo funcionan?
+            </List.Item>
+            <List.Item as="a" href="#extend">
+              ¿Qué es EXTEND y cómo se usa?
+            </List.Item>
+            <List.Item as="a" href="#capcode">
+              ¿Qué es la estrella que aparece en algunos nombres? ¿Qué es un
+              cap?
+            </List.Item>
+          </List.List>
+        </List.Item>
+        <List.Item>
+          Información adicional
+          <List.List>
+            <List.Item as="a" href="#weabot">
+              weabot Script
+            </List.Item>
+            <List.Item as="a" href="#client">
+              bai-client (vipper.tech)
+            </List.Item>
+          </List.List>
+        </List.Item>
+      </List>
+      <Divider />
+      <Header as="h2">Acerca de BaI</Header>
+      <Header as="h3" id="queEsBai">
+        ¿Qué es BaI?
+      </Header>
       <p>
         <b>Bienvenido a Internet</b> es una comunidad en donde se puede
         conversar y compartir imágenes libremente sin necesidad de tener una
@@ -29,7 +91,9 @@ const FAQ = ({ nightMode }) => {
         queremos que existan alternativas para personas que no se sientan a
         gusto en esos entornos.
       </p>
-      <Header as="h3">¿Realmente es anónimo? ¿Es BaI seguro?</Header>
+      <Header as="h3" id="esAnonimo">
+        ¿Realmente es anónimo? ¿Es BaI seguro?
+      </Header>
       <p>
         A pesar de que es posible usar un nombre, la mayoría de los usuarios no
         lo hacen a modo de formalidad. Al decir lo que realmente piensas sin
@@ -44,7 +108,9 @@ const FAQ = ({ nightMode }) => {
           lo haya especificado.
         </b>
       </p>
-      <Header as="h3">¿Quién está a cargo de BaI?</Header>
+      <Header as="h3" id="quienACargo">
+        ¿Quién está a cargo de BaI?
+      </Header>
       <p>
         Bienvenido a Internet es mantenido por el staff de BaI, o{" "}
         <span className="ui text green">Staff ★</span>. Es un pequeño grupo
@@ -64,14 +130,18 @@ const FAQ = ({ nightMode }) => {
         </a>
         .
       </p>
-      <Header as="h3">¿Cuál es la nacionalidad de BaI?</Header>
+      <Header as="h3" id="nacionalidad">
+        ¿Cuál es la nacionalidad de BaI?
+      </Header>
       <p>
         En BaI se le permite el acceso al sitio y a postear a gente de todas las
         nacionalidades. Desde un principio en BaI se intentó no tener un foco
         especial en ningún país en específico, sin importar que la base de
         usuarios tienda a ser de algún que otro país.
       </p>
-      <Header as="h3">¿Hay reglas que debo seguir?</Header>
+      <Header as="h3" id="reglas">
+        ¿Hay reglas que debo seguir?
+      </Header>
       <p>
         Creemos que la comunidad es capaz de decidir el rumbo de sí misma,{" "}
         <i>
@@ -87,8 +157,10 @@ const FAQ = ({ nightMode }) => {
           considerado ilegal bajo la ley estadounidense.
         </b>
       </p>
-      <Header as="h1">Funcionamiento y Terminología</Header>
-      <Header as="h3">¿Cómo me identifico y qué es un trip?</Header>
+      <Header as="h2">Funcionamiento y Terminología</Header>
+      <Header as="h3" id="trip">
+        ¿Cómo me identifico y qué es un trip?
+      </Header>
       <p>
         A pesar de que convencionalmente no es común identificarse,{" "}
         <b>
@@ -131,9 +203,9 @@ const FAQ = ({ nightMode }) => {
         (&quot;&gt;&quot;) al texto que quieres citar, de la misma forma que se
         hace en servicios de e-mail o grupos de noticias de antaño.
       </p>
-      <Header as="h3">¿Cómo elimino mi post?</Header>
-      <p></p>
-      <Header as="h3">¿Cómo denuncio a alguien?</Header>
+      <Header as="h3" id="denuncia">
+        ¿Cómo denuncio a alguien?
+      </Header>
       <p>
         Si crees que otra persona postea spam o material ilegal, o alguna otra
         razón especial, puedes pedirle al staff que lo elimine presionando el
@@ -142,7 +214,9 @@ const FAQ = ({ nightMode }) => {
         recomendamos sugerirlo y discutirlo en la sección de sugerencias del
         sitio.
       </p>
-      <Header as="h3">¿Qué es &quot;sage&quot;?</Header>
+      <Header as="h3" id="sage">
+        ¿Qué es &quot;sage&quot;?
+      </Header>
       <p>
         Normalmente un hilo de conversación salta al principio una vez que
         respondes en él, al igual que en foros tradicionales. Si por cualquier
@@ -153,7 +227,9 @@ const FAQ = ({ nightMode }) => {
         Además, usar sage ocultará la ID de tu post en las secciones (o hilos en
         boards sin IDs, en caso de haber usado <i>EXTEND</i>) que lo permitan.
       </p>
-      <Header as="h3">¿Qué son los IDs y cómo funcionan?</Header>
+      <Header as="h3" id="ids">
+        ¿Qué son los IDs y cómo funcionan?
+      </Header>
       <p>
         El ID es una serie de 8 letras y números que identifican únicamente al
         autor de un mensaje, manteniendo su anonimato. Este identificador sólo
@@ -255,7 +331,9 @@ const FAQ = ({ nightMode }) => {
         </Table.Body>
       </Table>
       <p></p>
-      <Header as="h3">¿Qué es EXTEND y cómo se usa?</Header>
+      <Header as="h3" id="extend">
+        ¿Qué es EXTEND y cómo se usa?
+      </Header>
       <p>
         EXTEND es una función para tomar opciones de la sección que normalmente
         son fijas (como la visibilidad de los IDs) y cambiarlas temporalmente
@@ -347,7 +425,7 @@ const FAQ = ({ nightMode }) => {
         Nótese que esta función no está habilitada en las siguientes secciones:{" "}
         <b>Meta, World Lobby</b>
       </p>
-      <Header as="h3">
+      <Header as="h3" id="capcode">
         ¿Qué es la estrella que aparece en algunos nombres? ¿Qué es un cap?
       </Header>
       <p>
@@ -373,8 +451,10 @@ const FAQ = ({ nightMode }) => {
         </a>
         .
       </p>
-      <Header as="h1">Información adicional</Header>
-      <Header as="h3">weabot Script</Header>
+      <Header as="h2">Información adicional</Header>
+      <Header as="h3" id="weabot">
+        weabot Script
+      </Header>
       <p>
         weabot es el script que usa este sitio para los BBS e Imageboards. Fue
         creado colaborativamente por antiguos y nuevos miembros del staff de
@@ -397,7 +477,9 @@ const FAQ = ({ nightMode }) => {
         <a href="http://wakaba.c3.cx/">Kareha/Wakaba</a>, un excelente script
         con funcionalidades similares.
       </p>
-      <Header as="h3">bai-client (vipper.tech)</Header>
+      <Header as="h3" id="client">
+        bai-client (vipper.tech)
+      </Header>
       <p>
         bai-client es una <i>app</i> escrita en JavaScript con la framework
         ReactJS+Semantic UI, desarrollada por{" "}
