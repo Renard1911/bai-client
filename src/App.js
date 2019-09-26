@@ -17,6 +17,7 @@ import Thread from "./Thread";
 import Board from "./Board";
 import NotFound from "./NotFound";
 import ThreadList from "./ThreadList";
+import FAQ from "./FAQ";
 
 class App extends Component {
   constructor() {
@@ -109,6 +110,9 @@ class App extends Component {
                 )}
               </Dropdown.Menu>
             </Dropdown>
+            <Menu.Item as={Link} to="/faq">
+              <Icon name="help" /> FAQ
+            </Menu.Item>
             <Menu.Menu position="right">
               <Menu.Item as="a" onClick={this.toggleTheme}>
                 {nightMode ? <Icon name="sun" /> : <Icon name="moon" />}
@@ -136,6 +140,7 @@ class App extends Component {
               path="/list/:dir"
               nightMode={nightMode}
             />
+            <FAQ path="/faq" />
             <NotFound default />
           </Router>
         </Container>
