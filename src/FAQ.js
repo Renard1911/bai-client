@@ -18,9 +18,9 @@ const FAQ = () => {
       <p>
         La idea es tener un ambiente simple y relajado y que al mismo tiempo
         escape del desastre que hay en muchas partes de Internet, como lo es la
-        web 2.0 o la cultura "chanera". Usualmente se abordan temas como
-        tecnología, videojuegos, cultura de Internet, música, política, cultura
-        retro, animé y material weeb en general, entre otros.
+        web 2.0 o la cultura &quot;chanera&quot;. Usualmente se abordan temas
+        como tecnología, videojuegos, cultura de Internet, música, política,
+        cultura retro, animé y material weeb en general, entre otros.
       </p>
       <p>
         Históricamente, BaI se basa en la ideología que tuvieron sitios como
@@ -128,8 +128,8 @@ const FAQ = () => {
       </p>
       <p>
         Para realizar una cita, sólo debes anteponer un símbolo de mayor que
-        (">") al texto que quieres citar, de la misma forma que se hace en
-        servicios de e-mail o grupos de noticias de antaño.
+        (&quot;&gt;&quot;) al texto que quieres citar, de la misma forma que se
+        hace en servicios de e-mail o grupos de noticias de antaño.
       </p>
       <Header as="h3">¿Cómo elimino mi post?</Header>
       <p></p>
@@ -142,12 +142,12 @@ const FAQ = () => {
         recomendamos sugerirlo y discutirlo en la sección de sugerencias del
         sitio.
       </p>
-      <Header as="h3">¿Qué es "sage"?</Header>
+      <Header as="h3">¿Qué es &quot;sage&quot;?</Header>
       <p>
         Normalmente un hilo de conversación salta al principio una vez que
         respondes en él, al igual que en foros tradicionales. Si por cualquier
-        razón deseas que el hilo no haga esto, puedes insertar la palabra "sage"
-        en el campo de e-mail al momento de postear en él.
+        razón deseas que el hilo no haga esto, puedes insertar la palabra
+        &quot;sage&quot; en el campo de e-mail al momento de postear en él.
       </p>
       <p>
         Además, usar sage ocultará la ID de tu post en las secciones (o hilos en
