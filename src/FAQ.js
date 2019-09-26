@@ -2,9 +2,9 @@ import React from "react";
 import { Header, Table, Segment } from "semantic-ui-react";
 import { Link } from "@reach/router";
 
-const FAQ = () => {
+const FAQ = ({ nightMode }) => {
   return (
-    <Segment>
+    <Segment inverted={nightMode}>
       <Header as="h1">Acerca de BaI</Header>
       <Header as="h3">¿Qué es BaI?</Header>
       <p>
@@ -57,8 +57,8 @@ const FAQ = () => {
       </p>
       <p>
         El staff está siempre abierto a toda sugerencia y reclamo, por lo que si
-        deseas contactarte con el staff, siéntete libre de dejar un mensaje en
-        <Link to="/board/bai">Discusión de BaI</Link> o enviar un correo a
+        deseas contactarte con el staff, siéntete libre de dejar un mensaje en{" "}
+        <Link to="/board/bai">Discusión de BaI</Link> o enviar un correo a{" "}
         <a href="mailto:burocracia@bienvenidoainternet.org">
           burocracia@bienvenidoainternet.org
         </a>
@@ -172,7 +172,7 @@ const FAQ = () => {
         desde dónde se ha enviado el mensaje. Los sufijos posibles actualmente
         son:
       </p>
-      <Table celled striped compact collapsing>
+      <Table celled striped compact collapsing inverted={nightMode}>
         <Table.Body>
           <Table.Row>
             <Table.Cell>R</Table.Cell>
@@ -200,7 +200,7 @@ const FAQ = () => {
           </Table.Row>
         </Table.Body>
       </Table>
-      <Table celled striped compact collapsing>
+      <Table celled striped compact collapsing inverted={nightMode}>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell colSpan={2}>Solo ID Detallada</Table.HeaderCell>
@@ -237,7 +237,7 @@ const FAQ = () => {
           </Table.Row>
         </Table.Body>
       </Table>
-      <Table celled striped compact collapsing>
+      <Table celled striped compact collapsing inverted={nightMode}>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell colSpan={2}>Extra</Table.HeaderCell>
@@ -267,7 +267,7 @@ const FAQ = () => {
         <code>!extend:(opción 1):(opción 2)</code>
       </p>
       <p>Las opciones disponibles son:</p>
-      <Table celled striped compact collapsing>
+      <Table celled striped compact collapsing inverted={nightMode}>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Opción 1</Table.HeaderCell>
@@ -297,7 +297,7 @@ const FAQ = () => {
           </Table.Row>
         </Table.Body>
       </Table>
-      <Table celled striped compact collapsing>
+      <Table celled striped compact collapsing inverted={nightMode}>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Opción 2</Table.HeaderCell>

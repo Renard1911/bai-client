@@ -140,7 +140,7 @@ class App extends Component {
               path="/list/:dir"
               nightMode={nightMode}
             />
-            <FAQ path="/faq" />
+            <FAQ path="/faq" nightMode={nightMode} />
             <NotFound default />
           </Router>
         </Container>
