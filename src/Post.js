@@ -176,8 +176,22 @@ const Post = ({ index, post, locked, threadId, currentBoard, nightMode }) => {
   } else if (isMine) {
     starColor = "blue";
   } else {
-    starColor = "gray";
+    starColor = "grey";
   }
+
+  let hasVideo = post.file.endsWith(".webm");
+  let hasAudio =
+    post.file.endsWith(".mp3") ||
+    post.file.endsWith(".opus") ||
+    post.file.endsWith(".ogg");
+  let isMime =
+    post.file.endsWith(".epub") ||
+    post.file.endsWith(".mod") ||
+    post.file.endsWith(".pdf") ||
+    post.file.endsWith(".s3m") ||
+    post.file.endsWith(".swf") ||
+    post.file.endsWith(".torrent") ||
+    post.file.endsWith(".xm");
 
   return (
     <Comment inverted={nightMode}>
@@ -218,25 +232,55 @@ const Post = ({ index, post, locked, threadId, currentBoard, nightMode }) => {
         <Comment.Text>
           {post.file !== "" ? (
             <div className="imageContainer">
-              <ImageModal
-                href={`https://bienvenidoainternet.org/${currentBoard.dir}/src/${post.file}`}
-                trigger={
-                  <Image
-                    centered
-                    className="postImage"
-                    src={`https://bienvenidoainternet.org/${currentBoard.dir}/thumb/${post.thumb}`}
-                  />
-                }
-              />
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={`https://bienvenidoainternet.org/${currentBoard.dir}/src/${post.file}`}
-              >
-                {post.file}
-              </a>{" "}
-              {post.image_width}x{post.image_height}{" "}
-              {filesize(post.file_size, { bits: true })}
+              {hasVideo && (
+                // eslint-disable-next-line jsx-a11y/media-has-caption
+                <video
+                  src={`https://bienvenidoainternet.org/${currentBoard.dir}/src/${post.file}`}
+                  controls
+                  poster={`https://bienvenidoainternet.org/${currentBoard.dir}/thumb/${post.thumb}`}
+                  width="400"
+                />
+              )}
+              {hasAudio && (
+                // eslint-disable-next-line jsx-a11y/media-has-caption
+                <audio
+                  src={`https://bienvenidoainternet.org/${currentBoard.dir}/src/${post.file}`}
+                  controls
+                />
+              )}
+              {!hasVideo && !hasAudio && !isMime && (
+                <ImageModal
+                  href={`https://bienvenidoainternet.org/${currentBoard.dir}/src/${post.file}`}
+                  trigger={
+                    <Image
+                      centered
+                      className="postImage"
+                      src={`https://bienvenidoainternet.org/${currentBoard.dir}/thumb/${post.thumb}`}
+                    />
+                  }
+                />
+              )}
+              {isMime && (
+                <Image
+                  size="mini"
+                  ui={false}
+                  src={`https://bienvenidoainternet.org/static/${post.thumb}`}
+                />
+              )}
+
+              <div>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`https://bienvenidoainternet.org/${currentBoard.dir}/src/${post.file}`}
+                >
+                  {post.file}
+                </a>{" "}
+                {!hasAudio &&
+                  !isMime &&
+                  `${post.image_width}x${post.image_height}`}{" "}
+                {filesize(post.file_size)}
+              </div>
             </div>
           ) : null}
 

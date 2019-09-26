@@ -123,3 +123,8 @@
 .ui.modal>.content.replyModal {
   padding: 0 !important;
 }
+
+.postMessage hr,
+.postMessage small {
+  display: none
+}
