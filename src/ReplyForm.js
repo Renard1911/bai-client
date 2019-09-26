@@ -76,6 +76,8 @@ class ReplyForm extends Component {
           })
           .then(resource => {
             if (resource.state === "success") {
+              this.randomQuote =
+                quotes[Math.floor(Math.random() * quotes.length)];
               this.setState({ replyRes: resource, message: "" });
               let ownPosts = JSON.parse(localStorage.getItem("ownPosts"));
               if (ownPosts === null) {
@@ -118,7 +120,7 @@ class ReplyForm extends Component {
           replyRes.state === "success" ? (
             <Message positive>
               <Message.Header>Gracias por tu post</Message.Header>
-              {quotes[Math.floor(Math.random() * quotes.length)]}
+              {this.randomQuote}
               <br />
               <span className="ui small text">
                 Nos tomó {replyRes.time_taken} segundos procesar tu mensaje.
