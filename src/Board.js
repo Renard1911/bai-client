@@ -137,6 +137,11 @@ class Board extends Component {
             {currentBoard.name}
             <Header.Subheader>/{currentBoard.dir}/</Header.Subheader>
           </Header>
+          <p>
+            <div
+              dangerouslySetInnerHTML={{ __html: currentBoard.postarea_desc }}
+            ></div>
+          </p>
           <Link to={`/list/${currentBoard.dir}`}>Lista de hilos</Link>
         </Segment>
 
