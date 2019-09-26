@@ -30,7 +30,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("https://bienvenidoainternet.org/cgi/api/boards")
+    fetch("https://bienvenidoainternet.org/cgi/api/boardsExtra")
       .then(response => {
         return response.json();
       })
