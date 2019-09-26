@@ -147,7 +147,12 @@ class Board extends Component {
 
         {threadList.map(thread => (
           <Segment.Group key={"seg_" + thread.timestamp + thread.id}>
-            <Header as="h3" attached inverted={nightMode}>
+            <Header
+              as="h3"
+              attached
+              inverted={nightMode}
+              className="threadTitle"
+            >
               <Link to={`/${dir}/read/${thread.id}`}>{thread.subject}</Link>
               <Header.Subheader>
                 {thread.total_replies} respuestas
