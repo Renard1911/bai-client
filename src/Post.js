@@ -74,7 +74,7 @@ const Post = ({ index, post, locked, threadId, currentBoard, nightMode }) => {
   // Manejo de posts eliminados
   if (post.IS_DELETED > 0) {
     return (
-      <Comment>
+      <Comment inverted={nightMode}>
         <Comment.Avatar
           src={`https://bienvenidoainternet.org/static/css/img/picnicbdy.gif`}
         />
