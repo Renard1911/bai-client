@@ -182,7 +182,11 @@ class App extends Component {
             <NotFound default />
           </Router>
         </Container>
-        <Segment vertical textAlign="center" className="footer">
+        <Segment
+          vertical
+          textAlign="center"
+          className={nightMode ? "footer night" : "footer"}
+        >
           Bievenido a Internet 2010-2019
           <br />
           <Icon name="github" />
