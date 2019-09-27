@@ -3,6 +3,7 @@ import { render } from "react-dom";
 import { Router, Link } from "@reach/router";
 import "fomantic-ui-css/semantic.css";
 import "./App.css";
+import wtfpl from "./wtfpl.png";
 
 import {
   Dropdown,
@@ -193,6 +194,10 @@ class App extends Component {
           <a href="https://github.com/Renard1911/bai-client">bai-client</a>
           {" + "}
           <a href="https://git.bienvenidoainternet.org/bai/weabot/">weabot</a>
+          <br />
+          <a href="http://www.wtfpl.net/about/">
+            <img src={wtfpl} alt="Do what the fuck you want" />
+          </a>
         </Segment>
       </React.Fragment>
     );
