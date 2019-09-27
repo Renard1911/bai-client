@@ -113,11 +113,11 @@ const Post = ({ index, post, locked, threadId, currentBoard, nightMode }) => {
 
   let rndAvatar, hue;
   if (user_id !== "") {
-    let i = Math.round(idRng() * avatars.length - 1);
+    let i = Math.round(idRng() * (avatars.length - 1));
     rndAvatar = avatars[i];
     hue = Math.round(idRng() * 360);
   } else {
-    let i = Math.round(rng() * avatars.length - 1);
+    let i = Math.round(rng() * (avatars.length - 1));
     rndAvatar = avatars[i];
     hue = Math.round(rng() * 360);
   }
