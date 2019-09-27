@@ -99,7 +99,7 @@ class Post extends Component {
         return response.json();
       })
       .then(resource => {
-        console.log(resource);
+        // TODO: Reportar resultado
       });
   }
 

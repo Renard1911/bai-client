@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { List, Header, Icon, Loader, Grid, Image } from "semantic-ui-react";
+import { Link } from "@reach/router";
+import { List, Header, Loader, Grid, Image } from "semantic-ui-react";
 import Moment from "react-moment";
 import "moment/locale/es";
-
-import { Link } from "@reach/router";
+import { Changelog } from "./Changelog";
 
 class Home extends Component {
   constructor() {
@@ -201,22 +201,51 @@ class Home extends Component {
               </List>
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row columns={1}>
+          <Grid.Row columns={2}>
+            <Grid.Column>
+              <Header as="h4" inverted={nightMode}>
+                Changelog
+              </Header>
+              <List inverted={nightMode}>
+                <List.Item>
+                  <Moment fromNow unix date={Changelog[0].timestamp} />
+                  <List.List>
+                    {Changelog[0].list.map((c, e) => (
+                      <List.Item key={e}>
+                        <List.Icon name={c.icon} />
+                        <List.Content>{c.desc}</List.Content>
+                      </List.Item>
+                    ))}
+                  </List.List>
+                </List.Item>
+              </List>
+              <Link to="/changelog">Ver más</Link>
+            </Grid.Column>
             <Grid.Column>
               <Header as="h4" inverted={nightMode}>
                 Blotter
               </Header>
               <List divided inverted={nightMode}>
-                {latestNews.map(n => (
-                  <List.Item key={n.timestamp}>
-                    <List.Content>
-                      <div dangerouslySetInnerHTML={{ __html: n.message }} />
-                      <small>
-                        <Moment fromNow unix locale="es" date={n.timestamp} />
-                      </small>
-                    </List.Content>
-                  </List.Item>
-                ))}
+                {latestNews.map(
+                  (n, i) =>
+                    i < 3 && (
+                      <List.Item key={n.timestamp}>
+                        <List.Content>
+                          <div
+                            dangerouslySetInnerHTML={{ __html: n.message }}
+                          />
+                          <small>
+                            <Moment
+                              fromNow
+                              unix
+                              locale="es"
+                              date={n.timestamp}
+                            />
+                          </small>
+                        </List.Content>
+                      </List.Item>
+                    )
+                )}
               </List>
             </Grid.Column>
           </Grid.Row>

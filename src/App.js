@@ -19,6 +19,7 @@ import Board from "./Board";
 import NotFound from "./NotFound";
 import ThreadList from "./ThreadList";
 import FAQ from "./FAQ";
+import ChangeLogPage from "./ChangelogPage";
 
 class App extends Component {
   constructor() {
@@ -179,7 +180,9 @@ class App extends Component {
               path="/list/:dir"
               nightMode={nightMode}
             />
+            <ChangeLogPage path="/changelog" nightMode={nightMode} />
             <FAQ path="/faq" nightMode={nightMode} />
+
             <NotFound default />
           </Router>
         </Container>
