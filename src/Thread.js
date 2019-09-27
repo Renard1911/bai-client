@@ -173,6 +173,7 @@ class Thread extends Component {
               locked={locked}
               currentBoard={currentBoard}
               threadId={id}
+              totalReplies={total_replies}
             />
           ))}
         </Comment.Group>

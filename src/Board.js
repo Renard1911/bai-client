@@ -167,6 +167,7 @@ class Board extends Component {
                   threadId={thread.id}
                   currentBoard={currentBoard}
                   nightMode={nightMode}
+                  totalReplies={thread.total_replies}
                 />
                 <Divider />
                 {thread.replies.map((reply, index, replies) => (
@@ -178,6 +179,7 @@ class Board extends Component {
                     key={"reply_" + reply.id}
                     currentBoard={currentBoard}
                     nightMode={nightMode}
+                    totalReplies={thread.total_replies}
                   />
                 ))}
               </Comment.Group>
