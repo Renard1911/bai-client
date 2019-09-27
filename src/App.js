@@ -36,7 +36,22 @@ class App extends Component {
         return response.json();
       })
       .then(resource => {
-        this.setState({ boardList: resource["boards"], isLoaded: true });
+        let polka = {
+          allow_image_replies: 1,
+          allow_images: 1,
+          board_type: 1,
+          dir: "polka",
+          maxsize: 500,
+          name: "Testing field",
+          postarea_desc: ""
+        };
+        if (localStorage.getItem("thereisnourflevel") === null) {
+          polka = {};
+        }
+        this.setState({
+          boardList: resource["boards"].concat(polka),
+          isLoaded: true
+        });
       });
 
     let _nightMode = localStorage.getItem("nightMode");
