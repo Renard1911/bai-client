@@ -60,6 +60,29 @@ class App extends Component {
     } else {
       this.setState({ nightMode: JSON.parse(_nightMode) });
     }
+    let password = localStorage.getItem("password");
+    if (password === null) {
+      localStorage.setItem("password", this.genPassword());
+    }
+  }
+
+  genPassword() {
+    let pass = "";
+    for (let i = 0; i < 10; i++) {
+      let x = Math.round(Math.random() * 2);
+      switch (x) {
+        case 0:
+          pass += String.fromCharCode(48 + Math.round(Math.random() * 9));
+          break;
+        case 1:
+          pass += String.fromCharCode(65 + Math.round(Math.random() * 25));
+          break;
+        case 2:
+          pass += String.fromCharCode(97 + Math.round(Math.random() * 25));
+          break;
+      }
+    }
+    return pass;
   }
 
   componentDidUpdate() {
