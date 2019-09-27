@@ -183,12 +183,6 @@ class Thread extends Component {
           locked={locked}
           nightMode={nightMode}
         />
-
-        <a
-          href={`https://bienvenidoainternet.org/cgi/api/thread?dir=${dir}&id=${this.props.id}`}
-        >
-          API Link
-        </a>
       </Container>
     );
   }
