@@ -19,6 +19,9 @@ class Home extends Component {
     this.refreshCooldown = 15;
     this.cooldownCounter = 0;
     this.lastTimeNoAge = 0;
+    this.notificationSound = new Audio(
+      "https://bienvenidoainternet.org/msn.ogg"
+    );
   }
 
   componentDidMount() {
@@ -82,6 +85,7 @@ class Home extends Component {
               lastAgeThreads: resource.threads
             });
             this.refreshCooldown = 30;
+            this.notificationSound.play();
           } else {
             this.refreshCooldown += 15;
             this.lastTimeNoAge = resource.time;
