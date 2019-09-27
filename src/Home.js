@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { List, Header, Icon, Loader, Grid } from "semantic-ui-react";
+import { List, Header, Icon, Loader, Grid, Image } from "semantic-ui-react";
 import Moment from "react-moment";
 import "moment/locale/es";
 
@@ -107,104 +107,117 @@ class Home extends Component {
     const { nightMode } = this.props;
     document.title = "B.a.I Home";
     return (
-      <Grid
-        columns={2}
-        divided
-        container
-        doubling
-        className={nightMode ? "homeContainer inverted" : "homeContainer"}
-      >
-        <Grid.Row>
-          <Grid.Column>
-            <Header as="h4" inverted={nightMode}>
-              Hilos activos
-            </Header>
-            <List divided inverted={nightMode}>
-              {lastAgeThreads.map(thread => (
-                <List.Item key={thread.id}>
-                  <List.Icon
-                    name={
-                      thread.bumped > this.lastTimeNoAge
-                        ? "bullhorn"
-                        : "comment alternate outline"
-                    }
-                    size="large"
-                    verticalAlign="middle"
-                  />
-                  <List.Content>
-                    <List.Header
-                      as={Link}
-                      to={`${thread.dir}/read/${thread.id}`}
-                      className="postMessage"
-                    >
-                      {thread.content}
-                    </List.Header>
-                    <List.Description as="a">
-                      <Icon name="folder open outline" /> {thread.board_fulln} ―{" "}
-                      <Icon name="clock" />
-                      <Moment fromNow unix locale="es" date={thread.last} />
-                    </List.Description>
-                  </List.Content>
-                </List.Item>
-              ))}
-            </List>
-          </Grid.Column>
-          <Grid.Column>
-            <Header as="h4" inverted={nightMode}>
-              Nuevos hilos
-            </Header>
-            <List divided inverted={nightMode}>
-              {newThreadsList.map(thread => (
-                <List.Item key={thread.id}>
-                  <List.Icon
-                    name="comment alternate outline"
-                    size="large"
-                    verticalAlign="middle"
-                  />
-                  <List.Content>
-                    <List.Header
-                      as={Link}
-                      to={`${thread.dir}/read/${thread.id}`}
-                    >
-                      {thread.content}
-                    </List.Header>
-                    <List.Description as="a">
-                      <Icon name="folder open outline" /> {thread.board_fulln} ―{" "}
-                      <Icon name="clock" />
-                      <Moment
-                        fromNow
-                        unix
-                        locale="es"
-                        date={thread.timestamp}
-                      />
-                    </List.Description>
-                  </List.Content>
-                </List.Item>
-              ))}
-            </List>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row columns={1}>
-          <Grid.Column>
-            <Header as="h4" inverted={nightMode}>
-              Blotter
-            </Header>
-            <List divided inverted={nightMode}>
-              {latestNews.map(n => (
-                <List.Item key={n.timestamp}>
-                  <List.Content>
-                    <div dangerouslySetInnerHTML={{ __html: n.message }} />
-                    <span className="ui tiny">
-                      <Icon name="clock" />
-                      <Moment fromNow unix locale="es" date={n.timestamp} />
-                    </span>
-                  </List.Content>
-                </List.Item>
-              ))}
-            </List>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <React.Fragment>
+        <Grid
+          columns={2}
+          divided
+          container
+          doubling
+          className={nightMode ? "homeContainer inverted" : "homeContainer"}
+        >
+          <Grid.Row centered columns={1}>
+            <Grid.Column centered textAlign="center">
+              <Image
+                src="https://bienvenidoainternet.org/bai_logo.png"
+                style={{ filter: `invert(${nightMode ? 0 : 1})` }}
+                centered
+              />
+              <p>
+                Resistiendo desde el 2010
+                <br />
+                <small>Ahora con 95% extra javascript!</small>
+              </p>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column>
+              <Header as="h4" inverted={nightMode}>
+                Hilos activos
+              </Header>
+              <List divided inverted={nightMode}>
+                {lastAgeThreads.map(thread => (
+                  <List.Item key={thread.id}>
+                    <List.Icon
+                      name={
+                        thread.bumped > this.lastTimeNoAge
+                          ? "bullhorn"
+                          : "comment alternate outline"
+                      }
+                      size="large"
+                      verticalAlign="middle"
+                    />
+                    <List.Content>
+                      <List.Header
+                        as={Link}
+                        to={`${thread.dir}/read/${thread.id}`}
+                        className="postMessage"
+                      >
+                        {thread.content}
+                      </List.Header>
+                      <List.Description>
+                        <Moment fromNow unix locale="es" date={thread.last} />{" "}
+                        en {thread.board_fulln}{" "}
+                      </List.Description>
+                    </List.Content>
+                  </List.Item>
+                ))}
+              </List>
+            </Grid.Column>
+            <Grid.Column>
+              <Header as="h4" inverted={nightMode}>
+                Nuevos hilos
+              </Header>
+              <List divided inverted={nightMode}>
+                {newThreadsList.map(thread => (
+                  <List.Item key={thread.id}>
+                    <List.Icon
+                      name="comment alternate outline"
+                      size="large"
+                      verticalAlign="middle"
+                    />
+                    <List.Content>
+                      <List.Header
+                        as={Link}
+                        to={`${thread.dir}/read/${thread.id}`}
+                      >
+                        {thread.content}
+                      </List.Header>
+                      <List.Description>
+                        <Moment
+                          fromNow
+                          unix
+                          locale="es"
+                          date={thread.timestamp}
+                        />{" "}
+                        en {thread.board_fulln}{" "}
+                      </List.Description>
+                    </List.Content>
+                  </List.Item>
+                ))}
+              </List>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row columns={1}>
+            <Grid.Column>
+              <Header as="h4" inverted={nightMode}>
+                Blotter
+              </Header>
+              <List divided inverted={nightMode}>
+                {latestNews.map(n => (
+                  <List.Item key={n.timestamp}>
+                    <List.Content>
+                      <div dangerouslySetInnerHTML={{ __html: n.message }} />
+                      <small>
+                        <Moment fromNow unix locale="es" date={n.timestamp} />
+                      </small>
+                    </List.Content>
+                  </List.Item>
+                ))}
+              </List>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </React.Fragment>
     );
   }
 }
