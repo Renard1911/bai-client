@@ -46,6 +46,7 @@ class ReplyForm extends Component {
       () => {
         const { submittedName, submittedEmail, submittedMessage } = this.state;
         const { currentBoard, parent } = this.props;
+        let password = localStorage.getItem("password");
         const data = {
           board: currentBoard.dir,
           parent: parent,
@@ -54,7 +55,7 @@ class ReplyForm extends Component {
           fielda: submittedName,
           fieldb: submittedEmail,
           message: submittedMessage,
-          password: "bai-client"
+          password: password
         };
 
         let userData = { name: name, email: email };
