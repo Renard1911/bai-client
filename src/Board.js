@@ -123,6 +123,11 @@ class Board extends Component {
     });
     document.title = currentBoard.name + " - B.a.I";
 
+    currentBoard.postarea_desc = currentBoard.postarea_desc.replace(
+      'src="/',
+      'src="https://bienvenidoainternet.org/'
+    );
+
     return (
       <React.Fragment>
         <Breadcrumb className={nightMode ? "inverted" : ""}>

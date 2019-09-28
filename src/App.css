@@ -152,3 +152,17 @@
 .invLogo {
   background: url("./background_inv.png");
 }
+
+#bgvid {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  transform: translatex(-50%) translatey(-50%);
+  background-size: cover;
+  transition: 1s opacity;
+}
