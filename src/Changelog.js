@@ -1,5 +1,17 @@
 export const Changelog = [
   {
+    timestamp: 1569693206,
+    list: [
+      { icon: "magic", desc: "Nuevo logo" },
+      { icon: "add", desc: "Ahora se pueden adjuntar achivos en posts" },
+      {
+        icon: "add",
+        desc: "Limites de tamaño de text en formulario de respuesta"
+      },
+      { icon: "bug", desc: "Fix: Título del faq" }
+    ]
+  },
+  {
     timestamp: 1569607703,
     list: [
       { icon: "add", desc: "Implementación de changelog" },
