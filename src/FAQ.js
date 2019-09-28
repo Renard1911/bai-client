@@ -3,6 +3,8 @@ import { Header, Table, Segment, List, Divider } from "semantic-ui-react";
 import { Link } from "@reach/router";
 
 const FAQ = ({ nightMode }) => {
+  document.title = "B.a.I - FAQ";
+  window.scrollTo(0, 0);
   return (
     <Segment inverted={nightMode}>
       <Header as="h2">Índice</Header>
