@@ -16,7 +16,8 @@ class ReplyForm extends Component {
       submittedName: "",
       submittedEmail: "",
       submittedMessage: "",
-      replyRes: null
+      replyRes: null,
+      selectedFile: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,10 +32,21 @@ class ReplyForm extends Component {
 
   handleChange(e) {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
+    if (name === "hiddenInput") {
+      let hiddenInput = document.getElementById("hiddenInput");
+      if (hiddenInput.files.length === 0) {
+        this.setState({ selectedFile: null });
+      } else {
+        let file = hiddenInput.files[0].name;
+        this.setState({ selectedFile: file });
+      }
+    } else {
+      this.setState({ [name]: value });
+    }
   }
 
   handleSubmit() {
+    console.log("submit event");
     const { name, email, message } = this.state;
     this.setState(
       {
@@ -44,10 +56,15 @@ class ReplyForm extends Component {
         replyRes: null
       },
       () => {
-        const { submittedName, submittedEmail, submittedMessage } = this.state;
+        var {
+          submittedName,
+          submittedEmail,
+          submittedMessage,
+          selectedFile
+        } = this.state;
         const { currentBoard, parent } = this.props;
         let password = localStorage.getItem("password");
-        const data = {
+        let data = {
           board: currentBoard.dir,
           parent: parent,
           name: "",
@@ -57,6 +74,11 @@ class ReplyForm extends Component {
           message: submittedMessage,
           password: password
         };
+
+        if (selectedFile !== null) {
+          let file = document.getElementById("hiddenInput").files[0];
+          data["file"] = file;
+        }
 
         let userData = { name: name, email: email };
         localStorage.setItem("userData", JSON.stringify(userData));
@@ -79,7 +101,11 @@ class ReplyForm extends Component {
             if (resource.state === "success") {
               this.randomQuote =
                 quotes[Math.floor(Math.random() * quotes.length)];
-              this.setState({ replyRes: resource, message: "" });
+              this.setState({
+                replyRes: resource,
+                message: "",
+                selectedFile: null
+              });
               let ownPosts = JSON.parse(localStorage.getItem("ownPosts"));
               if (ownPosts === null) {
                 ownPosts = {};
@@ -93,6 +119,8 @@ class ReplyForm extends Component {
                 reply_id: resource.post_id
               });
               localStorage.setItem("ownPosts", JSON.stringify(ownPosts));
+            } else {
+              this.setState({ replyRes: resource });
             }
           });
       }
@@ -105,7 +133,14 @@ class ReplyForm extends Component {
   }
 
   render() {
-    const { name, email, message, replyRes, attachment } = this.state;
+    const {
+      name,
+      email,
+      message,
+      replyRes,
+      attachment,
+      selectedFile
+    } = this.state;
     const { currentBoard, nightMode, quickReply, locked } = this.props;
     if (locked === 1) {
       return (
@@ -143,6 +178,7 @@ class ReplyForm extends Component {
               placeholder="Nombre (Opcional)"
               value={name}
               onChange={this.handleChange}
+              maxLength="50"
             />
             <Form.Input
               label="E-mail"
@@ -151,12 +187,19 @@ class ReplyForm extends Component {
               placeholder="E-mail (Opcional)"
               value={email}
               onChange={this.handleChange}
+              maxLength="50"
             />
             {/* TODO: Archivos adjuntos */}
-            {currentBoard.board_type === 0 &&
-            currentBoard.allow_image_replies === 1 ? (
+            {currentBoard.allow_image_replies === 1 ? (
               <React.Fragment>
-                <input id="hiddenInput" type="file" hidden />
+                <input
+                  id="hiddenInput"
+                  name="hiddenInput"
+                  type="file"
+                  hidden
+                  onChange={this.handleChange}
+                  multiple={false}
+                />
                 <Form.Button
                   label="Adjunto"
                   fluid
@@ -164,7 +207,7 @@ class ReplyForm extends Component {
                   onClick={this.handleClick}
                 >
                   <Icon name="attach" />
-                  Adjuntar archivo
+                  {selectedFile === null ? "Adjuntar archivo" : selectedFile}
                 </Form.Button>
               </React.Fragment>
             ) : null}
@@ -175,6 +218,7 @@ class ReplyForm extends Component {
             label="Mensaje"
             placeholder="(　･ω･) Cuentáme algo interesante ..."
             onChange={this.handleChange}
+            maxLength="8000"
           />
           <Button type="submit">Enviar</Button>
         </Form>
