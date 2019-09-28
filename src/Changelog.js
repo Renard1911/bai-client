@@ -1,7 +1,8 @@
 export const Changelog = [
   {
-    timestamp: 1569693206,
+    timestamp: 1569700814,
     list: [
+      { icon: "magic", desc: "Lista de hilos rediseñada" },
       { icon: "magic", desc: "Nuevo logo" },
       { icon: "add", desc: "Ahora se pueden adjuntar achivos en posts" },
       {
