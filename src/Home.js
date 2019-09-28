@@ -73,6 +73,7 @@ class Home extends Component {
 
   componentWillUnmount() {
     clearInterval(this.state.autoRefresh);
+    window.removeEventListener("mousemove", this.handeMouseMove);
   }
 
   async updateAges() {
