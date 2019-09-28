@@ -133,3 +133,22 @@
 .footer.night {
   color: rgba(255, 255, 255, 0.7);
 }
+
+#baiLogo {
+  font-weight: 800;
+  color: transparent;
+  font-size: 150px;
+  -webkit-background-clip: text;
+  position: relative;
+  text-align: center;
+  line-height: 120px;
+  letter-spacing: -8px;
+}
+
+.whiLogo {
+  background: url("./background.png");
+}
+
+.invLogo {
+  background: url("./background_inv.png");
+}

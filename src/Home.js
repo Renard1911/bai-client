@@ -22,6 +22,8 @@ class Home extends Component {
     this.notificationSound = new Audio(
       "https://bienvenidoainternet.org/msn.ogg"
     );
+    this.handeMouseMove = this.handeMouseMove.bind(this);
+    this.mouseVars = {};
   }
 
   componentDidMount() {
@@ -59,6 +61,14 @@ class Home extends Component {
         });
       });
     window.scrollTo(0, 0);
+    window.addEventListener("mousemove", this.handeMouseMove);
+  }
+
+  handeMouseMove(e) {
+    let traX = (4 * e.pageX) / 480;
+    let traY = (4 * e.pageY) / 250;
+    document.getElementById("baiLogo").style.backgroundPosition =
+      traX + "%" + traY + "%";
   }
 
   componentWillUnmount() {
@@ -121,11 +131,9 @@ class Home extends Component {
         >
           <Grid.Row centered columns={1}>
             <Grid.Column centered textAlign="center">
-              <Image
-                src="https://bienvenidoainternet.org/bai_logo.png"
-                style={{ filter: `invert(${nightMode ? 0 : 1})` }}
-                centered
-              />
+              <div id="baiLogo" className={nightMode ? "invLogo" : "whiLogo"}>
+                BaI
+              </div>
               <p>
                 Resistiendo desde el 2010
                 <br />
