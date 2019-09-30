@@ -27,6 +27,10 @@ class Thread extends Component {
     this.lastTime = 0;
     this.refreshCooldown = 15;
     this.cooldownCounter = 0;
+    this.newPostCounter = 0;
+    this.notificationSound = new Audio(
+      "https://bienvenidoainternet.org/msn.ogg"
+    );
   }
 
   componentDidMount() {
@@ -81,13 +85,15 @@ class Thread extends Component {
         if (resource.state === "success") {
           if (resource.posts.length > 0) {
             const newPosts = this.state.thread.posts.concat(resource.posts);
+            this.refreshCooldown = 15;
+            this.newPostCounter += resource.posts.length;
+            this.notificationSound.play();
             this.setState(({ thread }) => ({
               thread: {
                 ...thread,
                 posts: newPosts
               }
             }));
-            this.refreshCooldown = 15;
           } else {
             this.refreshCooldown += 15;
             if (this.refreshCooldown > 60) {
@@ -134,7 +140,12 @@ class Thread extends Component {
     const currentBoard = boardList.find(board => {
       return board.dir === dir;
     });
-    document.title = subject + " - " + currentBoard.name + "@B.a.I";
+
+    let npCounter = "";
+    if (this.newPostCounter !== 0) {
+      npCounter = "(" + this.newPostCounter + ") ";
+    }
+    document.title = `${npCounter}${subject} - ${currentBoard.name}@BaI`;
 
     return (
       <Container className={nightMode ? "thread inverted" : "thread"}>
