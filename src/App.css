@@ -166,3 +166,20 @@
   background-size: cover;
   transition: 1s opacity;
 }
+
+.ui.items>.item>.content>.description.inverted {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.ui.items>.item .meta.inverted :last-child {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.ui.items>.item .extra.inverted {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.ui.items>.item>.content>a.header.inverted {
+  color: #4183C4;
+  ;
+}

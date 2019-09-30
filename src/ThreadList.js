@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Loader, Icon, Item } from "semantic-ui-react";
+import { Loader, Icon, Item, Segment } from "semantic-ui-react";
 import { Link } from "@reach/router";
 import Moment from "react-moment";
 import "moment/locale/es";
@@ -24,7 +24,7 @@ class ThreadList extends Component {
   }
 
   render() {
-    const { dir, boardList } = this.props;
+    const { dir, boardList, nightMode } = this.props;
     const { threadList, isLoading } = this.state;
 
     const currentBoard = boardList.find(board => {
@@ -44,38 +44,44 @@ class ThreadList extends Component {
     );
 
     return (
-      <Item.Group divided>
-        {threadList.map((thread, index) => {
-          return (
-            <Item key={index}>
-              {currentBoard.allow_images === 1 && (
-                <Item.Image
-                  size="tiny"
-                  src={`https://bienvenidoainternet.org/${dir}/thumb/${thread.thumb}`}
-                />
-              )}
-              <Item.Content verticalAlign="middle">
-                <Item.Header as={Link} to={`/${dir}/read/${thread.id}`}>
-                  {thread.subject}
-                </Item.Header>
-                <Item.Meta>
-                  <span className="date">
-                    <Moment fromNow unix date={thread.timestamp} />
-                  </span>
-                </Item.Meta>
-                <Item.Description>
-                  {thread.message.replace(stripHtml, "").substring(0, 200) +
-                    " ..."}
-                </Item.Description>
-                <Item.Extra>
-                  <Icon name="reply" />
-                  {thread.total_replies} Respuestas
-                </Item.Extra>
-              </Item.Content>
-            </Item>
-          );
-        })}
-      </Item.Group>
+      <Segment inverted={nightMode}>
+        <Item.Group divided>
+          {threadList.map((thread, index) => {
+            return (
+              <Item key={index}>
+                {currentBoard.allow_images === 1 && (
+                  <Item.Image
+                    size="tiny"
+                    src={`https://bienvenidoainternet.org/${dir}/thumb/${thread.thumb}`}
+                  />
+                )}
+                <Item.Content verticalAlign="middle">
+                  <Item.Header
+                    as={Link}
+                    to={`/${dir}/read/${thread.id}`}
+                    className={nightMode && "inverted"}
+                  >
+                    {thread.subject}
+                  </Item.Header>
+                  <Item.Meta className={nightMode && "inverted"}>
+                    <span className="date">
+                      <Moment fromNow unix date={thread.timestamp} />
+                    </span>
+                  </Item.Meta>
+                  <Item.Description className={nightMode && "inverted"}>
+                    {thread.message.replace(stripHtml, "").substring(0, 200) +
+                      " ..."}
+                  </Item.Description>
+                  <Item.Extra className={nightMode && "inverted"}>
+                    <Icon name="reply" />
+                    {thread.total_replies} Respuestas
+                  </Item.Extra>
+                </Item.Content>
+              </Item>
+            );
+          })}
+        </Item.Group>
+      </Segment>
     );
   }
 }
