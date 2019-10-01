@@ -6,6 +6,7 @@ const notificationSounds = [
   { key: "bongchime", value: "bongchime", text: "Bongchime" },
   { key: "boombang", value: "boombang", text: "Boom bang!" },
   { key: "chime", value: "chime", text: "Chime" },
+  { key: "cuack", value: "cuack", text: "Cuack" },
   { key: "dootdoot", value: "dootdoot", text: "Mr Skeltal - Doot doot" },
   { key: "iqc", value: "iqc", text: "Notificación IQC" },
   { key: "msn", value: "msn", text: "Notificación MSN" },

@@ -21,6 +21,7 @@ import ThreadList from "./ThreadList";
 import FAQ from "./FAQ";
 import ChangeLogPage from "./ChangelogPage";
 import SettingsModal from "./Settings";
+import NewThread from "./NewThread";
 
 class App extends Component {
   constructor() {
@@ -193,7 +194,11 @@ class App extends Component {
             />
             <ChangeLogPage path="/changelog" nightMode={nightMode} />
             <FAQ path="/faq" nightMode={nightMode} />
-
+            <NewThread
+              path="/new/:dir"
+              boardList={boardList}
+              nightMode={nightMode}
+            />
             <NotFound default />
           </Router>
         </Container>
