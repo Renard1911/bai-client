@@ -130,6 +130,7 @@ class SettingsModal extends Component {
               <Dropdown
                 inline
                 select
+                scrolling
                 options={notificationSounds}
                 value={homeSound}
                 onChange={this.handleChange}
@@ -149,6 +150,7 @@ class SettingsModal extends Component {
               <Dropdown
                 inline
                 select
+                scrolling
                 options={notificationSounds}
                 value={threadSound}
                 onChange={this.handleChange}
