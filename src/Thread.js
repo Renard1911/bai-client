@@ -28,8 +28,9 @@ class Thread extends Component {
     this.refreshCooldown = 15;
     this.cooldownCounter = 0;
     this.newPostCounter = 0;
+    let threadSound = JSON.parse(localStorage.getItem("settings")).threadSound;
     this.notificationSound = new Audio(
-      "https://bienvenidoainternet.org/msn.ogg"
+      `https://bienvenidoainternet.org/static/sfx/${threadSound}.ogg`
     );
   }
 
@@ -64,6 +65,10 @@ class Thread extends Component {
   }
 
   async updateReplies() {
+    if (!JSON.parse(localStorage.getItem("settings")).autoUpdateThreads) {
+      return;
+    }
+
     this.cooldownCounter++;
     if (this.cooldownCounter < this.refreshCooldown) {
       return;
@@ -87,7 +92,9 @@ class Thread extends Component {
             const newPosts = this.state.thread.posts.concat(resource.posts);
             this.refreshCooldown = 15;
             this.newPostCounter += resource.posts.length;
-            this.notificationSound.play();
+            if (JSON.parse(localStorage.getItem("settings")).notifyOnThread) {
+              this.notificationSound.play();
+            }
             this.setState(({ thread }) => ({
               thread: {
                 ...thread,

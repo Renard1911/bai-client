@@ -91,7 +91,7 @@ class Post extends Component {
   handleConfirm() {
     this.setState({ deleteDialog: false });
     const { post, currentBoard } = this.props;
-    let password = localStorage.getItem("password");
+    let password = JSON.parse(localStorage.getItem("settings")).postPassword;
     fetch(
       `https://bienvenidoainternet.org/cgi/api/delete?dir=${currentBoard.dir}&id=${post.id}&password=${password}`
     )
@@ -251,12 +251,17 @@ class Post extends Component {
       isDeleteable = false;
     }
 
+    let settingRenderAvatar = JSON.parse(localStorage.getItem("settings"))
+      .showAvatars;
+
     return (
       <Comment inverted={nightMode}>
-        <Comment.Avatar
-          src={`https://bienvenidoainternet.org/static/ico/${rndAvatar}.gif`}
-          style={{ filter: `hue-rotate(${hue}deg)` }}
-        />
+        {settingRenderAvatar && (
+          <Comment.Avatar
+            src={`https://bienvenidoainternet.org/static/ico/${rndAvatar}.gif`}
+            style={{ filter: `hue-rotate(${hue}deg)` }}
+          />
+        )}
         <Comment.Content>
           <Comment.Author
             as="a"

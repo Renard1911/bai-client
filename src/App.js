@@ -20,6 +20,7 @@ import NotFound from "./NotFound";
 import ThreadList from "./ThreadList";
 import FAQ from "./FAQ";
 import ChangeLogPage from "./ChangelogPage";
+import SettingsModal from "./Settings";
 
 class App extends Component {
   constructor() {
@@ -29,7 +30,7 @@ class App extends Component {
       isLoaded: false,
       nightMode: false
     };
-    this.toggleTheme = this.toggleTheme.bind(this);
+    this.updateTheme = this.updateTheme.bind(this);
   }
 
   componentDidMount() {
@@ -56,16 +57,29 @@ class App extends Component {
         });
       });
 
-    let _nightMode = localStorage.getItem("nightMode");
-    if (_nightMode === null) {
-      localStorage.setItem("nightMode", false);
+    let lsSettings = localStorage.getItem("settings");
+    let settings = JSON.parse(lsSettings);
+
+    if (lsSettings === null) {
+      let defaultSettings = {
+        homeSound: "msn",
+        threadSound: "msn",
+        nightMode: false,
+        notifyOnHome: true,
+        notifyOnThread: true,
+        autoUpdateThreads: true,
+        showAvatars: true,
+        postPassword: this.genPassword()
+      };
+      localStorage.setItem("settings", JSON.stringify(defaultSettings));
+      settings = defaultSettings;
     } else {
-      this.setState({ nightMode: JSON.parse(_nightMode) });
+      this.setState({ nightMode: settings.nightMode });
     }
-    let password = localStorage.getItem("password");
-    if (password === null) {
-      localStorage.setItem("password", this.genPassword());
-    }
+  }
+
+  updateTheme(mode) {
+    this.setState({ nightMode: mode });
   }
 
   genPassword() {
@@ -95,12 +109,6 @@ class App extends Component {
     }
   }
 
-  toggleTheme() {
-    this.setState({ nightMode: !this.state.nightMode }, () => {
-      localStorage.setItem("nightMode", this.state.nightMode);
-    });
-  }
-
   render() {
     const { boardList, nightMode, isLoaded } = this.state;
 
@@ -120,8 +128,9 @@ class App extends Component {
             <Menu.Item as={Link} to="/">
               <Icon name="home" /> Home
             </Menu.Item>
-            <Dropdown text="BBS" className="link item">
+            <Dropdown text="Boards" className="link item">
               <Dropdown.Menu>
+                <Dropdown.Header>Bolletin Board System</Dropdown.Header>
                 {boardList.map(board =>
                   board.board_type === 1 ? (
                     <Dropdown.Item
@@ -133,10 +142,7 @@ class App extends Component {
                     </Dropdown.Item>
                   ) : null
                 )}
-              </Dropdown.Menu>
-            </Dropdown>
-            <Dropdown text="Imageboard" className="link item">
-              <Dropdown.Menu>
+                <Dropdown.Header>Imageboard</Dropdown.Header>
                 {boardList.map(board =>
                   board.board_type === 0 ? (
                     <Dropdown.Item
@@ -154,9 +160,14 @@ class App extends Component {
               <Icon name="help" /> FAQ
             </Menu.Item>
             <Menu.Menu position="right">
-              <Menu.Item as="a" onClick={this.toggleTheme}>
-                {nightMode ? <Icon name="sun" /> : <Icon name="moon" />}
-              </Menu.Item>
+              <SettingsModal
+                trigger={
+                  <Menu.Item as="a">
+                    <Icon name="configure" />
+                  </Menu.Item>
+                }
+                handler={this.updateTheme}
+              />
             </Menu.Menu>
           </Container>
         </Menu>

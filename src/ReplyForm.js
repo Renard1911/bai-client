@@ -63,7 +63,8 @@ class ReplyForm extends Component {
           selectedFile
         } = this.state;
         const { currentBoard, parent } = this.props;
-        let password = localStorage.getItem("password");
+        let password = JSON.parse(localStorage.getItem("settings"))
+          .postPassword;
         let data = {
           board: currentBoard.dir,
           parent: parent,

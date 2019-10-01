@@ -19,8 +19,9 @@ class Home extends Component {
     this.refreshCooldown = 15;
     this.cooldownCounter = 0;
     this.lastTimeNoAge = 0;
+    let homeSound = JSON.parse(localStorage.getItem("settings")).homeSound;
     this.notificationSound = new Audio(
-      "https://bienvenidoainternet.org/msn.ogg"
+      `https://bienvenidoainternet.org/static/sfx/${homeSound}.ogg`
     );
     this.handeMouseMove = this.handeMouseMove.bind(this);
     this.mouseVars = {};
@@ -77,6 +78,9 @@ class Home extends Component {
   }
 
   async updateAges() {
+    if (!JSON.parse(localStorage.getItem("settings")).autoUpdateThreads) {
+      return;
+    }
     this.cooldownCounter++;
     if (this.cooldownCounter < this.refreshCooldown) {
       return;
@@ -96,7 +100,9 @@ class Home extends Component {
               lastAgeThreads: resource.threads
             });
             this.refreshCooldown = 30;
-            this.notificationSound.play();
+            if (JSON.parse(localStorage.getItem("settings")).notifyOnHome) {
+              this.notificationSound.play();
+            }
           } else {
             this.refreshCooldown += 15;
             this.lastTimeNoAge = resource.time;
@@ -131,7 +137,7 @@ class Home extends Component {
           className={nightMode ? "homeContainer inverted" : "homeContainer"}
         >
           <Grid.Row centered columns={1}>
-            <Grid.Column centered textAlign="center">
+            <Grid.Column textAlign="center">
               <div id="baiLogo" className={nightMode ? "invLogo" : "whiLogo"}>
                 BaI
               </div>

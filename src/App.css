@@ -183,3 +183,12 @@
   color: #4183C4;
   ;
 }
+
+.ui.checkbox,
+.select {
+  margin-top: 0.5em;
+}
+
+.settingCheckbox {
+  display: block !important;
+}
