@@ -6,10 +6,12 @@ import {
   Header,
   Comment,
   Divider,
-  Breadcrumb
+  Breadcrumb,
+  Button
 } from "semantic-ui-react";
 import { Link } from "@reach/router";
 import Post from "./Post";
+import NewThread from "./NewThread";
 class Board extends Component {
   constructor() {
     super();
@@ -147,8 +149,16 @@ class Board extends Component {
               dangerouslySetInnerHTML={{ __html: currentBoard.postarea_desc }}
             ></div>
           </p>
-          <Link to={`/list/${currentBoard.dir}`}>Lista de hilos</Link>
         </Segment>
+        <Button.Group widths={5} basic={!nightMode} secondary={nightMode}>
+          <Button as={Link} to={`/list/${currentBoard.dir}`}>
+            Lista de hilos
+          </Button>
+          <NewThread
+            trigger={<Button>Crear un hilo</Button>}
+            currentBoard={currentBoard}
+          />
+        </Button.Group>
 
         {threadList.map(thread => (
           <Segment.Group key={"seg_" + thread.timestamp + thread.id}>

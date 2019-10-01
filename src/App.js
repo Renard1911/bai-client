@@ -47,7 +47,10 @@ class App extends Component {
           dir: "polka",
           maxsize: 500,
           name: "Testing field",
-          postarea_desc: ""
+          postarea_desc: "",
+          disable_name: 0,
+          disable_subject: 0,
+          allow_spoilers: 0
         };
         if (localStorage.getItem("thereisnourflevel") === null) {
           polka = {};

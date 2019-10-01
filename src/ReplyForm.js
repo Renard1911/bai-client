@@ -46,7 +46,6 @@ class ReplyForm extends Component {
   }
 
   handleSubmit() {
-    console.log("submit event");
     const { name, email, message } = this.state;
     this.setState(
       {
@@ -190,7 +189,6 @@ class ReplyForm extends Component {
               onChange={this.handleChange}
               maxLength="50"
             />
-            {/* TODO: Archivos adjuntos */}
             {currentBoard.allow_image_replies === 1 ? (
               <React.Fragment>
                 <input
