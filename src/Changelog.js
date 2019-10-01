@@ -1,7 +1,8 @@
 export const Changelog = [
   {
-    timestamp: 1569892800,
+    timestamp: 1569956414,
     list: [
+      { icon: "add", desc: "Formulario creación de hilos" },
       { icon: "add", desc: "Configuraciones!✨" },
       { icon: "add", desc: "Nuevos sonidos de notificación" },
       { icon: "magic", desc: "Nightmode en lista de hilos" },
