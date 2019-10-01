@@ -146,11 +146,11 @@
 }
 
 .whiLogo {
-  background: url("./background.png");
+  background: url("./logo_bg.svg");
 }
 
 .invLogo {
-  background: url("./background_inv.png");
+  background: url("./logo_bg_inv.svg");
 }
 
 #bgvid {
