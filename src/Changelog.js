@@ -1,5 +1,15 @@
 export const Changelog = [
   {
+    timestamp: 1569892800,
+    list: [
+      { icon: "add", desc: "Configuraciones!✨" },
+      { icon: "add", desc: "Nuevos sonidos de notificación" },
+      { icon: "magic", desc: "Nightmode en lista de hilos" },
+      { icon: "add", desc: "Contador de posts nuevos (en título)" },
+      { icon: "video", desc: "Video en /0/" }
+    ]
+  },
+  {
     timestamp: 1569700814,
     list: [
       { icon: "magic", desc: "Lista de hilos rediseñada" },
