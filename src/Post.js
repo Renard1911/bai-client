@@ -146,7 +146,7 @@ class Post extends Component {
     const seedrandom = require("seedrandom");
     const rng = seedrandom(threadId + index);
     const idRng = seedrandom(user_id);
-    const idColor =
+    let idColor =
       "rgb(" +
       Math.round(idRng() * 255) +
       ", " +
@@ -214,13 +214,31 @@ class Post extends Component {
       }
     }
 
-    let starColor;
+    let starColor = "grey";
+    let icon = "user";
     if (user_id === "CAP_USER*") {
-      starColor = "yellow";
-    } else if (isMine) {
       starColor = "blue";
-    } else {
-      starColor = "grey";
+      icon = "check circle";
+    } else if (isMine) {
+      starColor = "olive";
+    } else if (user_id === "???T") {
+      icon = "user secret";
+    }
+    if (post.name === "Renard ★") {
+      starColor = "yellow";
+      icon = "chess queen";
+      user_id = "Bai-Client Dev";
+      idColor = "#FBBD08";
+    }
+    if (post.name === "TOW ★") {
+      starColor = "pink";
+      icon = "chess queen";
+      user_id = "Weabot Dev";
+      idColor = "#e03997";
+    }
+    if (post.name === "Staff ★") {
+      user_id = "Staff de BaI";
+      idColor = "rgba(255, 255, 255, 0.7);";
     }
 
     let hasVideo = post.file.endsWith(".webm");
@@ -283,7 +301,7 @@ class Post extends Component {
               <Moment fromNow unix locale="es" date={post.timestamp} />
             </div>
             <div>
-              <Icon name="star" color={starColor} />
+              <Icon name={icon} color={starColor} />
               {user_id === "CAP_USER*" ? (
                 "Usuario verificado"
               ) : (
