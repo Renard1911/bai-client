@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import { Router, Link } from "@reach/router";
-import "fomantic-ui-css/semantic.css";
+import "fomantic-ui-css/semantic.min.css";
 import "./App.css";
 import wtfpl from "./wtfpl.png";
 
