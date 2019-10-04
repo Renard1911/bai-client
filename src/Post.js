@@ -142,14 +142,14 @@ class Post extends Component {
     }
 
     // Obtener un avatar aleatorio basado en ID
-    let user_id = post.timestamp_formatted.split(" ID:")[1];
-    if (user_id === undefined) {
-      user_id = "";
+    let userID = post.timestamp_formatted.split(" ID:")[1];
+    if (userID === undefined) {
+      userID = "";
     }
-    console.log("#" + user_id + ", length: " + user_id.length);
+
     const seedrandom = require("seedrandom");
     const rng = seedrandom(threadId + index);
-    const idRng = seedrandom(user_id);
+    const idRng = seedrandom(userID);
     let idColor =
       "rgb(" +
       Math.round(idRng() * 255) +
@@ -160,7 +160,7 @@ class Post extends Component {
       ")";
 
     let rndAvatar, hue;
-    if (user_id !== "") {
+    if (userID !== "") {
       let i = Math.round(idRng() * (avatars.length - 1));
       rndAvatar = avatars[i];
       hue = Math.round(idRng() * 360);
@@ -218,13 +218,13 @@ class Post extends Component {
       }
     }
 
-    let starColor = "grey";
+    let iconColor = "grey";
     let icon = "user";
     let settingBrowserId = JSON.parse(localStorage.getItem("settings"))
       .browserId;
 
-    if (user_id.length > 8 && settingBrowserId) {
-      let sufix = user_id.substr(8, 1);
+    if (userID.length > 8 && settingBrowserId) {
+      let sufix = userID.substr(8, 1);
       const browser = {
         F: "firefox",
         C: "chrome",
@@ -240,29 +240,29 @@ class Post extends Component {
       }
     }
 
-    if (user_id === "CAP_USER*") {
-      starColor = "blue";
+    if (userID === "CAP_USER*") {
+      iconColor = "blue";
       icon = "check circle";
-      user_id = "Usuario verificado";
+      userID = "Usuario verificado";
     } else if (isMine) {
-      starColor = "olive";
-    } else if (user_id.startsWith("???")) {
+      iconColor = "olive";
+    } else if (userID.startsWith("???")) {
       icon = "user secret";
     }
     if (post.name === "Renard ★") {
-      starColor = "yellow";
+      iconColor = "yellow";
       icon = "chess queen";
-      user_id = "Bai-Client Dev";
+      userID = "Bai-Client Dev";
       idColor = "#FBBD08";
     }
     if (post.name === "TOW ★") {
-      starColor = "pink";
+      iconColor = "pink";
       icon = "chess queen";
-      user_id = "Weabot Dev";
+      userID = "Weabot Dev";
       idColor = "#e03997";
     }
     if (post.name === "Staff ★") {
-      user_id = "Staff de BaI";
+      userID = "Staff de BaI";
       idColor = "rgba(255, 255, 255, 0.7);";
     }
 
@@ -330,11 +330,11 @@ class Post extends Component {
               <Moment fromNow unix locale="es" date={post.timestamp} />
             </div>
             <div>
-              <Icon name={icon} color={starColor} />
+              <Icon name={icon} color={iconColor} />
               {settingColorifyIDs ? (
-                <span style={{ color: idColor }}>{user_id}</span>
+                <span style={{ color: idColor }}>{userID}</span>
               ) : (
-                user_id
+                userID
               )}
               {isMine ? " (Tú)" : null}
             </div>
