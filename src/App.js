@@ -63,21 +63,27 @@ class App extends Component {
 
     let lsSettings = localStorage.getItem("settings");
     let settings = JSON.parse(lsSettings);
-
+    const defaultSettings = {
+      homeSound: "msn",
+      threadSound: "msn",
+      nightMode: false,
+      notifyOnHome: true,
+      notifyOnThread: true,
+      autoUpdateThreads: true,
+      showAvatars: true,
+      postPassword: this.genPassword(),
+      embedYoutube: true
+    };
     if (lsSettings === null) {
-      let defaultSettings = {
-        homeSound: "msn",
-        threadSound: "msn",
-        nightMode: false,
-        notifyOnHome: true,
-        notifyOnThread: true,
-        autoUpdateThreads: true,
-        showAvatars: true,
-        postPassword: this.genPassword()
-      };
       localStorage.setItem("settings", JSON.stringify(defaultSettings));
       settings = defaultSettings;
     } else {
+      Object.keys(defaultSettings).forEach(key => {
+        if (settings[key] === undefined) {
+          settings[key] = defaultSettings[key];
+        }
+      });
+      localStorage.setItem("settings", JSON.stringify(defaultSettings));
       this.setState({ nightMode: settings.nightMode });
     }
   }
