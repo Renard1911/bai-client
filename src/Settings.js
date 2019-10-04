@@ -34,7 +34,8 @@ class SettingsModal extends Component {
       notifyOnThread: true,
       autoUpdateThreads: true,
       showAvatars: true,
-      postPassword: ""
+      postPassword: "",
+      embedYoutube: true
     };
     this.handleChange = this.handleChange.bind(this);
     this.toggleSetting = this.toggleSetting.bind(this);
@@ -50,7 +51,8 @@ class SettingsModal extends Component {
       notifyOnThread: settings.notifyOnThread,
       autoUpdateThreads: settings.autoUpdateThreads,
       showAvatars: settings.showAvatars,
-      postPassword: settings.postPassword
+      postPassword: settings.postPassword,
+      embedYoutube: settings.embedYoutube
     });
   }
 
@@ -85,7 +87,8 @@ class SettingsModal extends Component {
       notifyOnHome,
       notifyOnThread,
       postPassword,
-      showAvatars
+      showAvatars,
+      embedYoutube
     } = this.state;
     return (
       <Modal trigger={this.props.trigger} size="tiny" centered={false}>
@@ -112,6 +115,13 @@ class SettingsModal extends Component {
             <Header as="h4" dividing>
               Comportamiento
             </Header>
+            <Checkbox
+              label="Incrustar videos de Youtube"
+              checked={embedYoutube}
+              name="embedYoutube"
+              onChange={this.toggleSetting}
+              className="settingCheckbox"
+            />
             <Checkbox
               label="Actualizar automáticamente hilos"
               checked={autoUpdateThreads}

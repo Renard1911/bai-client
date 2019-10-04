@@ -271,6 +271,8 @@ class Post extends Component {
 
     let settingRenderAvatar = JSON.parse(localStorage.getItem("settings"))
       .showAvatars;
+    let settingEmbedYoutube = JSON.parse(localStorage.getItem("settings"))
+      .embedYoutube;
 
     return (
       <Comment inverted={nightMode}>
@@ -365,7 +367,7 @@ class Post extends Component {
               </div>
             ) : null}
 
-            {youtubeVideos !== null
+            {youtubeVideos !== null && settingEmbedYoutube
               ? youtubeVideos.map((url, i) => {
                   let id = url.split("?v=")[1];
                   return (
