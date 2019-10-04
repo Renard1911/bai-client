@@ -143,6 +143,10 @@ class Post extends Component {
 
     // Obtener un avatar aleatorio basado en ID
     let user_id = post.timestamp_formatted.split(" ID:")[1];
+    if (user_id === undefined) {
+      user_id = "";
+    }
+    console.log("#" + user_id + ", length: " + user_id.length);
     const seedrandom = require("seedrandom");
     const rng = seedrandom(threadId + index);
     const idRng = seedrandom(user_id);
@@ -216,13 +220,33 @@ class Post extends Component {
 
     let starColor = "grey";
     let icon = "user";
+    let settingBrowserId = JSON.parse(localStorage.getItem("settings"))
+      .browserId;
+
+    if (user_id.length > 8 && settingBrowserId) {
+      let sufix = user_id.substr(8, 1);
+      const browser = {
+        F: "firefox",
+        C: "chrome",
+        s: "safari",
+        S: "SeaMonkey",
+        o: "opera",
+        I: "internet explorer",
+        E: "microsoft edge",
+        a: "android"
+      };
+      if (Object.keys(browser).includes(sufix)) {
+        icon = browser[sufix];
+      }
+    }
+
     if (user_id === "CAP_USER*") {
       starColor = "blue";
       icon = "check circle";
       user_id = "Usuario verificado";
     } else if (isMine) {
       starColor = "olive";
-    } else if (user_id === "???T") {
+    } else if (user_id.startsWith("???")) {
       icon = "user secret";
     }
     if (post.name === "Renard ★") {

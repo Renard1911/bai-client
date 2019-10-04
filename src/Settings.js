@@ -36,7 +36,8 @@ class SettingsModal extends Component {
       showAvatars: true,
       postPassword: "",
       embedYoutube: true,
-      colorifyIDs: true
+      colorifyIDs: true,
+      browserId: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.toggleSetting = this.toggleSetting.bind(this);
@@ -54,7 +55,8 @@ class SettingsModal extends Component {
       showAvatars: settings.showAvatars,
       postPassword: settings.postPassword,
       embedYoutube: settings.embedYoutube,
-      colorifyIDs: settings.colorifyIDs
+      colorifyIDs: settings.colorifyIDs,
+      browserId: settings.browserId
     });
   }
 
@@ -91,7 +93,8 @@ class SettingsModal extends Component {
       postPassword,
       showAvatars,
       embedYoutube,
-      colorifyIDs
+      colorifyIDs,
+      browserId
     } = this.state;
     return (
       <Modal trigger={this.props.trigger} size="tiny" centered={false}>
@@ -119,6 +122,13 @@ class SettingsModal extends Component {
               label="Colorear ID's de Posts"
               checked={colorifyIDs}
               name="colorifyIDs"
+              onChange={this.toggleSetting}
+              className="settingCheckbox"
+            />
+            <Checkbox
+              label="Interpretar navegador de posts"
+              checked={browserId}
+              name="browserId"
               onChange={this.toggleSetting}
               className="settingCheckbox"
             />
