@@ -219,6 +219,7 @@ class Post extends Component {
     if (user_id === "CAP_USER*") {
       starColor = "blue";
       icon = "check circle";
+      user_id = "Usuario verificado";
     } else if (isMine) {
       starColor = "olive";
     } else if (user_id === "???T") {
@@ -273,6 +274,8 @@ class Post extends Component {
       .showAvatars;
     let settingEmbedYoutube = JSON.parse(localStorage.getItem("settings"))
       .embedYoutube;
+    let settingColorifyIDs = JSON.parse(localStorage.getItem("settings"))
+      .colorifyIDs;
 
     return (
       <Comment inverted={nightMode}>
@@ -304,10 +307,10 @@ class Post extends Component {
             </div>
             <div>
               <Icon name={icon} color={starColor} />
-              {user_id === "CAP_USER*" ? (
-                "Usuario verificado"
-              ) : (
+              {settingColorifyIDs ? (
                 <span style={{ color: idColor }}>{user_id}</span>
+              ) : (
+                user_id
               )}
               {isMine ? " (Tú)" : null}
             </div>

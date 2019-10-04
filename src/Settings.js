@@ -35,7 +35,8 @@ class SettingsModal extends Component {
       autoUpdateThreads: true,
       showAvatars: true,
       postPassword: "",
-      embedYoutube: true
+      embedYoutube: true,
+      colorifyIDs: true
     };
     this.handleChange = this.handleChange.bind(this);
     this.toggleSetting = this.toggleSetting.bind(this);
@@ -52,7 +53,8 @@ class SettingsModal extends Component {
       autoUpdateThreads: settings.autoUpdateThreads,
       showAvatars: settings.showAvatars,
       postPassword: settings.postPassword,
-      embedYoutube: settings.embedYoutube
+      embedYoutube: settings.embedYoutube,
+      colorifyIDs: settings.colorifyIDs
     });
   }
 
@@ -88,7 +90,8 @@ class SettingsModal extends Component {
       notifyOnThread,
       postPassword,
       showAvatars,
-      embedYoutube
+      embedYoutube,
+      colorifyIDs
     } = this.state;
     return (
       <Modal trigger={this.props.trigger} size="tiny" centered={false}>
@@ -109,6 +112,13 @@ class SettingsModal extends Component {
               label="Mostrar avatares"
               checked={showAvatars}
               name="showAvatars"
+              onChange={this.toggleSetting}
+              className="settingCheckbox"
+            />
+            <Checkbox
+              label="Colorear ID's de Posts"
+              checked={colorifyIDs}
+              name="colorifyIDs"
               onChange={this.toggleSetting}
               className="settingCheckbox"
             />

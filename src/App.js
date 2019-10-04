@@ -72,7 +72,8 @@ class App extends Component {
       autoUpdateThreads: true,
       showAvatars: true,
       postPassword: this.genPassword(),
-      embedYoutube: true
+      embedYoutube: true,
+      colorifyIDs: true
     };
     if (lsSettings === null) {
       localStorage.setItem("settings", JSON.stringify(defaultSettings));
