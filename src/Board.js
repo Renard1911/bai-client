@@ -144,11 +144,9 @@ class Board extends Component {
             {currentBoard.name}
             <Header.Subheader>/{currentBoard.dir}/</Header.Subheader>
           </Header>
-          <p>
-            <div
-              dangerouslySetInnerHTML={{ __html: currentBoard.postarea_desc }}
-            ></div>
-          </p>
+          <div
+            dangerouslySetInnerHTML={{ __html: currentBoard.postarea_desc }}
+          ></div>
         </Segment>
         <Button.Group widths={5} basic={!nightMode} secondary={nightMode}>
           <Button as={Link} to={`/list/${currentBoard.dir}`}>

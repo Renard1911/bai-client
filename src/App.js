@@ -85,7 +85,7 @@ class App extends Component {
           settings[key] = defaultSettings[key];
         }
       });
-      localStorage.setItem("settings", JSON.stringify(defaultSettings));
+      localStorage.setItem("settings", JSON.stringify(settings));
       this.setState({ nightMode: settings.nightMode });
     }
   }

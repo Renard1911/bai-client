@@ -28,8 +28,8 @@ class SettingsModal extends Component {
     super(props);
     this.state = {
       homeSound: "msn",
-      threadSound: "dootdoot",
-      nightMode: true,
+      threadSound: "msn",
+      nightMode: false,
       notifyOnHome: true,
       notifyOnThread: true,
       autoUpdateThreads: true,
@@ -160,7 +160,6 @@ class SettingsModal extends Component {
               Sonido de notificación:{" "}
               <Dropdown
                 inline
-                select
                 scrolling
                 options={notificationSounds}
                 value={homeSound}
@@ -180,7 +179,6 @@ class SettingsModal extends Component {
               Sonido de notificación :{" "}
               <Dropdown
                 inline
-                select
                 scrolling
                 options={notificationSounds}
                 value={threadSound}
