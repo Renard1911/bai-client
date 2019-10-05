@@ -66,10 +66,12 @@ class Home extends Component {
   }
 
   handeMouseMove(e) {
-    let traX = (4 * e.pageX) / 480;
-    let traY = (4 * e.pageY) / 250;
-    document.getElementById("baiLogo").style.backgroundPosition =
-      traX + "%" + traY + "%";
+    if (this.state.isLoaded) {
+      let traX = (4 * e.pageX) / 480;
+      let traY = (4 * e.pageY) / 250;
+      document.getElementById("baiLogo").style.backgroundPosition =
+        traX + "%" + traY + "%";
+    }
   }
 
   componentWillUnmount() {
