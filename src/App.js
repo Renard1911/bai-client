@@ -35,31 +35,29 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("https://bienvenidoainternet.org/cgi/api/boardsExtra")
-      .then(response => {
-        return response.json();
-      })
-      .then(resource => {
-        let polka = {
-          allow_image_replies: 1,
-          allow_images: 1,
-          board_type: 1,
-          dir: "polka",
-          maxsize: 500,
-          name: "Testing field",
-          postarea_desc: "",
-          disable_name: 0,
-          disable_subject: 0,
-          allow_spoilers: 0
-        };
-        if (localStorage.getItem("thereisnourflevel") === null) {
-          polka = {};
-        }
-        this.setState({
-          boardList: resource["boards"].concat(polka),
-          isLoaded: true
+    let boardsInfo = localStorage.getItem("boardsInfo");
+    let shouldUpdate = false;
+    if (boardsInfo !== null) {
+      shouldUpdate = Date.now() / 1000 - JSON.parse(boardsInfo).time > 10080;
+    }
+    if (boardsInfo === null || shouldUpdate) {
+      fetch("https://bienvenidoainternet.org/cgi/api/boardsExtra")
+        .then(response => {
+          return response.json();
+        })
+        .then(resource => {
+          localStorage.setItem("boardsInfo", JSON.stringify(resource));
+          this.setState({
+            boardList: resource["boards"],
+            isLoaded: true
+          });
         });
+    } else {
+      this.setState({
+        boardList: JSON.parse(boardsInfo)["boards"],
+        isLoaded: true
       });
+    }
 
     let lsSettings = localStorage.getItem("settings");
     let settings = JSON.parse(lsSettings);
