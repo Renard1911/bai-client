@@ -48,8 +48,8 @@ class ThreadList extends Component {
         <Item.Group divided>
           {threadList.map((thread, index) => {
             return (
-              <Item key={index}>
-                {currentBoard.allow_images === 1 && (
+              <Item key={index} className={nightMode ? "inverted" : ""}>
+                {currentBoard.allow_images === 1 && thread.thumb !== "" && (
                   <Item.Image
                     size="tiny"
                     src={`https://bienvenidoainternet.org/${dir}/thumb/${thread.thumb}`}
@@ -59,7 +59,9 @@ class ThreadList extends Component {
                   <Item.Header
                     as={Link}
                     to={`/${dir}/read/${thread.id}`}
-                    className={nightMode && "inverted"}
+                    className={
+                      nightMode ? "threadTitle inverted" : "threadTitle"
+                    }
                   >
                     {thread.subject}
                   </Item.Header>

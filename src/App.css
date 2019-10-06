@@ -198,3 +198,11 @@
   margin-top: 1em;
   margin-bottom: 1em;
 }
+
+.ui.divided.items>.item.inverted:first-child {
+  border-top: none;
+}
+
+.ui.divided.items>.item.inverted {
+  border-top: 1px solid rgba(49, 50, 51, 1);
+}
