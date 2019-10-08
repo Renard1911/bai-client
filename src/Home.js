@@ -176,7 +176,7 @@ class Home extends Component {
                         {thread.content}
                       </List.Header>
                       <List.Description>
-                        <Moment fromNow unix locale="es" date={thread.last} />{" "}
+                        <Moment fromNow unix locale="es" date={thread.bumped} />{" "}
                         en {thread.board_fulln}{" "}
                       </List.Description>
                     </List.Content>
