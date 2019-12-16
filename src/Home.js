@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
-import { List, Header, Loader, Grid, Image } from "semantic-ui-react";
+import { List, Header, Loader, Grid, Tab } from "semantic-ui-react";
 import Moment from "react-moment";
 import "moment/locale/es";
 import { Changelog } from "./Changelog";
@@ -127,8 +127,85 @@ class Home extends Component {
     }
 
     const { newThreadsList, lastAgeThreads, latestNews } = this.state;
-    const { nightMode } = this.props;
+    const { nightMode, boardList } = this.props;
     document.title = "B.a.I Home";
+
+    let tabs = [
+      {
+        menuItem: "Boards",
+        render: () => (
+          <Tab.Pane
+            inverted={nightMode}
+            style={{ textAlign: "center" }}
+            className="customTab"
+          >
+            <List horizontal celled link inverted={nightMode} centered>
+              {boardList.map(
+                (board, i) =>
+                  board.board_type === 1 && (
+                    <List.Item key={i} inverted={nightMode}>
+                      <Link to={`/board/${board.dir}`}>{board.name}</Link>
+                    </List.Item>
+                  )
+              )}
+            </List>
+            <List horizontal celled link inverted={nightMode}>
+              {boardList.map(
+                (board, i) =>
+                  board.board_type === 0 && (
+                    <List.Item key={i}>
+                      <Link to={`/board/${board.dir}`}>{board.name}</Link>
+                    </List.Item>
+                  )
+              )}
+            </List>
+          </Tab.Pane>
+        )
+      },
+      {
+        menuItem: "Blotter",
+        render: () => (
+          <Tab.Pane inverted={nightMode} className="customTab">
+            <List divided inverted={nightMode}>
+              {latestNews.map(
+                (n, i) =>
+                  i < 6 && (
+                    <List.Item key={n.timestamp}>
+                      <List.Content>
+                        <div dangerouslySetInnerHTML={{ __html: n.message }} />
+                        <small>
+                          <Moment fromNow unix locale="es" date={n.timestamp} />
+                        </small>
+                      </List.Content>
+                    </List.Item>
+                  )
+              )}
+            </List>
+          </Tab.Pane>
+        )
+      },
+      {
+        menuItem: "Changelog",
+        render: () => (
+          <Tab.Pane inverted={nightMode} className="customTab">
+            <List inverted={nightMode}>
+              <List.Item>
+                <Moment fromNow unix date={Changelog[0].timestamp} />
+                <List.List>
+                  {Changelog[0].list.map((c, e) => (
+                    <List.Item key={e}>
+                      <List.Icon name={c.icon} />
+                      <List.Content>{c.desc}</List.Content>
+                    </List.Item>
+                  ))}
+                </List.List>
+              </List.Item>
+            </List>
+          </Tab.Pane>
+        )
+      }
+    ];
+
     return (
       <React.Fragment>
         <Grid
@@ -148,6 +225,20 @@ class Home extends Component {
                 <br />
                 <small>Ahora con 95% extra javascript!</small>
               </p>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row columns={1}>
+            <Grid.Column>
+              <Tab
+                panes={tabs}
+                menu={{
+                  inverted: nightMode,
+                  attached: false,
+                  tabular: false,
+                  secondary: true,
+                  pointing: true
+                }}
+              />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
@@ -215,54 +306,6 @@ class Home extends Component {
                     </List.Content>
                   </List.Item>
                 ))}
-              </List>
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row columns={2}>
-            <Grid.Column>
-              <Header as="h4" inverted={nightMode}>
-                Changelog
-              </Header>
-              <List inverted={nightMode}>
-                <List.Item>
-                  <Moment fromNow unix date={Changelog[0].timestamp} />
-                  <List.List>
-                    {Changelog[0].list.map((c, e) => (
-                      <List.Item key={e}>
-                        <List.Icon name={c.icon} />
-                        <List.Content>{c.desc}</List.Content>
-                      </List.Item>
-                    ))}
-                  </List.List>
-                </List.Item>
-              </List>
-              <Link to="/changelog">Ver más</Link>
-            </Grid.Column>
-            <Grid.Column>
-              <Header as="h4" inverted={nightMode}>
-                Blotter
-              </Header>
-              <List divided inverted={nightMode}>
-                {latestNews.map(
-                  (n, i) =>
-                    i < 3 && (
-                      <List.Item key={n.timestamp}>
-                        <List.Content>
-                          <div
-                            dangerouslySetInnerHTML={{ __html: n.message }}
-                          />
-                          <small>
-                            <Moment
-                              fromNow
-                              unix
-                              locale="es"
-                              date={n.timestamp}
-                            />
-                          </small>
-                        </List.Content>
-                      </List.Item>
-                    )
-                )}
               </List>
             </Grid.Column>
           </Grid.Row>

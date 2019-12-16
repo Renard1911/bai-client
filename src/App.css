@@ -121,13 +121,13 @@
   background-color: #1c1c1c !important;
 }
 
-.ui.modal>.content.replyModal {
+.ui.modal > .content.replyModal {
   padding: 0 !important;
 }
 
 .postMessage hr,
 .postMessage small {
-  display: none
+  display: none;
 }
 
 .footer.night {
@@ -167,21 +167,20 @@
   transition: 1s opacity;
 }
 
-.ui.items>.item>.content>.description.inverted {
+.ui.items > .item > .content > .description.inverted {
   color: rgba(255, 255, 255, 0.9);
 }
 
-.ui.items>.item .meta.inverted :last-child {
+.ui.items > .item .meta.inverted :last-child {
   color: rgba(255, 255, 255, 0.7);
 }
 
-.ui.items>.item .extra.inverted {
+.ui.items > .item .extra.inverted {
   color: rgba(255, 255, 255, 0.7);
 }
 
-.ui.items>.item>.content>a.header.inverted {
-  color: #4183C4;
-  ;
+.ui.items > .item > .content > a.header.inverted {
+  color: #4183c4;
 }
 
 .ui.checkbox,
@@ -199,10 +198,15 @@
   margin-bottom: 1em;
 }
 
-.ui.divided.items>.item.inverted:first-child {
+.ui.divided.items > .item.inverted:first-child {
   border-top: none;
 }
 
-.ui.divided.items>.item.inverted {
+.ui.divided.items > .item.inverted {
   border-top: 1px solid rgba(49, 50, 51, 1);
+}
+
+.customTab {
+  border: none !important;
+  padding: 7px !important;
 }
