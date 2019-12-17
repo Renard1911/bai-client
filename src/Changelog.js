@@ -1,5 +1,12 @@
 export const Changelog = [
   {
+    timestamp: 1576624951,
+    list: [
+      { icon: "magic", desc: "Cambios estéticos del home" },
+      { icon: "add", desc: "Lista de hilos activos ahora muestra la cantidad de respuestas que tiene el hilo" }
+    ]
+  },
+  {
     timestamp: 1569956414,
     list: [
       { icon: "add", desc: "Formulario creación de hilos" },

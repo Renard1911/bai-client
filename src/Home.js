@@ -201,6 +201,7 @@ class Home extends Component {
                 </List.List>
               </List.Item>
             </List>
+            <Link to="/changelog">Ver cambios antiguos ...</Link>
           </Tab.Pane>
         )
       }
