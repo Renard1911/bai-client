@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
-import { List, Header, Loader, Grid, Tab } from "semantic-ui-react";
+import { List, Header, Loader, Grid, Tab, Label } from "semantic-ui-react";
 import Moment from "react-moment";
 import "moment/locale/es";
 import { Changelog } from "./Changelog";
@@ -249,6 +249,9 @@ class Home extends Component {
               <List divided inverted={nightMode}>
                 {lastAgeThreads.map(thread => (
                   <List.Item key={thread.id}>
+                    <List.Content floated="right">
+                      <Label size="mini" color={nightMode ? "grey" : ""}>{thread.length}</Label>
+                    </List.Content>
                     <List.Icon
                       name={
                         thread.bumped > this.lastTimeNoAge
@@ -267,8 +270,14 @@ class Home extends Component {
                         {thread.content}
                       </List.Header>
                       <List.Description>
-                        <Moment fromNow unix locale="es" date={thread.bumped} />{" "}
-                        en {thread.board_fulln}{" "}
+                        {"Hace "}
+                        <Moment
+                          fromNow
+                          unix
+                          locale="es"
+                          date={thread.bumped}
+                        />{" "}
+                        en {thread.board_fulln}
                       </List.Description>
                     </List.Content>
                   </List.Item>
@@ -295,13 +304,15 @@ class Home extends Component {
                         {thread.content}
                       </List.Header>
                       <List.Description>
+                        {"Hace "}
                         <Moment
                           fromNow
                           unix
                           locale="es"
+                          ago
                           date={thread.timestamp}
                         />{" "}
-                        en {thread.board_fulln}{" "}
+                        en {thread.board_fulln}
                       </List.Description>
                     </List.Content>
                   </List.Item>
